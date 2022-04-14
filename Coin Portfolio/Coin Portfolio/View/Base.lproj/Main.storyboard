@@ -17,13 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Adress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0C8-rI-fDb">
-                                <rect key="frame" x="73" y="169" width="304" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="caner@gmail.com" borderStyle="roundedRect" placeholder="Email Adress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0C8-rI-fDb">
+                                <rect key="frame" x="73" y="125" width="304" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8B7-dC-jTk">
-                                <rect key="frame" x="73" y="253" width="304" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8B7-dC-jTk">
+                                <rect key="frame" x="73" y="209" width="304" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -36,11 +36,10 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Create New Account"/>
                                 <connections>
                                     <action selector="newAccountTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d1D-9T-yrj"/>
-                                    <segue destination="VLX-Vj-haf" kind="show" identifier="toSigninVC" id="Gk2-MH-YCy"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yB3-Yp-Q2j">
-                                <rect key="frame" x="151" y="369" width="112" height="89"/>
+                                <rect key="frame" x="151" y="325" width="112" height="89"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="89" id="Wp1-cs-swQ"/>
                                 </constraints>
@@ -72,6 +71,8 @@
                     <connections>
                         <outlet property="emailTextField" destination="0C8-rI-fDb" id="JGT-Zt-lG3"/>
                         <outlet property="passwordTextField" destination="8B7-dC-jTk" id="CvY-9q-gZl"/>
+                        <segue destination="d6x-ch-VD7" kind="presentation" identifier="toTabBar" modalPresentationStyle="fullScreen" id="Vq5-ON-qH0"/>
+                        <segue destination="VLX-Vj-haf" kind="presentation" identifier="ToSigninVC" modalPresentationStyle="fullScreen" id="5ki-sl-fJQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -225,6 +226,7 @@
         <scene sceneID="oYH-ZB-Lf1">
             <objects>
                 <tabBarController id="d6x-ch-VD7" customClass="TabBarController" customModule="Coin_Portfolio" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="MdT-gL-JO2"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Dx0-Dc-krE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -249,12 +251,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Surname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p7z-DJ-0PA">
-                                <rect key="frame" x="244" y="132" width="120" height="34"/>
+                                <rect key="frame" x="244" y="88" width="120" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Adress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5y9-Wy-e0x">
-                                <rect key="frame" x="45" y="225" width="319" height="34"/>
+                                <rect key="frame" x="45" y="181" width="319" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="mEh-pJ-VxH"/>
                                 </constraints>
@@ -262,7 +264,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3I3-8D-5E2">
-                                <rect key="frame" x="45" y="342" width="319" height="34"/>
+                                <rect key="frame" x="45" y="298" width="319" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="RKI-57-PHp"/>
                                 </constraints>
@@ -270,7 +272,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnA-qP-ggs">
-                                <rect key="frame" x="132" y="469" width="158" height="61"/>
+                                <rect key="frame" x="132" y="425" width="158" height="105"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Create Account"/>
                                 <connections>
@@ -278,7 +280,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gq2-lx-uV5">
-                                <rect key="frame" x="45" y="132" width="120" height="34"/>
+                                <rect key="frame" x="45" y="88" width="120" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="jMr-Sf-CTw"/>
                                 </constraints>
@@ -313,6 +315,7 @@
                         <outlet property="nameTextField" destination="Gq2-lx-uV5" id="uII-Al-hT2"/>
                         <outlet property="passwordTextField" destination="3I3-8D-5E2" id="BJv-Iu-6iF"/>
                         <outlet property="surnameTextField" destination="p7z-DJ-0PA" id="Qgw-2T-nMZ"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toVC" modalPresentationStyle="fullScreen" id="qov-EI-WiL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4G-W8-Odb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -338,6 +341,10 @@
             <point key="canvasLocation" x="131.8840579710145" y="99.776785714285708"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5ki-sl-fJQ"/>
+        <segue reference="qov-EI-WiL"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.forward" catalog="system" width="128" height="106"/>
         <image name="doc.plaintext" catalog="system" width="115" height="128"/>
