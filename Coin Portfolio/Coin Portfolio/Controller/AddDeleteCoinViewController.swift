@@ -26,6 +26,7 @@ class AddDeleteCoinViewController: UIViewController  {
         
         fetchData()
     }
+   
     
     func fetchData() {
         if let url = URL(string: api) {

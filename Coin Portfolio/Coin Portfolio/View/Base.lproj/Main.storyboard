@@ -78,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.0289855072465" y="99.776785714285708"/>
+            <point key="canvasLocation" x="993" y="106"/>
         </scene>
         <!--Add / Delete Coin-->
         <scene sceneID="rd5-eF-Hai">
@@ -346,6 +346,7 @@
                         <segue destination="eUJ-6o-tFY" kind="relationship" relationship="viewControllers" id="tvW-7j-hPe"/>
                         <segue destination="gH3-6D-Gp9" kind="relationship" relationship="viewControllers" id="c5B-Us-0Lp"/>
                         <segue destination="klh-Gq-mgs" kind="relationship" relationship="viewControllers" id="Pfw-Fs-utc"/>
+                        <segue destination="cVo-Jt-qix" kind="presentation" identifier="toVC" modalPresentationStyle="fullScreen" id="OMv-8a-1uk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l4g-WC-iGJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -437,6 +438,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cVo-Jt-qix" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="3T2-RX-txc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wwO-wy-ET4">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
