@@ -25,6 +25,7 @@
 		010EBC2528095480003436C6 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBC2428095480003436C6 /* CoinModel.swift */; };
 		010EBC49280C43C0003436C6 /* CoinListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */; };
 		01E290B7280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */; };
+		01E2911A280F282F004C3143 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 01E29119280F282F004C3143 /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				010EBC2128094CA7003436C6 /* Alamofire in Frameworks */,
+				01E2911A280F282F004C3143 /* FirebaseFirestore in Frameworks */,
 				010EBBF428083D83003436C6 /* FirebaseAuth in Frameworks */,
 				010EBBF628083D83003436C6 /* FirebaseFirestore in Frameworks */,
 			);
@@ -144,6 +146,7 @@
 				010EBBF328083D83003436C6 /* FirebaseAuth */,
 				010EBBF528083D83003436C6 /* FirebaseFirestore */,
 				010EBC2028094CA7003436C6 /* Alamofire */,
+				01E29119280F282F004C3143 /* FirebaseFirestore */,
 			);
 			productName = "Coin Portfolio";
 			productReference = 010EBBCE2808145A003436C6 /* Coin Portfolio.app */;
@@ -468,6 +471,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 010EBC1F28094CA7003436C6 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		01E29119280F282F004C3143 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 010EBBF228083D83003436C6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

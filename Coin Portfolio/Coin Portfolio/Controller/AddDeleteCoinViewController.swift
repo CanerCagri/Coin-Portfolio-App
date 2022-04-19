@@ -11,11 +11,7 @@ import Alamofire
 class AddDeleteCoinViewController: UIViewController  {
 
     @IBOutlet var coinListTableView: UITableView!
-    
-    @IBOutlet var myListLabel: UILabel!
-    
-    @IBOutlet var myListTable: UITableView!
-    
+
     var priceName = ""
     var priceString = ""
     var decodedData = [CoinModel] ()
