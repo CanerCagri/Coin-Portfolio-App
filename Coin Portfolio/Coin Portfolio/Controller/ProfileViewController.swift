@@ -8,13 +8,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
-    @IBOutlet var yesterdayBalanceLabel: UILabel!
-    @IBOutlet var totalBalanceLabel: UILabel!
-    @IBOutlet var listTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 }

@@ -6,7 +6,6 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -229,10 +228,10 @@
             </objects>
             <point key="canvasLocation" x="3714.4927536231885" y="413.83928571428572"/>
         </scene>
-        <!--My Profile-->
+        <!--My Collection-->
         <scene sceneID="n93-oT-UC7">
             <objects>
-                <viewController id="klh-Gq-mgs" customClass="ProfileViewController" customModule="Coin_Portfolio" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="klh-Gq-mgs" customClass="CollectionViewController" customModule="Coin_Portfolio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fQR-nI-PH0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -274,59 +273,26 @@
                         <viewLayoutGuide key="safeArea" id="3hn-KK-oPc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My Profile" image="arrowshape.turn.up.forward" catalog="system" id="ara-M0-SSp"/>
+                    <tabBarItem key="tabBarItem" title="My Collection" image="arrowshape.turn.up.forward" catalog="system" id="ara-M0-SSp"/>
                     <connections>
-                        <outlet property="listTableView" destination="vxo-rP-IeV" id="PtA-MW-83z"/>
-                        <outlet property="totalBalanceLabel" destination="5CU-ZS-41A" id="KFZ-ri-DfN"/>
-                        <outlet property="yesterdayBalanceLabel" destination="dff-of-Mup" id="0Zq-tZ-mGg"/>
+                        <outlet property="collectionTableView" destination="vxo-rP-IeV" id="kB8-n4-XyC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TzI-3O-SiQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2740.579710144928" y="1111.6071428571429"/>
         </scene>
-        <!--My Collection-->
+        <!--My Profile-->
         <scene sceneID="RfJ-uY-xDz">
             <objects>
-                <viewController id="eUJ-6o-tFY" customClass="CollectionViewController" customModule="Coin_Portfolio" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eUJ-6o-tFY" customClass="ProfileViewController" customModule="Coin_Portfolio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nep-vg-UXr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IMD-NZ-prY">
-                                <rect key="frame" x="20" y="62" width="374" height="751"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GcK-Pt-2eM">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="IiT-N1-G11">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yYa-gn-x3g">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="VXU-fU-fKW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="IMD-NZ-prY" firstAttribute="bottom" secondItem="VXU-fU-fKW" secondAttribute="bottom" id="4dA-Z2-RCy"/>
-                            <constraint firstItem="IMD-NZ-prY" firstAttribute="top" secondItem="VXU-fU-fKW" secondAttribute="top" constant="18" id="6jX-Sr-CRN"/>
-                            <constraint firstItem="VXU-fU-fKW" firstAttribute="trailing" secondItem="IMD-NZ-prY" secondAttribute="trailing" constant="20" id="ctx-vA-m7b"/>
-                            <constraint firstItem="IMD-NZ-prY" firstAttribute="leading" secondItem="VXU-fU-fKW" secondAttribute="leading" constant="20" id="grs-zZ-lTG"/>
-                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My Collection" image="doc.plaintext" catalog="system" id="RDk-Q2-J9K"/>
-                    <connections>
-                        <outlet property="collectionView" destination="IMD-NZ-prY" id="TQQ-P2-Iqh"/>
-                    </connections>
+                    <tabBarItem key="tabBarItem" title="My Profile" image="doc.plaintext" catalog="system" id="RDk-Q2-J9K"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uck-lg-GSK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

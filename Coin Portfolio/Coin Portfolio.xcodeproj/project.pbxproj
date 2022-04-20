@@ -26,6 +26,7 @@
 		010EBC49280C43C0003436C6 /* CoinListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */; };
 		01E290B7280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */; };
 		01E2911A280F282F004C3143 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 01E29119280F282F004C3143 /* FirebaseFirestore */; };
+		01E2911C280F5873004C3143 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2911B280F5873004C3143 /* PostModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		010EBC2428095480003436C6 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListTableViewCell.swift; sourceTree = "<group>"; };
 		01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeleteTableViewPopUpViewController.swift; sourceTree = "<group>"; };
+		01E2911B280F5873004C3143 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +113,8 @@
 				010EBBE82808171D003436C6 /* SigninViewController.swift */,
 				010EBBEA28081DBC003436C6 /* TabBarController.swift */,
 				010EBBEC28081DDC003436C6 /* CollectionViewController.swift */,
-				010EBBF028081DFB003436C6 /* AddDeleteCoinViewController.swift */,
 				010EBBEE28081DEB003436C6 /* ProfileViewController.swift */,
+				010EBBF028081DFB003436C6 /* AddDeleteCoinViewController.swift */,
 				01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */,
 			);
 			path = Controller;
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				010EBC2428095480003436C6 /* CoinModel.swift */,
+				01E2911B280F5873004C3143 /* PostModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				010EBC2528095480003436C6 /* CoinModel.swift in Sources */,
+				01E2911C280F5873004C3143 /* PostModel.swift in Sources */,
 				010EBBF128081DFB003436C6 /* AddDeleteCoinViewController.swift in Sources */,
 				010EBBED28081DDC003436C6 /* CollectionViewController.swift in Sources */,
 				01E290B7280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift in Sources */,

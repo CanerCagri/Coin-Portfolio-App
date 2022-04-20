@@ -6,19 +6,15 @@
 //
 
 import UIKit
+import Firebase
 
 class CollectionViewController: UIViewController {
 
-    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var collectionTableView: UITableView!
+    
+    var postArray = [Post] ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
-        
-        
     }
-    
-    
 }

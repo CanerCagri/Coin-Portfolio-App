@@ -8,8 +8,6 @@
 import UIKit
 import Firebase
 
-
-
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
     var logoutButton = UIButton()
@@ -19,16 +17,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         self.delegate = self
         createButton()
-       
-        
-        
-        
     }
     
     func createButton() {
         
         logoutButton = UIButton()
-        
         logoutButton.setImage(UIImage(named: "logout"), for: .normal)
         logoutButton.setTitleColor(.black, for: .normal)
         logoutButton.setTitleColor(.yellow, for: .highlighted)

@@ -30,32 +30,28 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
         quantityTextField.delegate = self
         
         if coinName != nil && coinPrice != nil {
-            
             coinNameLabel.text = coinName!
             coinPriceLabel.text = String(coinPrice!)
             
             let selectedCoinName = coinNameLabel.text?.components(separatedBy: "USDT")[0]
             selectedCoin.text = selectedCoinName
-            
-            
         }
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
         
         let fireStoreDatabase = Firestore.firestore()
-        
         let fireStorePost = ["email" : Auth.auth().currentUser!.email! , "coinname" : selectedCoin.text! , "coinquantity" : selectedCoinPrice! , "totalprice" : totalPrice.text! , "date" : FieldValue.serverTimestamp()] as [String:Any]
         
         fireStoreDatabase.collection("Post").addDocument(data: fireStorePost) { err in
             if err != nil {
                 let ac = UIAlertController(title: "Error", message: err?.localizedDescription ?? "Error! try again", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(ac, animated: true)
             } else {
                 self.dismiss(animated: true)
             }
         }
-        
     }
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
@@ -73,7 +69,6 @@ extension AddDeleteTableViewPopUpViewController: UITextFieldDelegate {
             } else {
                 addBtn.isEnabled = true
             }
-            
             selectedCoinPrice = Double(quantityTextField.text ?? "0")
             guard let selectedCoinPrice = selectedCoinPrice else {
                 return

@@ -10,7 +10,6 @@ import Foundation
 struct CoinModel : Decodable {
     
     var symbol : String
-    
     var price : String
 }
 
