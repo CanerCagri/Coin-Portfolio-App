@@ -27,6 +27,7 @@
 		01E290B7280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */; };
 		01E2911A280F282F004C3143 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 01E29119280F282F004C3143 /* FirebaseFirestore */; };
 		01E2911C280F5873004C3143 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2911B280F5873004C3143 /* PostModel.swift */; };
+		01E291202810883E004C3143 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2911F2810883E004C3143 /* CollectionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListTableViewCell.swift; sourceTree = "<group>"; };
 		01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeleteTableViewPopUpViewController.swift; sourceTree = "<group>"; };
 		01E2911B280F5873004C3143 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		01E2911F2810883E004C3143 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */,
+				01E2911F2810883E004C3143 /* CollectionTableViewCell.swift */,
 				010EBBD72808145A003436C6 /* Main.storyboard */,
 			);
 			path = View;
@@ -222,6 +225,7 @@
 				010EBC49280C43C0003436C6 /* CoinListTableViewCell.swift in Sources */,
 				010EBBEF28081DEB003436C6 /* ProfileViewController.swift in Sources */,
 				010EBBEB28081DBC003436C6 /* TabBarController.swift in Sources */,
+				01E291202810883E004C3143 /* CollectionTableViewCell.swift in Sources */,
 				010EBBD42808145A003436C6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
-
+    
     var logoutButton = UIButton()
     
     override func viewDidLoad() {

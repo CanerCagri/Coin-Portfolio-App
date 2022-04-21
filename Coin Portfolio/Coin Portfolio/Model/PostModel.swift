@@ -7,13 +7,13 @@
 
 import Foundation
 
-class Post {
+class PostModel {
     var email : String
     var coinname : String
     var coinquantity : Double
-    var totalprice : Double
+    var totalprice : String
     
-    init(email: String , coinname: String , coinquantity: Double , totalprice: Double ) {
+    init(email: String , coinname: String , coinquantity: Double , totalprice: String ) {
         self.email = email
         self.coinname = coinname
         self.coinquantity = coinquantity

@@ -66,9 +66,9 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
         if symbolString.suffix(4) == "USDT"  {
             cell.coinName.text = decodedData[indexPath.row].symbol
             
-            priceString = decodedData[indexPath.row].price
-            priceString = priceString.components(separatedBy: ".")[0]
-            cell.coinPrice.text = priceString
+            //priceString = decodedData[indexPath.row].price
+            //priceString = priceString.components(separatedBy: ".")[0]
+            cell.coinPrice.text = decodedData[indexPath.row].price
             
             return cell
         } else {
@@ -80,8 +80,9 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         priceName = decodedData[indexPath.row].symbol
-        let priceStringTemp = decodedData[indexPath.row].price
-        priceString = priceStringTemp.components(separatedBy: ".")[0]
+        //let priceStringTemp = decodedData[indexPath.row].price
+        //priceString = priceStringTemp.components(separatedBy: ".")[0]
+        priceString = decodedData[indexPath.row].price
         performSegue(withIdentifier: "toPopup", sender: nil)
     }
     
