@@ -11,8 +11,10 @@ import CoreMedia
 
 class CollectionViewController: UIViewController {
     
+    @IBOutlet var totalBalance: UILabel!
     @IBOutlet var collectionTableView: UITableView!
     
+    var calculatedBalance : Double = 0
     var postArray = [PostModel] ()
     
     override func viewDidLoad() {
@@ -85,7 +87,9 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = collectionTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CollectionTableViewCell
         cell.coinNameLabel.text = postArray[indexPath.row].coinname
         cell.quantityLabel.text = String(postArray[indexPath.row].coinquantity)
-        cell.priceLabel.text = String(postArray[indexPath.row].totalprice)
+        cell.priceLabel.text = "$ \(String(postArray[indexPath.row].totalprice))"
+        calculatedBalance += Double(postArray[indexPath.row].totalprice)!
+        totalBalance.text = "$ \(String(calculatedBalance))"
         return cell
     }
 }
