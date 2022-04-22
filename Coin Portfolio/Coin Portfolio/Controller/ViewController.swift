@@ -10,11 +10,16 @@ import Firebase
 
 class ViewController: UIViewController {
 
+    @IBOutlet var createBtn: UIButton!
+    @IBOutlet var logitnBtn: UIButton!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        loadButtonsOptions()
     }
 
     @IBAction func loginTapped(_ sender: Any) {
@@ -34,5 +39,37 @@ class ViewController: UIViewController {
     @IBAction func newAccountTapped(_ sender: Any) {
         performSegue(withIdentifier: "ToSigninVC", sender: self)
     }
+    
+    func loadButtonsOptions() {
+        
+        logitnBtn.setTitleColor(.black, for: .normal)
+        logitnBtn.setTitleColor(.yellow, for: .highlighted)
+        logitnBtn.frame = CGRect(x: 100, y: 0, width: 44, height: 44)
+        logitnBtn.backgroundColor = .orange
+        logitnBtn.layer.borderWidth = 4
+        logitnBtn.layer.borderColor = UIColor.yellow.cgColor
+        logitnBtn.layer.cornerRadius = 32
+        
+        
+        createBtn.setTitleColor(.black, for: .normal)
+        createBtn.setTitleColor(.yellow, for: .highlighted)
+        createBtn.frame = CGRect(x: 100, y: 0, width: 44, height: 44)
+        createBtn.backgroundColor = .orange
+        createBtn.layer.borderWidth = 4
+        createBtn.layer.borderColor = UIColor.yellow.cgColor
+        createBtn.layer.cornerRadius = 32
+        
+    }
+    /*
+    logoutButton.setImage(UIImage(named: "logout"), for: .normal)
+    logoutButton.setTitleColor(.black, for: .normal)
+    logoutButton.setTitleColor(.yellow, for: .highlighted)
+    logoutButton.frame = CGRect(x: 100, y: 0, width: 44, height: 44)
+    logoutButton.backgroundColor = .orange
+    logoutButton.layer.borderWidth = 4
+    logoutButton.layer.borderColor = UIColor.yellow.cgColor
+    logoutButton.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
+    logoutButton.tag = 100
+    self.view.addSubview(logoutButton)   */
 }
 

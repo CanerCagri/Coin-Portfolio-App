@@ -33,7 +33,10 @@
                                     <constraint firstAttribute="height" constant="62" id="ef1-tn-C6W"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Create New Account"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Create New Account">
+                                    <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="15"/>
+                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="newAccountTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d1D-9T-yrj"/>
                                 </connections>
@@ -44,7 +47,10 @@
                                     <constraint firstAttribute="height" constant="89" id="Wp1-cs-swQ"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Login"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Login">
+                                    <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hbo-om-0Q7"/>
                                 </connections>
@@ -69,7 +75,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="s0c-Zx-o1l"/>
                     <connections>
+                        <outlet property="createBtn" destination="p6e-LP-EEH" id="Q6X-za-9Dl"/>
                         <outlet property="emailTextField" destination="0C8-rI-fDb" id="JGT-Zt-lG3"/>
+                        <outlet property="logitnBtn" destination="yB3-Yp-Q2j" id="7e7-9H-F30"/>
                         <outlet property="passwordTextField" destination="8B7-dC-jTk" id="CvY-9q-gZl"/>
                         <segue destination="d6x-ch-VD7" kind="presentation" identifier="toTabBar" modalPresentationStyle="fullScreen" id="Vq5-ON-qH0"/>
                         <segue destination="VLX-Vj-haf" kind="presentation" identifier="ToSigninVC" modalPresentationStyle="fullScreen" id="5ki-sl-fJQ"/>
@@ -459,6 +467,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="5ki-sl-fJQ"/>
         <segue reference="qov-EI-WiL"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -468,6 +477,9 @@
         <namedColor name="AccentColor">
             <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
