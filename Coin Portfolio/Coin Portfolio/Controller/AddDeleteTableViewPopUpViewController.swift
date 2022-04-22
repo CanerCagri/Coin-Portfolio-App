@@ -33,7 +33,7 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
             coinNameLabel.text = coinName!
             coinPriceLabel.text = String(coinPrice!)
             
-            let selectedCoinName = coinNameLabel.text?.components(separatedBy: "USDT")[0]
+            let selectedCoinName = coinNameLabel.text?.components(separatedBy: "/USDT")[0]
             selectedCoin.text = selectedCoinName
         }
     }

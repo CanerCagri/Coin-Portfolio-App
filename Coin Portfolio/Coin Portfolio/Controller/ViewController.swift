@@ -50,7 +50,6 @@ class ViewController: UIViewController {
         logitnBtn.layer.borderColor = UIColor.yellow.cgColor
         logitnBtn.layer.cornerRadius = 32
         
-        
         createBtn.setTitleColor(.black, for: .normal)
         createBtn.setTitleColor(.yellow, for: .highlighted)
         createBtn.frame = CGRect(x: 100, y: 0, width: 44, height: 44)
@@ -60,16 +59,5 @@ class ViewController: UIViewController {
         createBtn.layer.cornerRadius = 32
         
     }
-    /*
-    logoutButton.setImage(UIImage(named: "logout"), for: .normal)
-    logoutButton.setTitleColor(.black, for: .normal)
-    logoutButton.setTitleColor(.yellow, for: .highlighted)
-    logoutButton.frame = CGRect(x: 100, y: 0, width: 44, height: 44)
-    logoutButton.backgroundColor = .orange
-    logoutButton.layer.borderWidth = 4
-    logoutButton.layer.borderColor = UIColor.yellow.cgColor
-    logoutButton.addTarget(self, action: #selector(addBtnTapped), for: .touchUpInside)
-    logoutButton.tag = 100
-    self.view.addSubview(logoutButton)   */
 }
 

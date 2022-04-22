@@ -17,6 +17,7 @@ class AddDeleteCoinViewController: UIViewController  {
     var decodedData = [CoinModel] ()
     let popUp = AddDeleteTableViewPopUpViewController()
     var api = "https://api.binance.com/api/v3/ticker/price"
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,13 +65,12 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: "CoinListCell", for: indexPath) as! CoinListTableViewCell
         let symbolString = decodedData[indexPath.row].symbol
         if symbolString.suffix(4) == "USDT"  {
-            cell.coinName.text = decodedData[indexPath.row].symbol
-            
+            var symbolStr = decodedData[indexPath.row].symbol
+            symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
+            cell.coinName.text = symbolStr
             priceString = decodedData[indexPath.row].price
             priceString = priceString.components(separatedBy: "00")[0]
             cell.coinPrice.text = priceString
-            //cell.coinPrice.text = decodedData[indexPath.row].price
-            
             return cell
         } else {
             decodedData.remove(at: indexPath.row)
@@ -80,7 +80,9 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        priceName = decodedData[indexPath.row].symbol
+        var symbolStr = decodedData[indexPath.row].symbol
+        symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
+        priceName = symbolStr
         let priceStringTemp = decodedData[indexPath.row].price
         priceString = priceStringTemp.components(separatedBy: "00")[0]
         //priceString = decodedData[indexPath.row].price
