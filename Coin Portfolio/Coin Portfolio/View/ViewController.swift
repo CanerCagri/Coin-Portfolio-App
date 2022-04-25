@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 
 class ViewController: UIViewController {
 
@@ -15,22 +14,23 @@ class ViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     
+    let viewControllerViewModel = ViewControllerViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+      
         loadButtonsOptions()
     }
 
     @IBAction func loginTapped(_ sender: Any) {
         if passwordTextField.text != "" && emailTextField.text != "" {
-            Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { [weak self]  result, error in
-                if error != nil {
-                    let vc = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
-                    vc.addAction(UIAlertAction(title: "OK", style: .default))
-                    self?.present(vc, animated: true)
+            viewControllerViewModel.login(email: emailTextField.text!, password: passwordTextField.text!) { bool in
+                if bool == true {
+                    self.performSegue(withIdentifier: "toTabBar", sender: nil)
                 } else {
-                    self?.performSegue(withIdentifier: "toTabBar", sender: nil)
+                    let ac = UIAlertController(title: "Error!", message: "Wrong id or password", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "oK", style: .default))
+                    self.present(ac, animated: true)
                 }
             }
         }
@@ -57,7 +57,8 @@ class ViewController: UIViewController {
         createBtn.layer.borderWidth = 4
         createBtn.layer.borderColor = UIColor.yellow.cgColor
         createBtn.layer.cornerRadius = 32
-        
     }
+    
+   
 }
 

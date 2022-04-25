@@ -13,15 +13,13 @@ class CollectionTableViewCell: UITableViewCell {
     @IBOutlet var coinNameLabel: UILabel!
     @IBOutlet var quantityLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    func configure(with postModel: [PostModel], indexPath: IndexPath) {
+        priceLabel.text = postModel[indexPath.row].totalprice
+        coinNameLabel.text = postModel[indexPath.row].coinname
+        quantityLabel.text = String(postModel[indexPath.row].coinquantity)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    
+    
+    
 }

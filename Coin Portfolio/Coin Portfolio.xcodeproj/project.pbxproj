@@ -24,6 +24,14 @@
 		010EBC2128094CA7003436C6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 010EBC2028094CA7003436C6 /* Alamofire */; };
 		010EBC2528095480003436C6 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBC2428095480003436C6 /* CoinModel.swift */; };
 		010EBC49280C43C0003436C6 /* CoinListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */; };
+		01CF4F3C2816815200C86268 /* ViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3B2816815200C86268 /* ViewControllerViewModel.swift */; };
+		01CF4F3E2816816400C86268 /* SigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3D2816816400C86268 /* SigninViewModel.swift */; };
+		01CF4F402816817700C86268 /* TabBarContollerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3F2816817700C86268 /* TabBarContollerViewModel.swift */; };
+		01CF4F422816819400C86268 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F412816819400C86268 /* CollectionViewModel.swift */; };
+		01CF4F44281681A500C86268 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F43281681A500C86268 /* ProfileViewModel.swift */; };
+		01CF4F46281681B500C86268 /* AddDeleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F45281681B500C86268 /* AddDeleteViewModel.swift */; };
+		01CF4F482816A68F00C86268 /* AddPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F472816A68E00C86268 /* AddPopupViewModel.swift */; };
+		01CF4F4D28173FFD00C86268 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F4C28173FFD00C86268 /* Service.swift */; };
 		01E290B7280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */; };
 		01E2911A280F282F004C3143 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 01E29119280F282F004C3143 /* FirebaseFirestore */; };
 		01E2911C280F5873004C3143 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2911B280F5873004C3143 /* PostModel.swift */; };
@@ -47,6 +55,14 @@
 		010EBBF928083E71003436C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		010EBC2428095480003436C6 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListTableViewCell.swift; sourceTree = "<group>"; };
+		01CF4F3B2816815200C86268 /* ViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerViewModel.swift; sourceTree = "<group>"; };
+		01CF4F3D2816816400C86268 /* SigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewModel.swift; sourceTree = "<group>"; };
+		01CF4F3F2816817700C86268 /* TabBarContollerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarContollerViewModel.swift; sourceTree = "<group>"; };
+		01CF4F412816819400C86268 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
+		01CF4F43281681A500C86268 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		01CF4F45281681B500C86268 /* AddDeleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeleteViewModel.swift; sourceTree = "<group>"; };
+		01CF4F472816A68E00C86268 /* AddPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPopupViewModel.swift; sourceTree = "<group>"; };
+		01CF4F4C28173FFD00C86268 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeleteTableViewPopUpViewController.swift; sourceTree = "<group>"; };
 		01E2911B280F5873004C3143 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		01E2911F2810883E004C3143 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -70,6 +86,7 @@
 		010EBBC52808145A003436C6 = {
 			isa = PBXGroup;
 			children = (
+				01CF4F4B28173FF200C86268 /* Service */,
 				010EBBD02808145A003436C6 /* Coin Portfolio */,
 				010EBBCF2808145A003436C6 /* Products */,
 			);
@@ -89,8 +106,8 @@
 				010EBBD12808145A003436C6 /* AppDelegate.swift */,
 				010EBBD32808145A003436C6 /* SceneDelegate.swift */,
 				010EBBE728081632003436C6 /* Model */,
+				01CF4F3A281680FD00C86268 /* View Model */,
 				010EBBE528081611003436C6 /* View */,
-				010EBBE62808161C003436C6 /* Controller */,
 				010EBBDA2808145B003436C6 /* Assets.xcassets */,
 				010EBBF928083E71003436C6 /* GoogleService-Info.plist */,
 				010EBBDC2808145B003436C6 /* LaunchScreen.storyboard */,
@@ -105,13 +122,6 @@
 				010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */,
 				01E2911F2810883E004C3143 /* CollectionTableViewCell.swift */,
 				010EBBD72808145A003436C6 /* Main.storyboard */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		010EBBE62808161C003436C6 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
 				010EBBD52808145A003436C6 /* ViewController.swift */,
 				010EBBE82808171D003436C6 /* SigninViewController.swift */,
 				010EBBEA28081DBC003436C6 /* TabBarController.swift */,
@@ -120,7 +130,7 @@
 				010EBBF028081DFB003436C6 /* AddDeleteCoinViewController.swift */,
 				01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */,
 			);
-			path = Controller;
+			path = View;
 			sourceTree = "<group>";
 		};
 		010EBBE728081632003436C6 /* Model */ = {
@@ -130,6 +140,28 @@
 				01E2911B280F5873004C3143 /* PostModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		01CF4F3A281680FD00C86268 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				01CF4F3B2816815200C86268 /* ViewControllerViewModel.swift */,
+				01CF4F3D2816816400C86268 /* SigninViewModel.swift */,
+				01CF4F3F2816817700C86268 /* TabBarContollerViewModel.swift */,
+				01CF4F412816819400C86268 /* CollectionViewModel.swift */,
+				01CF4F43281681A500C86268 /* ProfileViewModel.swift */,
+				01CF4F45281681B500C86268 /* AddDeleteViewModel.swift */,
+				01CF4F472816A68E00C86268 /* AddPopupViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		01CF4F4B28173FF200C86268 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				01CF4F4C28173FFD00C86268 /* Service.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,19 +246,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01CF4F422816819400C86268 /* CollectionViewModel.swift in Sources */,
 				010EBC2528095480003436C6 /* CoinModel.swift in Sources */,
 				01E2911C280F5873004C3143 /* PostModel.swift in Sources */,
 				010EBBF128081DFB003436C6 /* AddDeleteCoinViewController.swift in Sources */,
+				01CF4F402816817700C86268 /* TabBarContollerViewModel.swift in Sources */,
 				010EBBED28081DDC003436C6 /* CollectionViewController.swift in Sources */,
 				01E290B7280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift in Sources */,
+				01CF4F3C2816815200C86268 /* ViewControllerViewModel.swift in Sources */,
+				01CF4F4D28173FFD00C86268 /* Service.swift in Sources */,
 				010EBBE92808171D003436C6 /* SigninViewController.swift in Sources */,
 				010EBBD62808145A003436C6 /* ViewController.swift in Sources */,
 				010EBBD22808145A003436C6 /* AppDelegate.swift in Sources */,
+				01CF4F46281681B500C86268 /* AddDeleteViewModel.swift in Sources */,
 				010EBC49280C43C0003436C6 /* CoinListTableViewCell.swift in Sources */,
+				01CF4F44281681A500C86268 /* ProfileViewModel.swift in Sources */,
 				010EBBEF28081DEB003436C6 /* ProfileViewController.swift in Sources */,
 				010EBBEB28081DBC003436C6 /* TabBarController.swift in Sources */,
+				01CF4F3E2816816400C86268 /* SigninViewModel.swift in Sources */,
 				01E291202810883E004C3143 /* CollectionTableViewCell.swift in Sources */,
 				010EBBD42808145A003436C6 /* SceneDelegate.swift in Sources */,
+				01CF4F482816A68F00C86268 /* AddPopupViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

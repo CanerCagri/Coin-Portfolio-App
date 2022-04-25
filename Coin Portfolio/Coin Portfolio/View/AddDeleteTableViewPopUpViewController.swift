@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 
 class AddDeleteTableViewPopUpViewController: UIViewController {
     
@@ -21,6 +20,7 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     var coinName : String?
     var coinPrice : String?
     var selectedCoinPrice : Double?
+    let addPopupViewModel = AddPopupViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,18 +40,8 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     
     @IBAction func addBtnTapped(_ sender: Any) {
         
-        let fireStoreDatabase = Firestore.firestore()
-        let fireStorePost = ["email" : Auth.auth().currentUser!.email! , "coinname" : selectedCoin.text! , "coinquantity" : selectedCoinPrice! , "totalprice" : totalPrice.text! , "date" : FieldValue.serverTimestamp()] as [String:Any]
-        
-        fireStoreDatabase.collection("Post").addDocument(data: fireStorePost) { err in
-            if err != nil {
-                let ac = UIAlertController(title: "Error", message: err?.localizedDescription ?? "Error! try again", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default))
-                self.present(ac, animated: true)
-            } else {
-                self.dismiss(animated: true)
-            }
-        }
+        addPopupViewModel.addData(selectedCoin: selectedCoin.text!, selectedCoinPrice: selectedCoinPrice!, totalPrice: totalPrice.text!)
+        dismiss(animated: true)
     }
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
@@ -76,7 +66,6 @@ extension AddDeleteTableViewPopUpViewController: UITextFieldDelegate {
             if selectedCoinPrice > 1.0 {
                 let total = selectedCoinPrice * Double(coinPrice!)!
                 totalPrice.text = String(total)
-                
             } else if selectedCoinPrice < 1.0 {
                 let total = selectedCoinPrice / Double(coinPrice!)!
                 totalPrice.text = String(total)

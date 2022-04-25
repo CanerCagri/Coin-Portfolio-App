@@ -6,12 +6,13 @@
 //
 
 import UIKit
-import Firebase
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     var logoutButton = UIButton()
     
+    let tabBarControllerViewModel = TabBarControllerViewModel()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,12 +36,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     @objc func addBtnTapped(_ sender: UIButton!) {
-        do {
-            try Auth.auth().signOut()
-            performSegue(withIdentifier: "toVC", sender: nil)
-        }catch {
-            print("Error when logout")
-        }
+        tabBarControllerViewModel.signOut()
+        performSegue(withIdentifier: "toVC", sender: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -54,15 +51,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
-    }
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if selectedIndex == 1 {
             logoutButton.isHidden = true
         } else if selectedIndex == 0 {
             logoutButton.isHidden = false
         } else if selectedIndex == 2 {
+           
             logoutButton.isHidden = true
         }
     }

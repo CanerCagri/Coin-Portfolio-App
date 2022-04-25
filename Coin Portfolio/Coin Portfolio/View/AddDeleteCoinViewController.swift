@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class AddDeleteCoinViewController: UIViewController  {
 
@@ -14,9 +13,10 @@ class AddDeleteCoinViewController: UIViewController  {
 
     var priceName = ""
     var priceString = ""
-    var decodedData = [CoinModel] ()
+    
     let popUp = AddDeleteTableViewPopUpViewController()
-    var api = "https://api.binance.com/api/v3/ticker/price"
+    var service = Service()
+    var addDeleteViewModel = AddDeleteViewModel()
     
 
     override func viewDidLoad() {
@@ -25,31 +25,12 @@ class AddDeleteCoinViewController: UIViewController  {
         coinListTableView.delegate = self
         coinListTableView.dataSource = self
         
-        fetchData()
-    }
-    
-    func fetchData() {
-        if let url = URL(string: api) {
-            let session = URLSession(configuration: .default)
+        service.loadCoins { data in
+            self.addDeleteViewModel.decodedData = data
             
-            let task = session.dataTask(with: url) { data, response, error in
-                if error != nil {
-                    print(error!)
-                }
-                if let safeData = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        self.decodedData = try decoder.decode([CoinModel].self, from: safeData)
-                        
-                        DispatchQueue.main.async { 
-                            self.coinListTableView.reloadData()
-                        }
-                    } catch {
-                         print(error)
-                    }
-                }
+            DispatchQueue.main.async {
+                self.coinListTableView.reloadData()
             }
-            task.resume()
         }
     }
 }
@@ -57,35 +38,28 @@ class AddDeleteCoinViewController: UIViewController  {
 extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return decodedData.count
+        return addDeleteViewModel.numberOfRow()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CoinListCell", for: indexPath) as! CoinListTableViewCell
-        let symbolString = decodedData[indexPath.row].symbol
+        let symbolString = addDeleteViewModel.decodedData[indexPath.row].symbol
         if symbolString.suffix(4) == "USDT"  {
-            var symbolStr = decodedData[indexPath.row].symbol
-            symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
-            cell.coinName.text = symbolStr
-            priceString = decodedData[indexPath.row].price
-            priceString = priceString.components(separatedBy: "00")[0]
-            cell.coinPrice.text = priceString
-            return cell
+            cell.configure(with: addDeleteViewModel.decodedData, indexPath: indexPath)
         } else {
-            decodedData.remove(at: indexPath.row)
+            addDeleteViewModel.decodedData.remove(at: indexPath.row)
             tableView.reloadData()
         }
-        return UITableViewCell()
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var symbolStr = decodedData[indexPath.row].symbol
+        var symbolStr = addDeleteViewModel.decodedData[indexPath.row].symbol
         symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
         priceName = symbolStr
-        let priceStringTemp = decodedData[indexPath.row].price
+        let priceStringTemp = addDeleteViewModel.decodedData[indexPath.row].price
         priceString = priceStringTemp.components(separatedBy: "00")[0]
-        //priceString = decodedData[indexPath.row].price
         performSegue(withIdentifier: "toPopup", sender: nil)
     }
     
