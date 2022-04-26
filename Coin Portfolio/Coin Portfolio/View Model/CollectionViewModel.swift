@@ -7,54 +7,34 @@
 
 import Foundation
 import Firebase
-import GameController
 
+protocol CollectionViewModelProtocol {
+    var postList : [PostModel] { get set }
+    var postListService: FirestoreService { get }
+    var collectionViewControllerDelegate: CollectionViewControllerProtocol? { get }
+    
+    func setDelegate(collectionVcProtocol: CollectionViewControllerProtocol)
+    func fetchAllItems()
+}
 
-
-class CollectionViewModel {
+class CollectionViewModel: CollectionViewModelProtocol {
+    var collectionViewControllerDelegate: CollectionViewControllerProtocol?
+    var postList: [PostModel] = []
+    let postListService: FirestoreService
     
-    var post = [PostModel] ()
-    
-    
-    func numberOfRow() -> Int {
-        return post.count
+    init() {
+        postListService = FirestoreService()
     }
     
-    func fetchData(completion : @escaping ([PostModel]) -> ()) {
-        let userEmail = Auth.auth().currentUser?.email
-        post.removeAll(keepingCapacity: false)
-        Firestore.firestore().collection("Post").order(by: "date" , descending: true)
-            .addSnapshotListener {  snapshot, err in
-                if err != nil {
-                    print(err!.localizedDescription)
-                } else {
-                    
-                    if snapshot?.isEmpty != true && snapshot != nil {
-                        
-                        for document in snapshot!.documents {
-                            
-                            if let email = document.get("email") as? String {
-                                
-                                if email == userEmail {
-                                    
-                                    if let coinName = document.get("coinname") as? String {
-                                        
-                                        if let coinquantity = document.get("coinquantity") as? Double {
-                                            
-                                            if let totalprice = document.get("totalprice") as? String {
-                                                self.post.append(PostModel(email: email, coinname: coinName, coinquantity: coinquantity, totalprice: totalprice))
-                                                completion(self.post)
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    // If current email and firestore email is not matching , do nothing! go next loop
-                                }
-                            }
-                        }
-                        
-                    }
-                }
-            }
+    func setDelegate(collectionVcProtocol: CollectionViewControllerProtocol) {
+        collectionViewControllerDelegate = collectionVcProtocol
+    }
+    
+    func fetchAllItems() {
+        postListService.fetchData {[weak self] response in
+            self?.postList = response ?? []
+            self?.collectionViewControllerDelegate?.saveDatas(values: self?.postList ?? [])
+        }
     }
 }
+

@@ -35,10 +35,5 @@ class CoinListTableViewCell: UITableViewCell {
         priceString = priceString.components(separatedBy: "00")[0]
         coinPrice.text = priceString
         
-        
-        
-        
-        
     }
-    
 }

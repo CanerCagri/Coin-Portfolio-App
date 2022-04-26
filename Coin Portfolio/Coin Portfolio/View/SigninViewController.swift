@@ -41,5 +41,4 @@ class SigninViewController: UIViewController {
         ac.addAction(UIAlertAction(title: "oK", style: .default))
         present(ac, animated: true)
     }
-    
 }

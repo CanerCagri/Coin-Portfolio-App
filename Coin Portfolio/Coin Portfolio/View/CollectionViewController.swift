@@ -7,17 +7,20 @@
 
 import UIKit
 
+protocol CollectionViewControllerProtocol {
+    func saveDatas(values : [PostModel])
+}
+
 class CollectionViewController: UIViewController {
     
     @IBOutlet var totalBalance: UILabel!
     @IBOutlet var collectionTableView: UITableView!
     
     var calculatedBalance : Double = 0
-  
-    let collectionViewModel = CollectionViewModel()
     
-    var service = Service()
- 
+    let collectionViewModel = CollectionViewModel()
+    lazy var results : [PostModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,17 +29,8 @@ class CollectionViewController: UIViewController {
         collectionTableView.reloadData()
         tableViewHeader()
         
-        collectionViewModel.fetchData { data in
-            DispatchQueue.main.async {
-                self.collectionViewModel.post = data
-                self.collectionTableView.reloadData()
-               
-            }
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
+        collectionViewModel.setDelegate(collectionVcProtocol: self)
+        collectionViewModel.fetchAllItems()
     }
     
     func tableViewHeader() {
@@ -53,15 +47,22 @@ class CollectionViewController: UIViewController {
 extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(collectionViewModel.post.count)
-        return collectionViewModel.post.count
+        print(results.count)
+        return results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = collectionTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CollectionTableViewCell
-        cell.configure(with: collectionViewModel.post, indexPath: indexPath)
-        calculatedBalance += Double(collectionViewModel.post[indexPath.row].totalprice)!
+        cell.configure(with: results, indexPath: indexPath)
+        calculatedBalance += Double(results[indexPath.row].totalprice)!
         totalBalance.text = "$ \(String(calculatedBalance))"
         return cell
+    }
+}
+
+extension CollectionViewController: CollectionViewControllerProtocol {
+    func saveDatas(values: [PostModel]) {
+        results = values
+        collectionTableView.reloadData()
     }
 }

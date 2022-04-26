@@ -13,13 +13,9 @@ class CollectionTableViewCell: UITableViewCell {
     @IBOutlet var coinNameLabel: UILabel!
     @IBOutlet var quantityLabel: UILabel!
     
-    
     func configure(with postModel: [PostModel], indexPath: IndexPath) {
         priceLabel.text = postModel[indexPath.row].totalprice
         coinNameLabel.text = postModel[indexPath.row].coinname
         quantityLabel.text = String(postModel[indexPath.row].coinquantity)
     }
-    
-    
-    
 }

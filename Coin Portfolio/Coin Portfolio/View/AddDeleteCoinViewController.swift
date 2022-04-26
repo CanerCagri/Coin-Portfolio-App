@@ -8,61 +8,54 @@
 import UIKit
 
 protocol AddDeleteCoinViewControllerProtocol {
-    func saveDatas(vales: [CoinModel])
+    func saveDatas(values: [CoinModel])
 }
 
 class AddDeleteCoinViewController: UIViewController  {
-
+    
     @IBOutlet var coinListTableView: UITableView!
-
+    
     var priceName = ""
     var priceString = ""
+    lazy var results : [CoinModel] = []
     
     let popUp = AddDeleteTableViewPopUpViewController()
-    var service = Service()
-    var addDeleteViewModel = AddDeleteViewModel()
+    lazy var addDeleteViewModel =  AddDeleteViewModel()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         coinListTableView.delegate = self
         coinListTableView.dataSource = self
+        addDeleteViewModel.setDelegate(addDeleteVcProtocol: self)
         
-        service.loadCoins { data in
-            self.addDeleteViewModel.decodedData = data!
-            
-            DispatchQueue.main.async {
-                self.coinListTableView.reloadData()
-            }
-        }
+        addDeleteViewModel.fetchItems()
     }
 }
 
 extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return addDeleteViewModel.decodedData.count
+        return results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CoinListCell", for: indexPath) as! CoinListTableViewCell
-        let symbolString = addDeleteViewModel.decodedData[indexPath.row].symbol
+        let symbolString = results[indexPath.row].symbol
         if symbolString.suffix(4) == "USDT"  {
-            cell.configure(with: addDeleteViewModel.decodedData, indexPath: indexPath)
+            cell.configure(with: results, indexPath: indexPath)
         } else {
-            addDeleteViewModel.decodedData.remove(at: indexPath.row)
+            results.remove(at: indexPath.row)
             tableView.reloadData()
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var symbolStr = addDeleteViewModel.decodedData[indexPath.row].symbol
+        var symbolStr = results[indexPath.row].symbol
         symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
         priceName = symbolStr
-        let priceStringTemp = addDeleteViewModel.decodedData[indexPath.row].price
+        let priceStringTemp = results[indexPath.row].price
         priceString = priceStringTemp.components(separatedBy: "00")[0]
         performSegue(withIdentifier: "toPopup", sender: nil)
     }
@@ -77,9 +70,8 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
 }
 
 extension AddDeleteCoinViewController: AddDeleteCoinViewControllerProtocol {
-    func saveDatas(vales: [CoinModel]) {
-        <#code#>
+    func saveDatas(values: [CoinModel]) {
+        results = values
+        coinListTableView.reloadData()
     }
-    
-    
 }

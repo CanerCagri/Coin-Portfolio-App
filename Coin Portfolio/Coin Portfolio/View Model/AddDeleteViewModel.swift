@@ -8,34 +8,33 @@
 import Foundation
 
 protocol AddDeleteViewModelProtocol {
-    func fetchItems()
-    
     var coinList: [CoinModel] { get set  }
     var coinListService: Service { get }
+    var addDeleteCoinViewControllerProtocol: AddDeleteCoinViewControllerProtocol? { get }
+    
+    func fetchItems()
+    func setDelegate(addDeleteVcProtocol: AddDeleteCoinViewControllerProtocol )
 }
 
-
-class AddDeleteViewModel: AddDeleteViewModelProtocol {
+final class AddDeleteViewModel: AddDeleteViewModelProtocol {
+    var addDeleteCoinViewControllerProtocol: AddDeleteCoinViewControllerProtocol?
+    
     let coinListService: Service
     var coinList: [CoinModel] = []
+    
     
     init() {
         coinListService = Service()
     }
     
-    var decodedData = [CoinModel] ()
-    
-    func numberOfRow() -> Int {
-        return decodedData.count
+    func setDelegate(addDeleteVcProtocol: AddDeleteCoinViewControllerProtocol) {
+        addDeleteCoinViewControllerProtocol = addDeleteVcProtocol
     }
     
     func fetchItems() {
-        coinListService.loadCoins { response in
-            self.coinList = response ?? []
+        coinListService.loadCoins { [weak self] response in
+            self?.coinList = response ?? []
+            self?.addDeleteCoinViewControllerProtocol?.saveDatas(values: self?.coinList ?? [] )
         }
     }
-    
-    
-    
-    
 }

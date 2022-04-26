@@ -58,7 +58,5 @@ class ViewController: UIViewController {
         createBtn.layer.borderColor = UIColor.yellow.cgColor
         createBtn.layer.cornerRadius = 32
     }
-    
-   
 }
 
