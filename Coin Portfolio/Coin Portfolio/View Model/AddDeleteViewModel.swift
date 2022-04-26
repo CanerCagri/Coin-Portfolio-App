@@ -7,11 +7,35 @@
 
 import Foundation
 
-struct AddDeleteViewModel {
+protocol AddDeleteViewModelProtocol {
+    func fetchItems()
+    
+    var coinList: [CoinModel] { get set  }
+    var coinListService: Service { get }
+}
+
+
+class AddDeleteViewModel: AddDeleteViewModelProtocol {
+    let coinListService: Service
+    var coinList: [CoinModel] = []
+    
+    init() {
+        coinListService = Service()
+    }
     
     var decodedData = [CoinModel] ()
     
     func numberOfRow() -> Int {
         return decodedData.count
     }
+    
+    func fetchItems() {
+        coinListService.loadCoins { response in
+            self.coinList = response ?? []
+        }
+    }
+    
+    
+    
+    
 }

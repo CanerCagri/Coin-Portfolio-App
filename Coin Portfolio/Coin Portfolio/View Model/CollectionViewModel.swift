@@ -9,6 +9,8 @@ import Foundation
 import Firebase
 import GameController
 
+
+
 class CollectionViewModel {
     
     var post = [PostModel] ()
@@ -22,7 +24,7 @@ class CollectionViewModel {
         let userEmail = Auth.auth().currentUser?.email
         post.removeAll(keepingCapacity: false)
         Firestore.firestore().collection("Post").order(by: "date" , descending: true)
-            .addSnapshotListener { snapshot, err in
+            .addSnapshotListener {  snapshot, err in
                 if err != nil {
                     print(err!.localizedDescription)
                 } else {

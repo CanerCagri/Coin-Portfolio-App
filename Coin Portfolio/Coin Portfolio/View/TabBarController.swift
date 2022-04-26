@@ -57,7 +57,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         } else if selectedIndex == 0 {
             logoutButton.isHidden = false
         } else if selectedIndex == 2 {
-           
             logoutButton.isHidden = true
         }
     }

@@ -7,30 +7,25 @@
 
 import Foundation
 import Firebase
+import Alamofire
 
-class Service {
+
+protocol ServiceProtocol {
+    func loadCoins(completion : @escaping ([CoinModel]?) -> Void)
+}
+
+class Service: ServiceProtocol {
     
-    var collectionViewModel : CollectionViewModel!
-    
-    func loadCoins(completion : @escaping ([CoinModel]) ->()) {
+    func loadCoins(completion: @escaping ([CoinModel]?) -> Void) {
+        
         let api = "https://api.binance.com/api/v3/ticker/price"
-        if let url = URL(string: api) {
-    
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                if error != nil {
-                    print(error!)
-                }
-                if let safeData = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        let result = try decoder.decode([CoinModel].self, from: safeData)
-                        completion(result)
-                    } catch {
-                         print(error)
-                    }
-                }
+        
+        AF.request(api).responseDecodable(of: [CoinModel].self ) { (model) in
+            guard let data = model.value else {
+                completion(nil)
+                return
             }
-            .resume()
+            completion(data)
         }
     }
 }

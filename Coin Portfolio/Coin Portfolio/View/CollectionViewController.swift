@@ -13,9 +13,11 @@ class CollectionViewController: UIViewController {
     @IBOutlet var collectionTableView: UITableView!
     
     var calculatedBalance : Double = 0
+  
     let collectionViewModel = CollectionViewModel()
-    var service = Service()
     
+    var service = Service()
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,7 +30,7 @@ class CollectionViewController: UIViewController {
             DispatchQueue.main.async {
                 self.collectionViewModel.post = data
                 self.collectionTableView.reloadData()
-                
+               
             }
         }
     }
@@ -51,8 +53,8 @@ class CollectionViewController: UIViewController {
 extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
-        return collectionViewModel.numberOfRow()
+        print(collectionViewModel.post.count)
+        return collectionViewModel.post.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

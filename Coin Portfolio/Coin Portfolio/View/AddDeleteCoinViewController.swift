@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol AddDeleteCoinViewControllerProtocol {
+    func saveDatas(vales: [CoinModel])
+}
+
 class AddDeleteCoinViewController: UIViewController  {
 
     @IBOutlet var coinListTableView: UITableView!
@@ -26,7 +30,7 @@ class AddDeleteCoinViewController: UIViewController  {
         coinListTableView.dataSource = self
         
         service.loadCoins { data in
-            self.addDeleteViewModel.decodedData = data
+            self.addDeleteViewModel.decodedData = data!
             
             DispatchQueue.main.async {
                 self.coinListTableView.reloadData()
@@ -38,7 +42,7 @@ class AddDeleteCoinViewController: UIViewController  {
 extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return addDeleteViewModel.numberOfRow()
+        return addDeleteViewModel.decodedData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -70,4 +74,12 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
             destination.coinPrice = priceString
         }
     }
+}
+
+extension AddDeleteCoinViewController: AddDeleteCoinViewControllerProtocol {
+    func saveDatas(vales: [CoinModel]) {
+        <#code#>
+    }
+    
+    
 }
