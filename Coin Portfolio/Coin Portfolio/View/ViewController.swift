@@ -20,6 +20,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
       
         loadButtonsOptions()
+        
+        
     }
 
     @IBAction func loginTapped(_ sender: Any) {

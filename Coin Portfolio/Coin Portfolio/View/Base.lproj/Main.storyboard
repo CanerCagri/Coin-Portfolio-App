@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cVo-Jt-qix">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="h89-1B-Vta">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -85,9 +85,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="993" y="106"/>
+            <point key="canvasLocation" x="1918.840579710145" y="99.776785714285708"/>
         </scene>
-        <!--Add / Delete Coin-->
+        <!--Add Delete Coin View Controller-->
         <scene sceneID="rd5-eF-Hai">
             <objects>
                 <viewController id="gH3-6D-Gp9" customClass="AddDeleteCoinViewController" customModule="Coin_Portfolio" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,7 +96,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Usj-Tx-akX">
-                                <rect key="frame" x="20" y="44" width="374" height="769"/>
+                                <rect key="frame" x="20" y="105" width="374" height="708"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -134,7 +134,7 @@
                         <viewLayoutGuide key="safeArea" id="CrG-Cz-Hnn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Add / Delete Coin" image="plus" catalog="system" id="aB0-FX-Lp9"/>
+                    <navigationItem key="navigationItem" id="MFO-uZ-Qvc"/>
                     <connections>
                         <outlet property="coinListTableView" destination="Usj-Tx-akX" id="Kjb-gD-dy3"/>
                         <segue destination="JGt-Dy-MKp" kind="show" identifier="toPopup" id="d5p-2g-z8h"/>
@@ -142,17 +142,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vc-iJ-lSO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2740.579710144928" y="409.82142857142856"/>
+            <point key="canvasLocation" x="4560.8695652173919" y="409.82142857142856"/>
         </scene>
         <!--Add Delete Table View Pop Up View Controller-->
         <scene sceneID="syN-23-8yv">
             <objects>
                 <viewController id="JGt-Dy-MKp" customClass="AddDeleteTableViewPopUpViewController" customModule="Coin_Portfolio" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2lI-hJ-j7m">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="2lI-hJ-j7m">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5NX-eR-n3L">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5NX-eR-n3L">
                                 <rect key="frame" x="45" y="122" width="327" height="415"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CoinName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ixc-so-Umo">
@@ -187,7 +187,7 @@
                                             <action selector="addBtnTapped:" destination="JGt-Dy-MKp" eventType="touchUpInside" id="X2G-GB-5AG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syg-tf-7tK">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syg-tf-7tK">
                                         <rect key="frame" x="122" y="358" width="83" height="37"/>
                                         <color key="backgroundColor" name="AccentColor"/>
                                         <state key="normal" title="Button"/>
@@ -270,7 +270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ppl-a6-87B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3714.4927536231885" y="413.83928571428572"/>
+            <point key="canvasLocation" x="5534.7826086956529" y="413.83928571428572"/>
         </scene>
         <!--My Collection-->
         <scene sceneID="n93-oT-UC7">
@@ -379,7 +379,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uck-lg-GSK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2740.579710144928" y="-319.41964285714283"/>
+            <point key="canvasLocation" x="3650.7246376811595" y="-319.41964285714283"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="oYH-ZB-Lf1">
@@ -393,14 +393,14 @@
                     </tabBar>
                     <connections>
                         <segue destination="eUJ-6o-tFY" kind="relationship" relationship="viewControllers" id="tvW-7j-hPe"/>
-                        <segue destination="gH3-6D-Gp9" kind="relationship" relationship="viewControllers" id="c5B-Us-0Lp"/>
+                        <segue destination="YSg-6B-g5v" kind="relationship" relationship="viewControllers" id="c5B-Us-0Lp"/>
                         <segue destination="klh-Gq-mgs" kind="relationship" relationship="viewControllers" id="Pfw-Fs-utc"/>
-                        <segue destination="cVo-Jt-qix" kind="presentation" identifier="toVC" modalPresentationStyle="fullScreen" id="OMv-8a-1uk"/>
+                        <segue destination="h89-1B-Vta" kind="presentation" identifier="toVC" modalPresentationStyle="fullScreen" id="E6B-cm-H1E"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l4g-WC-iGJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1851" y="106"/>
+            <point key="canvasLocation" x="2760.8695652173915" y="105.80357142857143"/>
         </scene>
         <!--Signin View Controller-->
         <scene sceneID="7kn-cc-Xxf">
@@ -475,7 +475,7 @@
                         <outlet property="nameTextField" destination="Gq2-lx-uV5" id="uII-Al-hT2"/>
                         <outlet property="passwordTextField" destination="3I3-8D-5E2" id="BJv-Iu-6iF"/>
                         <outlet property="surnameTextField" destination="p7z-DJ-0PA" id="Qgw-2T-nMZ"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toVC" modalPresentationStyle="fullScreen" id="qov-EI-WiL"/>
+                        <segue destination="h89-1B-Vta" kind="presentation" identifier="toVC" modalPresentationStyle="fullScreen" id="qov-EI-WiL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4G-W8-Odb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -483,27 +483,45 @@
             <point key="canvasLocation" x="1887" y="-807"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Ktk-tQ-18z">
+        <scene sceneID="ijX-0P-vMs">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cVo-Jt-qix" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h89-1B-Vta" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="3T2-RX-txc"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wwO-wy-ET4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HAl-bq-TXd">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="TjG-1J-fvl"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="f10-vc-pp0"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JJX-0M-thI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MWo-gQ-0aF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="99.776785714285708"/>
+            <point key="canvasLocation" x="1008.6956521739131" y="99.776785714285708"/>
+        </scene>
+        <!--Add / Delete Coin-->
+        <scene sceneID="e7p-Gw-sZn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YSg-6B-g5v" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Add / Delete Coin" image="plus" catalog="system" id="aB0-FX-Lp9"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bkX-xY-STz">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gH3-6D-Gp9" kind="relationship" relationship="rootViewController" id="RvI-ab-x76"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cfj-0T-GIB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3650.7246376811595" y="409.82142857142856"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="TjG-1J-fvl"/>
+        <segue reference="E6B-cm-H1E"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.forward" catalog="system" width="128" height="106"/>

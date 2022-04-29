@@ -18,45 +18,95 @@ class AddDeleteCoinViewController: UIViewController  {
     var priceName = ""
     var priceString = ""
     lazy var results : [CoinModel] = []
+    var filteredCoins : [CoinModel] = []
     
     let popUp = AddDeleteTableViewPopUpViewController()
     lazy var addDeleteViewModel =  AddDeleteViewModel()
+    let searchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadConfig()
+        initSearchController()
+    }
+    
+    func loadConfig() {
+        
         coinListTableView.delegate = self
         coinListTableView.dataSource = self
         addDeleteViewModel.setDelegate(addDeleteVcProtocol: self)
-        
         addDeleteViewModel.fetchItems()
+        
+    }
+    
+    func initSearchController() {
+        searchController.loadViewIfNeeded()
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.enablesReturnKeyAutomatically = false
+        searchController.searchBar.returnKeyType = UIReturnKeyType.done
+        definesPresentationContext = true
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.delegate = self
     }
 }
 
 extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(searchController.isActive) {
+            return filteredCoins.count
+        }
         return results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CoinListCell", for: indexPath) as! CoinListTableViewCell
-        let symbolString = results[indexPath.row].symbol
-        if symbolString.suffix(4) == "USDT"  {
-            cell.configure(with: results, indexPath: indexPath)
+        
+        let coinResult : CoinModel!
+        
+        if searchController.isActive {
+            coinResult = filteredCoins[indexPath.row]
+            let symbolString = coinResult.symbol
+            if symbolString.suffix(4) == "USDT"  {
+                cell.configure(with: filteredCoins, indexPath: indexPath)
+            } else {
+                filteredCoins.remove(at: indexPath.row)
+                tableView.reloadData()
+            }
         } else {
-            results.remove(at: indexPath.row)
-            tableView.reloadData()
+            
+            coinResult = results[indexPath.row]
+            let symbolString = coinResult.symbol
+            if symbolString.suffix(4) == "USDT"  {
+                cell.configure(with: results, indexPath: indexPath)
+            } else {
+                results.remove(at: indexPath.row)
+                tableView.reloadData()
+            }
+            
         }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var symbolStr = results[indexPath.row].symbol
+        
+        let coinResult : CoinModel!
+        
+        if searchController.isActive {
+            coinResult = filteredCoins[indexPath.row]
+        } else {
+            coinResult = results[indexPath.row]
+        }
+        
+        var symbolStr = coinResult.symbol
         symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
         priceName = symbolStr
-        let priceStringTemp = results[indexPath.row].price
-        priceString = priceStringTemp.components(separatedBy: "00")[0]
+        priceString = coinResult.price
         performSegue(withIdentifier: "toPopup", sender: nil)
     }
     
@@ -74,4 +124,31 @@ extension AddDeleteCoinViewController: AddDeleteCoinViewControllerProtocol {
         results = values
         coinListTableView.reloadData()
     }
+}
+
+extension AddDeleteCoinViewController : UISearchResultsUpdating, UISearchBarDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        let searchBar = searchController.searchBar
+        let searchText = searchBar.text!
+        
+        filterForSearch(searchText: searchText)
+        
+    }
+    
+    func filterForSearch(searchText: String ) {
+        print("Test")
+        filteredCoins = results.filter {
+            coin in
+            
+            if (searchController.searchBar.text != "") {
+                let searchTextMatch = coin.symbol.lowercased().contains(searchText.lowercased())
+                return searchTextMatch
+            } else {
+                return true
+            }
+        }
+        coinListTableView.reloadData()
+    }
+    
 }
