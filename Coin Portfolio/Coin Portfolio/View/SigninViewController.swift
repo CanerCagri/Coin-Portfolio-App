@@ -9,8 +9,6 @@ import UIKit
 
 class SigninViewController: UIViewController {
 
-    @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var surnameTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
@@ -22,6 +20,11 @@ class SigninViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func cancelBtnTapped(_ sender: Any) {
+        dismiss(animated: true)
+        performSegue(withIdentifier: "toVC", sender: self)
+        
+    }
     @IBAction func createAccTapped(_ sender: Any) {
         if passwordTextField.text != "" && emailTextField.text != ""  {
             signinViewModel.createAccount(email: emailTextField.text!, password: passwordTextField.text!) { bool in
