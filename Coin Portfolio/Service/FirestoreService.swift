@@ -19,6 +19,7 @@ class FirestoreService: FirestoreServiceProtocol {
     var posts: [PostModel] = []
     
     func addData(selectedCoin : String , selectedCoinPrice: Double, totalPrice: String) {
+        
         let db = Firestore.firestore()
         
         db.collection("Post").addDocument(data: ["email" : Auth.auth().currentUser!.email! , "coinname" : selectedCoin , "coinquantity" : selectedCoinPrice , "totalprice" : totalPrice , "date" : FieldValue.serverTimestamp()]) { error in
@@ -32,6 +33,8 @@ class FirestoreService: FirestoreServiceProtocol {
     
     func fetchData(completion: @escaping ([PostModel]?) -> Void) {
         let userEmail = Auth.auth().currentUser?.email
+        
+        
         Firestore.firestore().collection("Post").order(by: "date" , descending: true)
             .addSnapshotListener {  snapshot, err in
                 if err != nil {

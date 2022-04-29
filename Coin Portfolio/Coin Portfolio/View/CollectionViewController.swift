@@ -17,7 +17,7 @@ class CollectionViewController: UIViewController {
     @IBOutlet var collectionTableView: UITableView!
     
     var calculatedBalance : Double = 0
-    
+  
     let collectionViewModel = CollectionViewModel()
     lazy var results : [PostModel] = []
     

@@ -18,12 +18,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="caner@gmail.com" borderStyle="roundedRect" placeholder="Email Adress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0C8-rI-fDb">
-                                <rect key="frame" x="73" y="125" width="304" height="34"/>
+                                <rect key="frame" x="73" y="169" width="304" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8B7-dC-jTk">
-                                <rect key="frame" x="73" y="209" width="304" height="34"/>
+                                <rect key="frame" x="73" y="253" width="304" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
@@ -42,7 +42,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yB3-Yp-Q2j">
-                                <rect key="frame" x="151" y="325" width="112" height="89"/>
+                                <rect key="frame" x="151" y="369" width="112" height="89"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="89" id="Wp1-cs-swQ"/>
                                 </constraints>
@@ -384,7 +384,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="oYH-ZB-Lf1">
             <objects>
-                <tabBarController id="d6x-ch-VD7" customClass="TabBarController" customModule="Coin_Portfolio" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="toTabBar" id="d6x-ch-VD7" customClass="TabBarController" customModule="Coin_Portfolio" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="MdT-gL-JO2"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Dx0-Dc-krE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -503,7 +503,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qov-EI-WiL"/>
+        <segue reference="TjG-1J-fvl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.forward" catalog="system" width="128" height="106"/>
