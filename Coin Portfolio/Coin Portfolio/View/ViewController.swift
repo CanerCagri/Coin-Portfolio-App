@@ -18,10 +18,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+
         loadButtonsOptions()
-        
-        
     }
 
     @IBAction func loginTapped(_ sender: Any) {
