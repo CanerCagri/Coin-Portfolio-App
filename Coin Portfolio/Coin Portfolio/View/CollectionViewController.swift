@@ -28,9 +28,14 @@ class CollectionViewController: UIViewController {
         collectionTableView.dataSource = self
         collectionTableView.reloadData()
         tableViewHeader()
+      
+    }
+    override func viewWillAppear(_ animated: Bool) {
         results.removeAll()
         collectionViewModel.setDelegate(collectionVcProtocol: self)
         collectionViewModel.fetchAllItems()
+     
+       
     }
     
     func tableViewHeader() {
@@ -62,6 +67,7 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CollectionViewController: CollectionViewControllerProtocol {
     func saveDatas(values: [PostModel]) {
+        results.removeAll()
         results = values
         collectionTableView.reloadData()
     }

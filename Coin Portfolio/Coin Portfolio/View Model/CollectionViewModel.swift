@@ -31,6 +31,7 @@ class CollectionViewModel: CollectionViewModelProtocol {
     }
     
     func fetchAllItems() {
+        postList.removeAll()
         postListService.fetchData {[weak self] response in
             self?.postList = response ?? []
             self?.collectionViewControllerDelegate?.saveDatas(values: self?.postList ?? [])

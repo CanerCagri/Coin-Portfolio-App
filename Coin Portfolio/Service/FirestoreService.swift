@@ -24,7 +24,7 @@ class FirestoreService: FirestoreServiceProtocol {
         
         db.collection("Post").addDocument(data: ["email" : Auth.auth().currentUser!.email! , "coinname" : selectedCoin , "coinquantity" : selectedCoinPrice , "totalprice" : totalPrice , "date" : FieldValue.serverTimestamp()]) { error in
             if error == nil {
-                
+                return
             } else {
                 fatalError(error!.localizedDescription)
             }
@@ -35,36 +35,37 @@ class FirestoreService: FirestoreServiceProtocol {
         let userEmail = Auth.auth().currentUser?.email
         
         
-        Firestore.firestore().collection("Post").addSnapshotListener {  snapshot, err in
-                if err != nil {
-                    print(err!.localizedDescription)
-                } else {
-                    
-                    if snapshot?.isEmpty != true && snapshot != nil {
+        Firestore.firestore().collection("Post").getDocuments(completion: { snapshot, err in
+            if err != nil {
+                print(err!.localizedDescription)
+            } else {
+                
+                if snapshot?.isEmpty != true && snapshot != nil {
+                    self.posts.removeAll()
+                    for document in snapshot!.documents {
                         
-                        for document in snapshot!.documents {
+                        if let email = document.get("email") as? String {
                             
-                            if let email = document.get("email") as? String {
+                            if email == userEmail {
                                 
-                                if email == userEmail {
+                                if let coinName = document.get("coinname") as? String {
                                     
-                                    if let coinName = document.get("coinname") as? String {
+                                    if let coinquantity = document.get("coinquantity") as? Double {
                                         
-                                        if let coinquantity = document.get("coinquantity") as? Double {
-                                            
-                                            if let totalprice = document.get("totalprice") as? String {
-                                                self.posts.append(PostModel(email: email, coinname: coinName, coinquantity: coinquantity, totalprice: totalprice))
-                                                completion(self.posts)
-                                            }
+                                        if let totalprice = document.get("totalprice") as? String {
+                                            self.posts.append(PostModel(email: email, coinname: coinName, coinquantity: coinquantity, totalprice: totalprice))
+                                            completion(self.posts)
                                         }
                                     }
-                                } else {
-                                    // If current email and firestore email is not matching , do nothing! go next loop
                                 }
+                            } else {
+                                // If current email and firestore email is not matching , do nothing! go next loop
                             }
                         }
                     }
                 }
             }
+        })
+            
     }
 }

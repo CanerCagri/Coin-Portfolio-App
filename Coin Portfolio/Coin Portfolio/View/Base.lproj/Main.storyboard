@@ -321,6 +321,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="My Collection" image="doc.plaintext" catalog="system" id="ara-M0-SSp"/>
+                    <navigationItem key="navigationItem" id="VQy-x3-hui"/>
                     <connections>
                         <outlet property="collectionTableView" destination="vxo-rP-IeV" id="kB8-n4-XyC"/>
                         <outlet property="totalBalance" destination="5CU-ZS-41A" id="XWd-fv-Fq6"/>
