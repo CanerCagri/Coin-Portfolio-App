@@ -28,7 +28,7 @@ class CollectionViewController: UIViewController {
         collectionTableView.dataSource = self
         collectionTableView.reloadData()
         tableViewHeader()
-        
+        results.removeAll()
         collectionViewModel.setDelegate(collectionVcProtocol: self)
         collectionViewModel.fetchAllItems()
     }

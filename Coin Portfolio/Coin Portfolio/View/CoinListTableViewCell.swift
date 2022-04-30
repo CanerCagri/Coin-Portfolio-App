@@ -31,7 +31,7 @@ class CoinListTableViewCell: UITableViewCell {
         symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
         
         coinName.text = symbolStr
-        coinPrice.text = postModel[indexPath.row].price
+        coinPrice.text = postModel[indexPath.row].lastPrice
         
     }
 }

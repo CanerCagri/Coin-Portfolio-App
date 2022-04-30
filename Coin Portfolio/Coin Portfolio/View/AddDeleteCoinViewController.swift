@@ -102,7 +102,7 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
         var symbolStr = coinResult.symbol
         symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
         priceName = symbolStr
-        priceString = coinResult.price
+        priceString = coinResult.lastPrice
         performSegue(withIdentifier: "toPopup", sender: nil)
     }
     

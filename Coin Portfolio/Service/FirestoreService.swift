@@ -35,8 +35,7 @@ class FirestoreService: FirestoreServiceProtocol {
         let userEmail = Auth.auth().currentUser?.email
         
         
-        Firestore.firestore().collection("Post").order(by: "date" , descending: true)
-            .addSnapshotListener {  snapshot, err in
+        Firestore.firestore().collection("Post").addSnapshotListener {  snapshot, err in
                 if err != nil {
                     print(err!.localizedDescription)
                 } else {
