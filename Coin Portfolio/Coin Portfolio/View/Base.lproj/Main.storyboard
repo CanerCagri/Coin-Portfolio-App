@@ -115,7 +115,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9PN-C3-Ven">
-                                                    <rect key="frame" x="258" y="11" width="116" height="36"/>
+                                                    <rect key="frame" x="218" y="11" width="148" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -472,6 +472,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="d5p-2g-z8h"/>
         <segue reference="qov-EI-WiL"/>
         <segue reference="pgy-5O-hp4"/>
     </inferredMetricsTieBreakers>

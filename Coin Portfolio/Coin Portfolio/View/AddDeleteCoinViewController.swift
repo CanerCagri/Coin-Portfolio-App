@@ -71,7 +71,13 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
             coinResult = filteredCoins[indexPath.row]
             let symbolString = coinResult.symbol
             if symbolString.suffix(4) == "USDT"  {
-                cell.configure(with: filteredCoins, indexPath: indexPath)
+                if coinResult.lastPrice != "0.00000000" {
+                    cell.configure(with: filteredCoins, indexPath: indexPath)
+                } else {
+                    filteredCoins.remove(at: indexPath.row)
+                    tableView.reloadData()
+                }
+              
             } else {
                 filteredCoins.remove(at: indexPath.row)
                 tableView.reloadData()
@@ -81,7 +87,12 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
             coinResult = results[indexPath.row]
             let symbolString = coinResult.symbol
             if symbolString.suffix(4) == "USDT"  {
+                if coinResult.lastPrice != "0.00000000" {
                 cell.configure(with: results, indexPath: indexPath)
+                } else {
+                    results.remove(at: indexPath.row)
+                    tableView.reloadData()
+                }
             } else {
                 results.remove(at: indexPath.row)
                 tableView.reloadData()
