@@ -18,7 +18,7 @@ class CollectionViewController: UIViewController {
     @IBOutlet var collectionTableView: UITableView!
     
     var calculatedBalance : Double = 0
-  
+    
     let collectionViewModel = CollectionViewModel()
     lazy var results : [PostModel] = []
     
@@ -29,7 +29,7 @@ class CollectionViewController: UIViewController {
         collectionTableView.dataSource = self
         collectionTableView.reloadData()
         tableViewHeader()
-      
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         results.removeAll()

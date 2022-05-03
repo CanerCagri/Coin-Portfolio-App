@@ -27,7 +27,6 @@ class AddDeleteCoinViewController: UIViewController  {
         super.viewDidLoad()
         
         loadConfig()
-     
     }
     
     func loadConfig() {
@@ -49,7 +48,6 @@ class AddDeleteCoinViewController: UIViewController  {
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.delegate = self
     }
-   
 }
 
 extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSource {
@@ -66,7 +64,6 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: "CoinListCell", for: indexPath) as! CoinListTableViewCell
         
         let coinResult : CoinModel!
-        
         if searchController.isActive {
             coinResult = filteredCoins[indexPath.row]
             let symbolString = coinResult.symbol
@@ -77,7 +74,6 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
                     filteredCoins.remove(at: indexPath.row)
                     tableView.reloadData()
                 }
-              
             } else {
                 filteredCoins.remove(at: indexPath.row)
                 tableView.reloadData()
@@ -88,7 +84,7 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
             let symbolString = coinResult.symbol
             if symbolString.suffix(4) == "USDT"  {
                 if coinResult.lastPrice != "0.00000000" {
-                cell.configure(with: results, indexPath: indexPath)
+                    cell.configure(with: results, indexPath: indexPath)
                 } else {
                     results.remove(at: indexPath.row)
                     tableView.reloadData()
@@ -97,7 +93,6 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
                 results.remove(at: indexPath.row)
                 tableView.reloadData()
             }
-            
         }
         return cell
     }
@@ -111,11 +106,17 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
             coinResult = results[indexPath.row]
         }
-        
         var symbolStr = coinResult.symbol
         symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
         priceName = symbolStr
-        priceString = coinResult.lastPrice
+        let apiPrice = coinResult.lastPrice
+        let result = apiPrice.components(separatedBy: "0000")
+        if result[0].last != "." {  // Price checking , if price end with . after result add 0
+            priceString = result[0]
+        } else {
+            let last = "\(result[0])0"
+            priceString = last
+        }
         performSegue(withIdentifier: "toPopup", sender: nil)
     }
     
@@ -141,7 +142,6 @@ extension AddDeleteCoinViewController : UISearchResultsUpdating, UISearchBarDele
         let searchBar = searchController.searchBar
         let searchText = searchBar.text!
         filterForSearch(searchText: searchText)
-        
     }
     
     func filterForSearch(searchText: String ) {

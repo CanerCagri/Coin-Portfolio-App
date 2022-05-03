@@ -26,12 +26,18 @@ class CoinListTableViewCell: UITableViewCell {
     }
     
     func configure(with postModel: [CoinModel], indexPath: IndexPath) {
-        
         var symbolStr = postModel[indexPath.row].symbol
         symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
         
         coinName.text = symbolStr
-        coinPrice.text = postModel[indexPath.row].lastPrice
-        
+        // Price settings
+        let apiPrice = postModel[indexPath.row].lastPrice
+        let result = apiPrice.components(separatedBy: "0000")
+        if result[0].last != "." {  // Price checking , if price end with . after result add 0
+            coinPrice.text = result[0]
+        } else {
+            let last = "\(result[0])0"
+            coinPrice.text = last
+        }
     }
 }
