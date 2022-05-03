@@ -8,6 +8,7 @@
 import Foundation
 
 struct PostModel {
+    let id : String
     let email : String
     let coinname : String
     let coinquantity : Double

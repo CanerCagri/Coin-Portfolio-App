@@ -58,6 +58,7 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
         if(searchController.isActive) {
             return filteredCoins.count
         }
+        filteredCoins.removeAll()
         return results.count
     }
     
@@ -76,6 +77,7 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
                 tableView.reloadData()
             }
         } else {
+            filteredCoins.removeAll()
             coinResult = results[indexPath.row]
             let symbolString = coinResult.symbol
             if symbolString.suffix(4) == "USDT"  {

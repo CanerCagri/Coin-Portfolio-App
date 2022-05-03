@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol CollectionViewControllerProtocol {
     func saveDatas(values : [PostModel])
@@ -34,8 +35,6 @@ class CollectionViewController: UIViewController {
         results.removeAll()
         collectionViewModel.setDelegate(collectionVcProtocol: self)
         collectionViewModel.fetchAllItems()
-     
-       
     }
     
     func tableViewHeader() {
@@ -62,6 +61,15 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
         calculatedBalance += Double(results[indexPath.row].totalprice)!
         totalBalance.text = "$ \(String(calculatedBalance))"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let fireStoreService = FirestoreService()
+            fireStoreService.deleteData(selectedCoin: results[indexPath.row].id)
+            results.remove(at: indexPath.row)
+            collectionTableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+        }
     }
 }
 

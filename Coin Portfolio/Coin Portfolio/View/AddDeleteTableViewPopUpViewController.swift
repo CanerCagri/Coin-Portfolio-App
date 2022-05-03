@@ -41,11 +41,11 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     @IBAction func addBtnTapped(_ sender: Any) {
         
         fireStoreService.addData(selectedCoin: selectedCoin.text!, selectedCoinPrice: selectedCoinPrice!, totalPrice: totalPrice.text!)
-        performSegue(withIdentifier: "toList", sender: nil)
+        dismiss(animated: true)
     }
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
-        performSegue(withIdentifier: "toList", sender: nil)
+        dismiss(animated: true)
     }
 }
 

@@ -18,6 +18,7 @@ protocol CollectionViewModelProtocol {
 }
 
 class CollectionViewModel: CollectionViewModelProtocol {
+    
     var collectionViewControllerDelegate: CollectionViewControllerProtocol?
     var postList: [PostModel] = []
     let postListService: FirestoreService
