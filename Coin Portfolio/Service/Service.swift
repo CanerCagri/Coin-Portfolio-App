@@ -16,9 +16,11 @@ protocol ServiceProtocol {
 
 class Service: ServiceProtocol {
     
+    let coinApiConstant = CoinApiService()
+    
     func loadCoins(completion: @escaping ([CoinModel]?) -> Void) {
         
-        let api = "https://api.binance.com/api/v3/ticker/24hr"
+        let api = coinApiConstant.apiUrl
         
         AF.request(api).responseDecodable(of: [CoinModel].self ) { (model) in
             guard let data = model.value else {

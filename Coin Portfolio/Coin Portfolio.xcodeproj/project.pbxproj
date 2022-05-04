@@ -24,6 +24,7 @@
 		010EBC2128094CA7003436C6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 010EBC2028094CA7003436C6 /* Alamofire */; };
 		010EBC2528095480003436C6 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBC2428095480003436C6 /* CoinModel.swift */; };
 		010EBC49280C43C0003436C6 /* CoinListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */; };
+		011C958F2823071B00F160C2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C958E2823071B00F160C2 /* Constants.swift */; };
 		01CF4F3C2816815200C86268 /* ViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3B2816815200C86268 /* ViewControllerViewModel.swift */; };
 		01CF4F3E2816816400C86268 /* SigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3D2816816400C86268 /* SigninViewModel.swift */; };
 		01CF4F402816817700C86268 /* TabBarContollerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3F2816817700C86268 /* TabBarContollerViewModel.swift */; };
@@ -56,6 +57,7 @@
 		010EBBF928083E71003436C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		010EBC2428095480003436C6 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListTableViewCell.swift; sourceTree = "<group>"; };
+		011C958E2823071B00F160C2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		01CF4F3B2816815200C86268 /* ViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerViewModel.swift; sourceTree = "<group>"; };
 		01CF4F3D2816816400C86268 /* SigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewModel.swift; sourceTree = "<group>"; };
 		01CF4F3F2816817700C86268 /* TabBarContollerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarContollerViewModel.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				010EBBE528081611003436C6 /* View */,
 				010EBBDA2808145B003436C6 /* Assets.xcassets */,
 				010EBBF928083E71003436C6 /* GoogleService-Info.plist */,
+				011C958E2823071B00F160C2 /* Constants.swift */,
 				010EBBDC2808145B003436C6 /* LaunchScreen.storyboard */,
 				010EBBDF2808145B003436C6 /* Info.plist */,
 			);
@@ -255,6 +258,7 @@
 				01CF4F4F281892F400C86268 /* FirestoreService.swift in Sources */,
 				010EBBF128081DFB003436C6 /* AddDeleteCoinViewController.swift in Sources */,
 				01CF4F402816817700C86268 /* TabBarContollerViewModel.swift in Sources */,
+				011C958F2823071B00F160C2 /* Constants.swift in Sources */,
 				010EBBED28081DDC003436C6 /* CollectionViewController.swift in Sources */,
 				01E290B7280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift in Sources */,
 				01CF4F3C2816815200C86268 /* ViewControllerViewModel.swift in Sources */,

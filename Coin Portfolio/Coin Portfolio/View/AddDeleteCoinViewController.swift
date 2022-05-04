@@ -23,6 +23,8 @@ class AddDeleteCoinViewController: UIViewController  {
     lazy var addDeleteViewModel =  AddDeleteViewModel()
     let searchController = UISearchController()
     
+    let addDeleteVC = AddDeleteVC()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +38,7 @@ class AddDeleteCoinViewController: UIViewController  {
         addDeleteViewModel.setDelegate(addDeleteVcProtocol: self)
         addDeleteViewModel.fetchItems()
         
-        title = "Coin List"
+        title = addDeleteVC.title
         
         searchController.loadViewIfNeeded()
         searchController.searchResultsUpdater = self
@@ -61,14 +63,15 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CoinListCell", for: indexPath) as! CoinListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: addDeleteVC.cellIdentifier , for: indexPath) as! CoinListTableViewCell
         
         let coinResult : CoinModel!
         if searchController.isActive {
+            
             coinResult = filteredCoins[indexPath.row]
             let symbolString = coinResult.symbol
-            if symbolString.suffix(4) == "USDT"  {
-                if coinResult.lastPrice != "0.00000000" {
+            if symbolString.suffix(4) == addDeleteVC.symbolSuffixUsdt {
+                if coinResult.lastPrice != addDeleteVC.firstlastPriceFilter && coinResult.lastPrice != addDeleteVC.secondlastPriceFilter {
                     cell.configure(with: filteredCoins, indexPath: indexPath)
                 } else {
                     filteredCoins.remove(at: indexPath.row)
@@ -82,8 +85,8 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
             filteredCoins.removeAll()
             coinResult = results[indexPath.row]
             let symbolString = coinResult.symbol
-            if symbolString.suffix(4) == "USDT"  {
-                if coinResult.lastPrice != "0.00000000" {
+            if symbolString.suffix(4) == addDeleteVC.symbolSuffixUsdt {
+                if coinResult.lastPrice != addDeleteVC.firstlastPriceFilter && coinResult.lastPrice != addDeleteVC.secondlastPriceFilter {
                     cell.configure(with: results, indexPath: indexPath)
                 } else {
                     results.remove(at: indexPath.row)
@@ -110,18 +113,18 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
         symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
         priceName = symbolStr
         let apiPrice = coinResult.lastPrice
-        let result = apiPrice.components(separatedBy: "0000")
+        let result = apiPrice.components(separatedBy: addDeleteVC.lastPriceSeperator)
         if result[0].last != "." {  // Price checking , if price end with . after result add 0
             priceString = result[0]
         } else {
             let last = "\(result[0])0"
             priceString = last
         }
-        performSegue(withIdentifier: "toPopup", sender: nil)
+        performSegue(withIdentifier: addDeleteVC.popUpIdentifier, sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toPopup" {
+        if segue.identifier == addDeleteVC.popUpIdentifier {
             let destination = segue.destination as! AddDeleteTableViewPopUpViewController
             destination.coinName = priceName
             destination.coinPrice = priceString

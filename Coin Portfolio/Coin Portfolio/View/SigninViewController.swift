@@ -42,7 +42,7 @@ class SigninViewController: UIViewController {
     
     func showError() {
         let ac = UIAlertController(title: "Error!", message: "Check please email and password areas.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "oK", style: .default))
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
     }
 }

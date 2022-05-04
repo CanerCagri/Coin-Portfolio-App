@@ -12,6 +12,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var logoutButton = UIButton()
     
     let tabBarControllerViewModel = TabBarControllerViewModel()
+    
+    let tabBarC = TabBarC()
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +25,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     func createButton() {
         
         logoutButton = UIButton()
-        logoutButton.setImage(UIImage(named: "logout"), for: .normal)
+        logoutButton.setImage(UIImage(named: tabBarC.logoutImageName), for: .normal)
         logoutButton.setTitleColor(.black, for: .normal)
         logoutButton.setTitleColor(.yellow, for: .highlighted)
         logoutButton.frame = CGRect(x: 100, y: 0, width: 44, height: 44)
@@ -37,7 +39,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     @objc func addBtnTapped(_ sender: UIButton!) {
         tabBarControllerViewModel.signOut()
-        performSegue(withIdentifier: "toVC", sender: nil)
+        performSegue(withIdentifier: tabBarC.segueIdentifier, sender: nil)
     }
     
     override func viewDidLayoutSubviews() {

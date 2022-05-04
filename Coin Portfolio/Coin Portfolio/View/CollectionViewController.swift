@@ -22,6 +22,8 @@ class CollectionViewController: UIViewController {
     let collectionViewModel = CollectionViewModel()
     lazy var results : [PostModel] = []
     
+    let collectionVc = CollectionVC()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,7 +43,7 @@ class CollectionViewController: UIViewController {
         let headerView: UIView = UIView.init(frame: CGRect(x: 1, y: 50, width: 276, height: 30))
         headerView.backgroundColor = .orange
         let labelView: UILabel = UILabel.init(frame: CGRect(x: 4, y: 5, width: 276, height: 24))
-        labelView.text = "YOUR COIN LIST"
+        labelView.text = collectionVc.title
         labelView.textAlignment = .center
         headerView.addSubview(labelView)
         self.collectionTableView.tableHeaderView = headerView
@@ -56,7 +58,7 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = collectionTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CollectionTableViewCell
+        let cell = collectionTableView.dequeueReusableCell(withIdentifier: collectionVc.cellIdentifier, for: indexPath) as! CollectionTableViewCell
         cell.configure(with: results, indexPath: indexPath)
         calculatedBalance += Double(results[indexPath.row].totalprice)!
         totalBalance.text = "$ \(String(calculatedBalance))"

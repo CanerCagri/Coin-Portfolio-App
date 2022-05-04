@@ -22,6 +22,10 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     var selectedCoinPrice : Double?
     let fireStoreService = FirestoreService()
     
+    let addDeletePopup = AddDeletePopupVC()
+    
+    static let shared = AddDeleteTableViewPopUpViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,13 +36,12 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
         if coinName != nil && coinPrice != nil {
             coinNameLabel.text = coinName!
             coinPriceLabel.text = String(coinPrice!)
-            let selectedCoinName = coinNameLabel.text?.components(separatedBy: "/USDT")[0]
+            let selectedCoinName = coinNameLabel.text?.components(separatedBy: addDeletePopup.selectedCoinNameSeperator)[0]
             selectedCoin.text = selectedCoinName
         }
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
-        
         fireStoreService.addData(selectedCoin: selectedCoin.text!, selectedCoinPrice: selectedCoinPrice!, totalPrice: totalPrice.text!)
         dismiss(animated: true)
     }

@@ -20,15 +20,17 @@ class FirestoreService: FirestoreServiceProtocol {
     var posts: [PostModel] = []
     let db = Firestore.firestore()
     
+    let firestoreConstants = FirestoreConstants()
+    
     func deleteData(selectedCoin : String) {
-        db.collection("Post").whereField("id", isEqualTo: "\(selectedCoin)").getDocuments { (snapshot, err) in
+        db.collection(firestoreConstants.collectionName).whereField(firestoreConstants.id, isEqualTo: "\(selectedCoin)").getDocuments { (snapshot, err) in
             
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
                 for document in snapshot!.documents {
                     if document == document {
-                        self.db.collection("Post").document(document.documentID).delete()
+                        self.db.collection(self.firestoreConstants.collectionName).document(document.documentID).delete()
                     }
                 }
             }
@@ -36,7 +38,7 @@ class FirestoreService: FirestoreServiceProtocol {
     }
     
     func addData(selectedCoin : String , selectedCoinPrice: Double, totalPrice: String) {
-        db.collection("Post").addDocument(data: ["id" : UUID().uuidString , "email" : Auth.auth().currentUser!.email! , "coinname" : selectedCoin , "coinquantity" : selectedCoinPrice , "totalprice" : totalPrice , "date" : FieldValue.serverTimestamp()]) { error in
+        db.collection(firestoreConstants.collectionName).addDocument(data: [firestoreConstants.id: UUID().uuidString , firestoreConstants.email: Auth.auth().currentUser!.email! , firestoreConstants.coinname: selectedCoin , firestoreConstants.coinquantity : selectedCoinPrice , firestoreConstants.totalprice : totalPrice , firestoreConstants.date: FieldValue.serverTimestamp()]) { error in
             if error == nil {
                 return
             } else {
@@ -49,7 +51,7 @@ class FirestoreService: FirestoreServiceProtocol {
         let userEmail = Auth.auth().currentUser?.email
         
         
-        Firestore.firestore().collection("Post").getDocuments(completion: { snapshot, err in
+        Firestore.firestore().collection(firestoreConstants.collectionName).getDocuments(completion: {  snapshot, err in
             if err != nil {
                 print(err!.localizedDescription)
             } else {
@@ -58,17 +60,17 @@ class FirestoreService: FirestoreServiceProtocol {
                     self.posts.removeAll()
                     for document in snapshot!.documents {
                         
-                        if let email = document.get("email") as? String {
+                        if let email = document.get(self.firestoreConstants.email) as? String {
                             
                             if email == userEmail {
                                 
-                                if let coinName = document.get("coinname") as? String {
+                                if let coinName = document.get(self.firestoreConstants.coinname) as? String {
                                     
-                                    if let coinquantity = document.get("coinquantity") as? Double {
+                                    if let coinquantity = document.get(self.firestoreConstants.coinquantity) as? Double {
                                         
-                                        if let id = document.get("id") as? String {
+                                        if let id = document.get(self.firestoreConstants.id) as? String {
                                             
-                                            if let totalprice = document.get("totalprice") as? String {
+                                            if let totalprice = document.get(self.firestoreConstants.totalprice) as? String {
                                                 self.posts.append(PostModel(id: id, email: email, coinname: coinName, coinquantity: coinquantity, totalprice: totalprice))
                                                 completion(self.posts)
                                             }
