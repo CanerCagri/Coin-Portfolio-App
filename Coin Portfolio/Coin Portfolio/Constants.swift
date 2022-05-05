@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct MainVC {
+    let tabBarIdentifier = "toTabBar"
+    let signInVcIdentifier = "ToSigninVC"
+}
+
 struct AddDeleteVC {
     let title = "Coin List"
     let cellIdentifier = "CoinListCell"

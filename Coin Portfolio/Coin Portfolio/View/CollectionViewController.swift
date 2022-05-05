@@ -21,7 +21,6 @@ class CollectionViewController: UIViewController {
     
     let collectionViewModel = CollectionViewModel()
     lazy var results : [PostModel] = []
-    
     let collectionVc = CollectionVC()
     
     override func viewDidLoad() {
@@ -67,7 +66,7 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let fireStoreService = FirestoreService()
+            let fireStoreService = DeleteDataFirestore()
             fireStoreService.deleteData(selectedCoin: results[indexPath.row].id)
             results.remove(at: indexPath.row)
             collectionTableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)

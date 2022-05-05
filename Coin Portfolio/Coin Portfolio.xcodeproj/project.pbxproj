@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		010EBBD22808145A003436C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBBD12808145A003436C6 /* AppDelegate.swift */; };
 		010EBBD42808145A003436C6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBBD32808145A003436C6 /* SceneDelegate.swift */; };
-		010EBBD62808145A003436C6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBBD52808145A003436C6 /* ViewController.swift */; };
+		010EBBD62808145A003436C6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBBD52808145A003436C6 /* MainViewController.swift */; };
 		010EBBD92808145A003436C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 010EBBD72808145A003436C6 /* Main.storyboard */; };
 		010EBBDB2808145B003436C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 010EBBDA2808145B003436C6 /* Assets.xcassets */; };
 		010EBBDE2808145B003436C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 010EBBDC2808145B003436C6 /* LaunchScreen.storyboard */; };
@@ -44,7 +44,7 @@
 		010EBBCE2808145A003436C6 /* Coin Portfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Coin Portfolio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		010EBBD12808145A003436C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		010EBBD32808145A003436C6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		010EBBD52808145A003436C6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		010EBBD52808145A003436C6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		010EBBD82808145A003436C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		010EBBDA2808145B003436C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		010EBBDD2808145B003436C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 				010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */,
 				01E2911F2810883E004C3143 /* CollectionTableViewCell.swift */,
 				010EBBD72808145A003436C6 /* Main.storyboard */,
-				010EBBD52808145A003436C6 /* ViewController.swift */,
+				010EBBD52808145A003436C6 /* MainViewController.swift */,
 				010EBBE82808171D003436C6 /* SigninViewController.swift */,
 				010EBBEA28081DBC003436C6 /* TabBarController.swift */,
 				010EBBEC28081DDC003436C6 /* CollectionViewController.swift */,
@@ -264,7 +264,7 @@
 				01CF4F3C2816815200C86268 /* ViewControllerViewModel.swift in Sources */,
 				01CF4F4D28173FFD00C86268 /* Service.swift in Sources */,
 				010EBBE92808171D003436C6 /* SigninViewController.swift in Sources */,
-				010EBBD62808145A003436C6 /* ViewController.swift in Sources */,
+				010EBBD62808145A003436C6 /* MainViewController.swift in Sources */,
 				010EBBD22808145A003436C6 /* AppDelegate.swift in Sources */,
 				01CF4F46281681B500C86268 /* AddDeleteViewModel.swift in Sources */,
 				010EBC49280C43C0003436C6 /* CoinListTableViewCell.swift in Sources */,

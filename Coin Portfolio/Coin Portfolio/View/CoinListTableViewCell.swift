@@ -13,6 +13,7 @@ class CoinListTableViewCell: UITableViewCell {
     @IBOutlet var coinName: UILabel!
     
     var priceString = ""
+    let priceSeperator = AddDeleteVC()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,7 +33,7 @@ class CoinListTableViewCell: UITableViewCell {
         coinName.text = symbolStr
         // Price settings
         let apiPrice = postModel[indexPath.row].lastPrice
-        let result = apiPrice.components(separatedBy: "0000")
+        let result = apiPrice.components(separatedBy: priceSeperator.lastPriceSeperator)
         if result[0].last != "." {  // Price checking , if price end with . after result add 0
             coinPrice.text = result[0]
            

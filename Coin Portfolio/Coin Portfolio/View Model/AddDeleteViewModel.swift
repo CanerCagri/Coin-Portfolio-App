@@ -11,14 +11,12 @@ protocol AddDeleteViewModelProtocol {
     var coinList: [CoinModel] { get set  }
     var coinListService: Service { get }
     var addDeleteCoinViewControllerProtocol: AddDeleteCoinViewControllerProtocol? { get }
-    
     func fetchItems()
     func setDelegate(addDeleteVcProtocol: AddDeleteCoinViewControllerProtocol )
 }
 
 final class AddDeleteViewModel: AddDeleteViewModelProtocol {
     var addDeleteCoinViewControllerProtocol: AddDeleteCoinViewControllerProtocol?
-    
     let coinListService: Service
     var coinList: [CoinModel] = []
     

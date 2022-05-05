@@ -20,7 +20,7 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     var coinName : String?
     var coinPrice : String?
     var selectedCoinPrice : Double?
-    let fireStoreService = FirestoreService()
+    let addFirestore = AddDataFirestore()
     
     let addDeletePopup = AddDeletePopupVC()
     
@@ -42,7 +42,7 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
-        fireStoreService.addData(selectedCoin: selectedCoin.text!, selectedCoinPrice: selectedCoinPrice!, totalPrice: totalPrice.text!)
+        addFirestore.addData(selectedCoin: selectedCoin.text!, selectedCoinPrice: selectedCoinPrice!, totalPrice: totalPrice.text!)
         dismiss(animated: true)
     }
     

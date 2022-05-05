@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet var emailTextField: UITextField!
     
     let viewControllerViewModel = ViewControllerViewModel()
+    let mainVcConstants = MainVC()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,7 @@ class ViewController: UIViewController {
         if passwordTextField.text != "" && emailTextField.text != "" {
             viewControllerViewModel.login(email: emailTextField.text!, password: passwordTextField.text!) { bool in
                 if bool == true {
-                    self.performSegue(withIdentifier: "toTabBar", sender: nil)
+                    self.performSegue(withIdentifier: self.mainVcConstants.tabBarIdentifier, sender: nil)
                 } else {
                     let ac = UIAlertController(title: "Error!", message: "Wrong id or password", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "oK", style: .default))
@@ -37,11 +38,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func newAccountTapped(_ sender: Any) {
-        performSegue(withIdentifier: "ToSigninVC", sender: self)
+        performSegue(withIdentifier: mainVcConstants.signInVcIdentifier, sender: self)
     }
     
     func loadButtonsOptions() {
-        
         logitnBtn.setTitleColor(.black, for: .normal)
         logitnBtn.setTitleColor(.yellow, for: .highlighted)
         logitnBtn.frame = CGRect(x: 100, y: 0, width: 44, height: 44)

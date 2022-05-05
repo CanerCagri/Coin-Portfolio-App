@@ -10,7 +10,7 @@ import Firebase
 
 protocol CollectionViewModelProtocol {
     var postList : [PostModel] { get set }
-    var postListService: FirestoreService { get }
+    var postListService: FetchDataFirestore { get }
     var collectionViewControllerDelegate: CollectionViewControllerProtocol? { get }
     
     func setDelegate(collectionVcProtocol: CollectionViewControllerProtocol)
@@ -21,10 +21,10 @@ class CollectionViewModel: CollectionViewModelProtocol {
     
     var collectionViewControllerDelegate: CollectionViewControllerProtocol?
     var postList: [PostModel] = []
-    let postListService: FirestoreService
+    let postListService: FetchDataFirestore
     
     init() {
-        postListService = FirestoreService()
+        postListService = FetchDataFirestore()
     }
     
     func setDelegate(collectionVcProtocol: CollectionViewControllerProtocol) {
