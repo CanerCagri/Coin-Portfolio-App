@@ -20,11 +20,9 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     var coinName : String?
     var coinPrice : String?
     var selectedCoinPrice : Double?
-    let addFirestore = AddDataFirestore()
     
+    let addPopupViewModel = AddPopupViewModel()
     let addDeletePopup = AddDeletePopupVC()
-    
-    static let shared = AddDeleteTableViewPopUpViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +40,7 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
-        addFirestore.addData(selectedCoin: selectedCoin.text!, selectedCoinPrice: selectedCoinPrice!, totalPrice: totalPrice.text!)
+        addPopupViewModel.postAddDocument(selectedCoin: selectedCoin.text!, selectedCoinPrice: selectedCoinPrice!, totalPrice: totalPrice.text!)
         dismiss(animated: true)
     }
     

@@ -15,17 +15,26 @@ protocol CollectionViewModelProtocol {
     
     func setDelegate(collectionVcProtocol: CollectionViewControllerProtocol)
     func fetchAllItems()
+    func postDeleteDocument(selectedCoin : String)
 }
 
 class CollectionViewModel: CollectionViewModelProtocol {
+   
     
     var collectionViewControllerDelegate: CollectionViewControllerProtocol?
     var postList: [PostModel] = []
     let postListService: FetchDataFirestore
+    let postDeleteService : DeleteDataFirestore
     
     init() {
         postListService = FetchDataFirestore()
+        postDeleteService = DeleteDataFirestore()
     }
+    
+    func postDeleteDocument(selectedCoin : String) {
+        postDeleteService.deleteData(selectedCoin: selectedCoin)
+    }
+    
     
     func setDelegate(collectionVcProtocol: CollectionViewControllerProtocol) {
         collectionViewControllerDelegate = collectionVcProtocol

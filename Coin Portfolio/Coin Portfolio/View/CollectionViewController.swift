@@ -20,7 +20,6 @@ class CollectionViewController: UIViewController {
     var calculatedBalance : Double = 0
     
     let collectionViewModel = CollectionViewModel()
-    lazy var results : [PostModel] = []
     let collectionVc = CollectionVC()
     
     override func viewDidLoad() {
@@ -33,7 +32,6 @@ class CollectionViewController: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        results.removeAll()
         collectionViewModel.setDelegate(collectionVcProtocol: self)
         collectionViewModel.fetchAllItems()
     }
@@ -52,23 +50,21 @@ class CollectionViewController: UIViewController {
 extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(results.count)
-        return results.count
+        return collectionViewModel.postList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = collectionTableView.dequeueReusableCell(withIdentifier: collectionVc.cellIdentifier, for: indexPath) as! CollectionTableViewCell
-        cell.configure(with: results, indexPath: indexPath)
-        calculatedBalance += Double(results[indexPath.row].totalprice)!
+        cell.configure(with: collectionViewModel.postList, indexPath: indexPath)
+        calculatedBalance += Double(collectionViewModel.postList[indexPath.row].totalprice)!
         totalBalance.text = "$ \(String(calculatedBalance))"
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let fireStoreService = DeleteDataFirestore()
-            fireStoreService.deleteData(selectedCoin: results[indexPath.row].id)
-            results.remove(at: indexPath.row)
+            collectionViewModel.postDeleteDocument(selectedCoin: collectionViewModel.postList[indexPath.row].id)
+            collectionViewModel.postList.remove(at: indexPath.row)
             collectionTableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         }
     }
@@ -76,8 +72,7 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CollectionViewController: CollectionViewControllerProtocol {
     func saveDatas(values: [PostModel]) {
-        results.removeAll()
-        results = values
+        collectionViewModel.postList = values
         collectionTableView.reloadData()
     }
 }
