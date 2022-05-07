@@ -8,20 +8,20 @@
 import Foundation
 import Firebase
 
-protocol CollectionViewModelProtocol {
+protocol CollectionViewModelProtocol: AnyObject {
     var postList : [PostModel] { get set }
     var postListService: FetchDataFirestore { get }
-    var collectionViewControllerDelegate: CollectionViewControllerProtocol? { get }
-    
-    func setDelegate(collectionVcProtocol: CollectionViewControllerProtocol)
     func fetchAllItems()
     func postDeleteDocument(selectedCoin : String)
+  
+}
+protocol CollectionViewModelOutput: AnyObject {
+    func updateView(valuePostList : [PostModel])
 }
 
 class CollectionViewModel: CollectionViewModelProtocol {
-   
-    
-    var collectionViewControllerDelegate: CollectionViewControllerProtocol?
+    weak var output : CollectionViewModelOutput?
+
     var postList: [PostModel] = []
     let postListService: FetchDataFirestore
     let postDeleteService : DeleteDataFirestore
@@ -30,21 +30,14 @@ class CollectionViewModel: CollectionViewModelProtocol {
         postListService = FetchDataFirestore()
         postDeleteService = DeleteDataFirestore()
     }
-    
     func postDeleteDocument(selectedCoin : String) {
         postDeleteService.deleteData(selectedCoin: selectedCoin)
     }
-    
-    
-    func setDelegate(collectionVcProtocol: CollectionViewControllerProtocol) {
-        collectionViewControllerDelegate = collectionVcProtocol
-    }
-    
+
     func fetchAllItems() {
         postList.removeAll()
         postListService.fetchData {[weak self] response in
-            self?.postList = response ?? []
-            self?.collectionViewControllerDelegate?.saveDatas(values: self?.postList ?? [])
+            self?.output?.updateView(valuePostList: response ?? [])
         }
     }
 }

@@ -7,9 +7,6 @@
 
 import UIKit
 
-protocol AddDeleteCoinViewControllerProtocol {
-    func saveDatas(values: [CoinModel])
-}
 
 class AddDeleteCoinViewController: UIViewController  {
     
@@ -17,12 +14,11 @@ class AddDeleteCoinViewController: UIViewController  {
     
     var priceName = ""
     var priceString = ""
-    lazy var results : [CoinModel] = []
     var filteredCoins : [CoinModel] = []
     let popUp = AddDeleteTableViewPopUpViewController()
-    lazy var addDeleteViewModel =  AddDeleteViewModel()
+ 
     let searchController = UISearchController()
-    
+    let addDeleteViewM = AddDeleteViewModel()
     let addDeleteVC = AddDeleteVC()
     
     override func viewDidLoad() {
@@ -31,13 +27,14 @@ class AddDeleteCoinViewController: UIViewController  {
         loadConfig()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        addDeleteViewM.output = self
+        addDeleteViewM.fetchItems()
+    }
+    
     func loadConfig() {
-        
         coinListTableView.delegate = self
         coinListTableView.dataSource = self
-        addDeleteViewModel.setDelegate(addDeleteVcProtocol: self)
-        addDeleteViewModel.fetchItems()
-        
         title = addDeleteVC.title
         
         searchController.loadViewIfNeeded()
@@ -59,7 +56,7 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
             return filteredCoins.count
         }
         filteredCoins.removeAll()
-        return results.count
+        return addDeleteViewM.coinListArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,17 +80,17 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
             }
         } else {
             filteredCoins.removeAll()
-            coinResult = results[indexPath.row]
+            coinResult = addDeleteViewM.coinListArray[indexPath.row]
             let symbolString = coinResult.symbol
             if symbolString.suffix(4) == addDeleteVC.symbolSuffixUsdt {
                 if coinResult.lastPrice != addDeleteVC.firstlastPriceFilter && coinResult.lastPrice != addDeleteVC.secondlastPriceFilter {
-                    cell.configure(with: results, indexPath: indexPath)
+                    cell.configure(with: addDeleteViewM.coinListArray, indexPath: indexPath)
                 } else {
-                    results.remove(at: indexPath.row)
+                    addDeleteViewM.coinListArray.remove(at: indexPath.row)
                     tableView.reloadData()
                 }
             } else {
-                results.remove(at: indexPath.row)
+                addDeleteViewM.coinListArray.remove(at: indexPath.row)
                 tableView.reloadData()
             }
         }
@@ -107,7 +104,7 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
         if searchController.isActive {
             coinResult = filteredCoins[indexPath.row]
         } else {
-            coinResult = results[indexPath.row]
+            coinResult = addDeleteViewM.coinListArray[indexPath.row]
         }
         var symbolStr = coinResult.symbol
         symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))
@@ -132,13 +129,6 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-extension AddDeleteCoinViewController: AddDeleteCoinViewControllerProtocol {
-    func saveDatas(values: [CoinModel]) {
-        results = values
-        coinListTableView.reloadData()
-    }
-}
-
 extension AddDeleteCoinViewController : UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         
@@ -148,7 +138,7 @@ extension AddDeleteCoinViewController : UISearchResultsUpdating, UISearchBarDele
     }
     
     func filterForSearch(searchText: String ) {
-        filteredCoins = results.filter {
+        filteredCoins = addDeleteViewM.coinListArray.filter {
             coin in
             if (searchController.searchBar.text != "") {
                 let searchTextMatch = coin.symbol.lowercased().contains(searchText.lowercased())
@@ -159,4 +149,14 @@ extension AddDeleteCoinViewController : UISearchResultsUpdating, UISearchBarDele
         }
         coinListTableView.reloadData()
     }
+}
+
+
+extension AddDeleteCoinViewController: AddDeleteViewModelOutput {
+    func updateView(valuePostList: [CoinModel]) {
+        addDeleteViewM.coinListArray = valuePostList
+        coinListTableView.reloadData()
+    }
+    
+    
 }

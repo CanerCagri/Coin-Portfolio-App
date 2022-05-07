@@ -8,20 +8,17 @@
 import UIKit
 import Firebase
 
-protocol CollectionViewControllerProtocol {
-    func saveDatas(values : [PostModel])
-}
-
 class CollectionViewController: UIViewController {
     
     @IBOutlet var totalBalance: UILabel!
     @IBOutlet var collectionTableView: UITableView!
     
     var calculatedBalance : Double = 0
-    
-    let collectionViewModel = CollectionViewModel()
+
+    let collectionViewM = CollectionViewModel()
     let collectionVc = CollectionVC()
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,8 +29,8 @@ class CollectionViewController: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        collectionViewModel.setDelegate(collectionVcProtocol: self)
-        collectionViewModel.fetchAllItems()
+        collectionViewM.output = self
+        collectionViewM.fetchAllItems()
     }
     
     func tableViewHeader() {
@@ -50,29 +47,30 @@ class CollectionViewController: UIViewController {
 extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return collectionViewModel.postList.count
+        print(collectionViewM.postList.count)
+        return collectionViewM.postList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = collectionTableView.dequeueReusableCell(withIdentifier: collectionVc.cellIdentifier, for: indexPath) as! CollectionTableViewCell
-        cell.configure(with: collectionViewModel.postList, indexPath: indexPath)
-        calculatedBalance += Double(collectionViewModel.postList[indexPath.row].totalprice)!
+        cell.configure(with: collectionViewM.postList, indexPath: indexPath)
+        calculatedBalance += Double(collectionViewM.postList[indexPath.row].totalprice)!
         totalBalance.text = "$ \(String(calculatedBalance))"
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            collectionViewModel.postDeleteDocument(selectedCoin: collectionViewModel.postList[indexPath.row].id)
-            collectionViewModel.postList.remove(at: indexPath.row)
+            collectionViewM.postDeleteDocument(selectedCoin: collectionViewM.postList[indexPath.row].id)
+            collectionViewM.postList.remove(at: indexPath.row)
             collectionTableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         }
     }
 }
 
-extension CollectionViewController: CollectionViewControllerProtocol {
-    func saveDatas(values: [PostModel]) {
-        collectionViewModel.postList = values
+extension CollectionViewController: CollectionViewModelOutput {
+    func updateView(valuePostList: [PostModel]) {
+        collectionViewM.postList = valuePostList
         collectionTableView.reloadData()
     }
 }
