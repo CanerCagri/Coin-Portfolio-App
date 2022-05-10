@@ -25,11 +25,10 @@
 		010EBC2528095480003436C6 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBC2428095480003436C6 /* CoinModel.swift */; };
 		010EBC49280C43C0003436C6 /* CoinListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */; };
 		011C958F2823071B00F160C2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C958E2823071B00F160C2 /* Constants.swift */; };
-		01CF4F3C2816815200C86268 /* ViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3B2816815200C86268 /* ViewControllerViewModel.swift */; };
+		01CF4F3C2816815200C86268 /* MainViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3B2816815200C86268 /* MainViewControllerViewModel.swift */; };
 		01CF4F3E2816816400C86268 /* SigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3D2816816400C86268 /* SigninViewModel.swift */; };
 		01CF4F402816817700C86268 /* TabBarContollerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3F2816817700C86268 /* TabBarContollerViewModel.swift */; };
 		01CF4F422816819400C86268 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F412816819400C86268 /* CollectionViewModel.swift */; };
-		01CF4F44281681A500C86268 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F43281681A500C86268 /* ProfileViewModel.swift */; };
 		01CF4F46281681B500C86268 /* AddDeleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F45281681B500C86268 /* AddDeleteViewModel.swift */; };
 		01CF4F482816A68F00C86268 /* AddPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F472816A68E00C86268 /* AddPopupViewModel.swift */; };
 		01CF4F4D28173FFD00C86268 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F4C28173FFD00C86268 /* Service.swift */; };
@@ -58,11 +57,10 @@
 		010EBC2428095480003436C6 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListTableViewCell.swift; sourceTree = "<group>"; };
 		011C958E2823071B00F160C2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		01CF4F3B2816815200C86268 /* ViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerViewModel.swift; sourceTree = "<group>"; };
+		01CF4F3B2816815200C86268 /* MainViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerViewModel.swift; sourceTree = "<group>"; };
 		01CF4F3D2816816400C86268 /* SigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewModel.swift; sourceTree = "<group>"; };
 		01CF4F3F2816817700C86268 /* TabBarContollerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarContollerViewModel.swift; sourceTree = "<group>"; };
 		01CF4F412816819400C86268 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
-		01CF4F43281681A500C86268 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		01CF4F45281681B500C86268 /* AddDeleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeleteViewModel.swift; sourceTree = "<group>"; };
 		01CF4F472816A68E00C86268 /* AddPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPopupViewModel.swift; sourceTree = "<group>"; };
 		01CF4F4C28173FFD00C86268 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -150,11 +148,10 @@
 		01CF4F3A281680FD00C86268 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
-				01CF4F3B2816815200C86268 /* ViewControllerViewModel.swift */,
+				01CF4F3B2816815200C86268 /* MainViewControllerViewModel.swift */,
 				01CF4F3D2816816400C86268 /* SigninViewModel.swift */,
 				01CF4F3F2816817700C86268 /* TabBarContollerViewModel.swift */,
 				01CF4F412816819400C86268 /* CollectionViewModel.swift */,
-				01CF4F43281681A500C86268 /* ProfileViewModel.swift */,
 				01CF4F45281681B500C86268 /* AddDeleteViewModel.swift */,
 				01CF4F472816A68E00C86268 /* AddPopupViewModel.swift */,
 			);
@@ -261,14 +258,13 @@
 				011C958F2823071B00F160C2 /* Constants.swift in Sources */,
 				010EBBED28081DDC003436C6 /* CollectionViewController.swift in Sources */,
 				01E290B7280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift in Sources */,
-				01CF4F3C2816815200C86268 /* ViewControllerViewModel.swift in Sources */,
+				01CF4F3C2816815200C86268 /* MainViewControllerViewModel.swift in Sources */,
 				01CF4F4D28173FFD00C86268 /* Service.swift in Sources */,
 				010EBBE92808171D003436C6 /* SigninViewController.swift in Sources */,
 				010EBBD62808145A003436C6 /* MainViewController.swift in Sources */,
 				010EBBD22808145A003436C6 /* AppDelegate.swift in Sources */,
 				01CF4F46281681B500C86268 /* AddDeleteViewModel.swift in Sources */,
 				010EBC49280C43C0003436C6 /* CoinListTableViewCell.swift in Sources */,
-				01CF4F44281681A500C86268 /* ProfileViewModel.swift in Sources */,
 				010EBBEF28081DEB003436C6 /* ProfileViewController.swift in Sources */,
 				010EBBEB28081DBC003436C6 /* TabBarController.swift in Sources */,
 				01CF4F3E2816816400C86268 /* SigninViewModel.swift in Sources */,

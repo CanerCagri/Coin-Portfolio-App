@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     
-    let viewControllerViewModel = ViewControllerViewModel()
+    let viewControllerViewModel = MainViewControllerViewModel()
     let mainVcConstants = MainVC()
     
     override func viewDidLoad() {

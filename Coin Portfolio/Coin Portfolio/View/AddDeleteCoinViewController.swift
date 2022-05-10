@@ -25,10 +25,16 @@ class AddDeleteCoinViewController: UIViewController  {
         super.viewDidLoad()
         
         loadConfig()
+        
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(refreshData), userInfo: nil, repeats: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         addDeleteViewM.output = self
+        addDeleteViewM.fetchItems()
+    }
+    
+    @objc func refreshData() -> Void {
         addDeleteViewM.fetchItems()
     }
     

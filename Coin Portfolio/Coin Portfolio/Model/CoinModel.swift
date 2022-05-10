@@ -12,6 +12,3 @@ struct CoinModel : Decodable {
     let lastPrice : String
 }
 
-
-
-

@@ -12,6 +12,7 @@ import Alamofire
 
 protocol ServiceProtocol {
     func loadCoins(completion : @escaping ([CoinModel]?) -> Void)
+    func loadSelectedCoin(selectedCoin : String, completion : @escaping (CoinModel?) -> Void)
 }
 
 class Service: ServiceProtocol {
@@ -23,6 +24,19 @@ class Service: ServiceProtocol {
         let api = coinApiConstant.apiUrl
         
         AF.request(api).responseDecodable(of: [CoinModel].self ) { (model) in
+            guard let data = model.value else {
+                completion(nil)
+                return
+            }
+            completion(data)
+        }
+    }
+    
+    func loadSelectedCoin(selectedCoin : String, completion : @escaping (CoinModel?) -> Void) {
+        let api = "https://api.binance.com/api/v3/ticker/24hr?symbol=\(selectedCoin)USDT"
+        
+        
+        AF.request(api).responseDecodable(of: CoinModel.self ) { (model) in
             guard let data = model.value else {
                 completion(nil)
                 return

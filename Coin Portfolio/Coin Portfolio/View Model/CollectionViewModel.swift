@@ -30,6 +30,7 @@ class CollectionViewModel: CollectionViewModelProtocol {
         postListService = FetchDataFirestore()
         postDeleteService = DeleteDataFirestore()
     }
+    
     func postDeleteDocument(selectedCoin : String) {
         postDeleteService.deleteData(selectedCoin: selectedCoin)
     }

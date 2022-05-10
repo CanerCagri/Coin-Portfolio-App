@@ -8,7 +8,7 @@
 import Foundation
 import Firebase
 
-class ViewControllerViewModel {
+class MainViewControllerViewModel {
     
     func login(email: String , password: String, completion: @escaping (Bool) -> ()) {
         Auth.auth().signIn(withEmail: email, password: password )  { result, error in
