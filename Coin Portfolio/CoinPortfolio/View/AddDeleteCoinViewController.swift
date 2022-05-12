@@ -9,14 +9,12 @@ import UIKit
 
 
 class AddDeleteCoinViewController: UIViewController  {
-    
     @IBOutlet var coinListTableView: UITableView!
     
     var priceName = ""
     var priceString = ""
     var filteredCoins : [CoinModel] = []
     let popUp = AddDeleteTableViewPopUpViewController()
- 
     let searchController = UISearchController()
     let addDeleteViewM = AddDeleteViewModel()
     let addDeleteVC = AddDeleteVC()
@@ -104,7 +102,6 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let coinResult : CoinModel!
         
         if searchController.isActive {
@@ -157,12 +154,9 @@ extension AddDeleteCoinViewController : UISearchResultsUpdating, UISearchBarDele
     }
 }
 
-
 extension AddDeleteCoinViewController: AddDeleteViewModelOutput {
     func updateView(valuePostList: [CoinModel]) {
         addDeleteViewM.coinListArray = valuePostList
         coinListTableView.reloadData()
     }
-    
-    
 }

@@ -20,6 +20,7 @@ class AddPopupViewModel: AddPopupViewModelProtocol{
     init() {
         postListService = AddDataFirestore()
     }
+    
     func postAddDocument(selectedCoin: String, selectedCoinPrice: Double, totalPrice: String) {
         postListService.addData(selectedCoin: selectedCoin, selectedCoinPrice: selectedCoinPrice, totalPrice: totalPrice)
     }

@@ -74,7 +74,7 @@ class FetchDataFirestore : FetchDataFirestoreProtocol {
                                         if let id = document.get(firestoreConstants.id) as? String {
                                             if let totalprice = document.get(firestoreConstants.totalprice) as? String {
                                                 self.posts.append(PostModel(id: id, email: email, coinname: coinName, coinquantity: coinquantity, totalprice: totalprice))
-                                                completion(self.posts)
+                                                
                                             }
                                         }
                                     }
@@ -84,6 +84,7 @@ class FetchDataFirestore : FetchDataFirestoreProtocol {
                             }
                         }
                     }
+                    completion(self.posts)
                 }
             }
         })

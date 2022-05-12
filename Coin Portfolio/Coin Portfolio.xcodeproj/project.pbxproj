@@ -16,7 +16,6 @@
 		010EBBE92808171D003436C6 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBBE82808171D003436C6 /* SigninViewController.swift */; };
 		010EBBEB28081DBC003436C6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBBEA28081DBC003436C6 /* TabBarController.swift */; };
 		010EBBED28081DDC003436C6 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBBEC28081DDC003436C6 /* CollectionViewController.swift */; };
-		010EBBEF28081DEB003436C6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBBEE28081DEB003436C6 /* ProfileViewController.swift */; };
 		010EBBF128081DFB003436C6 /* AddDeleteCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBBF028081DFB003436C6 /* AddDeleteCoinViewController.swift */; };
 		010EBBF428083D83003436C6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 010EBBF328083D83003436C6 /* FirebaseAuth */; };
 		010EBBF628083D83003436C6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 010EBBF528083D83003436C6 /* FirebaseFirestore */; };
@@ -51,7 +50,6 @@
 		010EBBE82808171D003436C6 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		010EBBEA28081DBC003436C6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		010EBBEC28081DDC003436C6 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
-		010EBBEE28081DEB003436C6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		010EBBF028081DFB003436C6 /* AddDeleteCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeleteCoinViewController.swift; sourceTree = "<group>"; };
 		010EBBF928083E71003436C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		010EBC2428095480003436C6 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 				010EBBE82808171D003436C6 /* SigninViewController.swift */,
 				010EBBEA28081DBC003436C6 /* TabBarController.swift */,
 				010EBBEC28081DDC003436C6 /* CollectionViewController.swift */,
-				010EBBEE28081DEB003436C6 /* ProfileViewController.swift */,
 				010EBBF028081DFB003436C6 /* AddDeleteCoinViewController.swift */,
 				01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */,
 			);
@@ -289,7 +286,6 @@
 				010EBBD22808145A003436C6 /* AppDelegate.swift in Sources */,
 				01CF4F46281681B500C86268 /* AddDeleteViewModel.swift in Sources */,
 				010EBC49280C43C0003436C6 /* CoinListTableViewCell.swift in Sources */,
-				010EBBEF28081DEB003436C6 /* ProfileViewController.swift in Sources */,
 				010EBBEB28081DBC003436C6 /* TabBarController.swift in Sources */,
 				01CF4F3E2816816400C86268 /* SigninViewModel.swift in Sources */,
 				01E291202810883E004C3143 /* CollectionTableViewCell.swift in Sources */,

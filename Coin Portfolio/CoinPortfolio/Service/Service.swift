@@ -12,7 +12,7 @@ import Alamofire
 
 protocol ServiceProtocol {
     func loadCoins(completion : @escaping ([CoinModel]?) -> Void)
-    func loadSelectedCoin(selectedCoin : String, completion : @escaping (CoinModel?) -> Void)
+    func loadSelectedCoin(selectedCoin : String, selectedCoinQuantity: Double , completion : @escaping (Double?) -> Void)
 }
 
 class Service: ServiceProtocol {
@@ -32,7 +32,7 @@ class Service: ServiceProtocol {
         }
     }
     
-    func loadSelectedCoin(selectedCoin : String, completion : @escaping (CoinModel?) -> Void) {
+    func loadSelectedCoin(selectedCoin : String, selectedCoinQuantity: Double , completion : @escaping (Double?) -> Void) {
         let api = "https://api.binance.com/api/v3/ticker/24hr?symbol=\(selectedCoin)USDT"
         
         
@@ -41,7 +41,9 @@ class Service: ServiceProtocol {
                 completion(nil)
                 return
             }
-            completion(data)
+            let currentlyLastPrice = data.lastPrice
+            let result = Double(currentlyLastPrice)! * selectedCoinQuantity
+            completion(result)
         }
     }
 }

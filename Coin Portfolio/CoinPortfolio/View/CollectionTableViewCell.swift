@@ -24,7 +24,6 @@ class CollectionTableViewCell: UITableViewCell {
         } else {
             let last = "$ \(result[0])0"
             priceLabel.text = last
-            
         }
         coinNameLabel.text = postModel[indexPath.row].coinname
         quantityLabel.text = String(postModel[indexPath.row].coinquantity)

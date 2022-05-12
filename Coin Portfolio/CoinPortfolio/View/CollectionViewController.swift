@@ -18,7 +18,6 @@ class CollectionViewController: UIViewController {
     let collectionViewM = CollectionViewModel()
     let collectionVc = CollectionVC()
     
-    static let shared = CollectionViewController()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +64,8 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             let coinPrice = Double(collectionViewM.postList[indexPath.row].totalprice)
             let result = calculatedBalance - coinPrice!
-            totalBalance.text = String(format: "%.2f", ceil(result * 100) / 100)
+            let calculate = String(format: "%.2f", ceil(result * 100) / 100)
+            totalBalance.text = "$ \(calculate)"
             collectionViewM.postDeleteDocument(selectedCoin: collectionViewM.postList[indexPath.row].id)
             collectionViewM.postList.remove(at: indexPath.row)
             collectionTableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)

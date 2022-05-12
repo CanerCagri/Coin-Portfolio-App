@@ -16,14 +16,13 @@ class SigninViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
         dismiss(animated: true)
         performSegue(withIdentifier: "toVC", sender: self)
-        
     }
+    
     @IBAction func createAccTapped(_ sender: Any) {
         if passwordTextField.text != "" && emailTextField.text != ""  {
             signinViewModel.createAccount(email: emailTextField.text!, password: passwordTextField.text!) { bool in
