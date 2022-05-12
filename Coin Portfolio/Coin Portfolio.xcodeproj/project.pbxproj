@@ -32,6 +32,7 @@
 		01CF4F482816A68F00C86268 /* AddPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F472816A68E00C86268 /* AddPopupViewModel.swift */; };
 		01CF4F4D28173FFD00C86268 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F4C28173FFD00C86268 /* Service.swift */; };
 		01CF4F4F281892F400C86268 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F4E281892F300C86268 /* FirestoreService.swift */; };
+		01E27391282DAC4500DC3280 /* PortfolioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E27390282DAC4400DC3280 /* PortfolioCollectionViewCell.swift */; };
 		01E290B7280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */; };
 		01E2911A280F282F004C3143 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 01E29119280F282F004C3143 /* FirebaseFirestore */; };
 		01E2911C280F5873004C3143 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2911B280F5873004C3143 /* PostModel.swift */; };
@@ -63,6 +64,7 @@
 		01CF4F472816A68E00C86268 /* AddPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPopupViewModel.swift; sourceTree = "<group>"; };
 		01CF4F4C28173FFD00C86268 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		01CF4F4E281892F300C86268 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		01E27390282DAC4400DC3280 /* PortfolioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCollectionViewCell.swift; sourceTree = "<group>"; };
 		01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeleteTableViewPopUpViewController.swift; sourceTree = "<group>"; };
 		01E2911B280F5873004C3143 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		01E2911F2810883E004C3143 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */,
 				01E2911F2810883E004C3143 /* CollectionTableViewCell.swift */,
+				01E27390282DAC4400DC3280 /* PortfolioCollectionViewCell.swift */,
 				010EBBD52808145A003436C6 /* MainViewController.swift */,
 				010EBBE82808171D003436C6 /* SigninViewController.swift */,
 				010EBBEA28081DBC003436C6 /* TabBarController.swift */,
@@ -271,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01CF4F422816819400C86268 /* CollectionViewModel.swift in Sources */,
+				01E27391282DAC4500DC3280 /* PortfolioCollectionViewCell.swift in Sources */,
 				010EBC2528095480003436C6 /* CoinModel.swift in Sources */,
 				01E2911C280F5873004C3143 /* PostModel.swift in Sources */,
 				01CF4F4F281892F400C86268 /* FirestoreService.swift in Sources */,

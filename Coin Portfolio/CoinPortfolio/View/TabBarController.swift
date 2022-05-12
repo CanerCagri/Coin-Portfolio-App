@@ -20,11 +20,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var changeText = UILabel()
     var currentPriceLabel = UILabel()
     var currentTotalPriceLabel = UILabel()
+    var portfolioCollectionView : UICollectionView?
     
     let tabBarControllerViewModel = TabBarControllerViewModel()
     let tabBarC = TabBarC()
     var coinListArray = [Double] ()
     var postListArray = [PostModel] ()
+    var saveByName = [CoinModel] ()
     var lastValue = [Double] ()
     var coinName = [String] ()
     var coinQuantity = [Double] ()
@@ -48,28 +50,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBarControllerViewModel.signOut()
         performSegue(withIdentifier: tabBarC.segueIdentifier, sender: nil)
     }
-    
-    @objc func calculateBtnTapped(_ sender: UIButton!) {
-        if postListArray.count != 0 {
-            for index in 0..<coinName.count {
-                tabBarControllerViewModel.fetchSelectedItems(index: index, selectedItem: coinName[index] , selectedItemQuantity: coinQuantity[index])
-            }
-            coinName.removeAll(keepingCapacity: false)
-            coinQuantity.removeAll(keepingCapacity: false)
-            lastValue.removeAll(keepingCapacity: false)
-            portfolioValueLabel.isHidden = false
-            portfolioValue.isHidden = false
-            changeLabel.isHidden = false
-            changeText.isHidden = false
-            currentPriceLabel.isHidden = false
-            currentTotalPriceLabel.isHidden = false
-        }
-    }
-    
+ 
     func loadChange() {
         if postListArray.count != 0 {
             for index in 0..<coinName.count {
                 tabBarControllerViewModel.fetchSelectedItems(index: index, selectedItem: coinName[index] , selectedItemQuantity: coinQuantity[index])
+                tabBarControllerViewModel.fetchSelectedByName(selectedItem: coinName[index])
             }
             coinName.removeAll(keepingCapacity: false)
             coinQuantity.removeAll(keepingCapacity: false)
@@ -123,6 +109,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             currentUserLabel.isHidden = false
             priceLabel.isHidden = false
             totalPriceLabel.isHidden = false
+            portfolioCollectionView?.isHidden = false
         } else if selectedIndex == 1 {
             logoutButton.isHidden = true
             welcomeLabel.isHidden = true
@@ -135,6 +122,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             changeText.isHidden = true
             currentPriceLabel.isHidden = true
             currentTotalPriceLabel.isHidden = true
+            portfolioCollectionView?.isHidden = true
         }  else if selectedIndex == 2 {
             logoutButton.isHidden = true
             welcomeLabel.isHidden = true
@@ -147,6 +135,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             changeText.isHidden = true
             currentPriceLabel.isHidden = true
             currentTotalPriceLabel.isHidden = true
+            portfolioCollectionView?.isHidden = true
         }
     }
     
@@ -159,39 +148,46 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         currentUserLabel.translatesAutoresizingMaskIntoConstraints = false
         currentUserLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-        currentUserLabel.leadingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor, constant: 35).isActive = true
+        currentUserLabel.leadingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor, constant: 30).isActive = true
         
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 125).isActive = true
+        priceLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 25).isActive = true
         priceLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40 ).isActive = true
         
         totalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        totalPriceLabel.topAnchor.constraint(equalTo: currentUserLabel.bottomAnchor, constant: 125).isActive = true
+        totalPriceLabel.topAnchor.constraint(equalTo: currentUserLabel.bottomAnchor, constant: 25).isActive = true
         totalPriceLabel.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor, constant: 20).isActive = true
         
         portfolioValueLabel.translatesAutoresizingMaskIntoConstraints = false
-        portfolioValueLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 200).isActive = true
+        portfolioValueLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
         portfolioValueLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor , constant: 30).isActive = true
         
         portfolioValue.translatesAutoresizingMaskIntoConstraints = false
         portfolioValue.topAnchor.constraint(equalTo: portfolioValueLabel.bottomAnchor, constant: 10).isActive = true
-        portfolioValue.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
+        portfolioValue.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25).isActive = true
         
         changeLabel.translatesAutoresizingMaskIntoConstraints = false
-        changeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 200).isActive = true
-        changeLabel.leadingAnchor.constraint(equalTo: portfolioValueLabel.trailingAnchor, constant: 50).isActive = true
+        changeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
+        changeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 180).isActive = true
         
         changeText.translatesAutoresizingMaskIntoConstraints = false
         changeText.topAnchor.constraint(equalTo: changeLabel.bottomAnchor, constant: 10).isActive = true
-        changeText.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 160).isActive = true
+        changeText.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 180).isActive = true
         
         currentPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentPriceLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 200).isActive = true
+        currentPriceLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
         currentPriceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor , constant: -20).isActive = true
         
         currentTotalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         currentTotalPriceLabel.topAnchor.constraint(equalTo: currentPriceLabel.bottomAnchor, constant: 10).isActive = true
-        currentTotalPriceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50).isActive = true
+        currentTotalPriceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        
+        portfolioCollectionView!.translatesAutoresizingMaskIntoConstraints = false
+        portfolioCollectionView!.topAnchor.constraint(equalTo: portfolioValue.bottomAnchor, constant: 25).isActive = true
+        portfolioCollectionView!.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        portfolioCollectionView!.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        portfolioCollectionView!.bottomAnchor.constraint(equalTo: logoutButton.topAnchor, constant: -10).isActive = true
+        
         
         logoutButton.frame = CGRect.init(x: self.tabBar.center.x - 32, y: self.view.bounds.height - 160, width: 64, height: 64)
         logoutButton.layer.cornerRadius = 32
@@ -214,7 +210,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         self.view.addSubview(currentUserLabel)
         
         priceLabel = UILabel()
-        priceLabel.text = "Portfolio Created Price :"
+        priceLabel.text = "My Portfolio Price:"
         priceLabel.font = UIFont.boldSystemFont(ofSize: 20)
         priceLabel.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
         self.view.addSubview(priceLabel)
@@ -228,6 +224,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         portfolioValueLabel = UILabel()
         portfolioValueLabel.text = "My Portfolio"
         portfolioValueLabel.textColor = .darkGray
+        portfolioValueLabel.textAlignment = .left
         portfolioValueLabel.font = UIFont.systemFont(ofSize: 15)
         portfolioValueLabel.frame = CGRect(x: 0, y: 0, width: 80, height: 50)
         portfolioValueLabel.isHidden = true
@@ -235,7 +232,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         portfolioValue = UILabel()
         portfolioValue.text = ""
-        portfolioValue.textAlignment = .center
+        portfolioValue.textAlignment = .left
         portfolioValue.font = UIFont.boldSystemFont(ofSize: 20)
         portfolioValue.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
         portfolioValue.isHidden = true
@@ -251,8 +248,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         changeText = UILabel()
         changeText.text = ""
-        changeText.textAlignment = .center
         changeText.font = UIFont.boldSystemFont(ofSize: 20)
+        changeText.textAlignment = .center
         changeText.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
         changeText.isHidden = true
         self.view.addSubview(changeText)
@@ -267,12 +264,25 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         currentTotalPriceLabel = UILabel()
         currentTotalPriceLabel.text = ""
-        currentTotalPriceLabel.textAlignment = .center
+        currentTotalPriceLabel.textAlignment = .right
         currentTotalPriceLabel.font = UIFont.boldSystemFont(ofSize: 20)
         currentTotalPriceLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
         currentTotalPriceLabel.isHidden = true
         self.view.addSubview(currentTotalPriceLabel)
         
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 25
+        layout.minimumInteritemSpacing = 1
+        layout.itemSize = CGSize(width: (view.frame.size.height/7)-4, height: (view.frame.size.height/5)-4)
+        portfolioCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        guard let portfolioCollectionView = portfolioCollectionView else { return }
+
+        portfolioCollectionView.register(PortfolioCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        portfolioCollectionView.dataSource = self
+        portfolioCollectionView.delegate = self
+        self.view.addSubview(portfolioCollectionView)
+      
         logoutButton = UIButton()
         logoutButton.setImage(UIImage(named: tabBarC.logoutImageName), for: .normal)
         logoutButton.setTitleColor(.black, for: .normal)
@@ -288,7 +298,37 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
 }
 
+extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return postListArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = portfolioCollectionView?.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? PortfolioCollectionViewCell
+        let currentItem = postListArray[indexPath.row]
+        cell?.coinNameLabel.text = currentItem.coinname
+        cell?.coinQuantityText.text = String(currentItem.coinquantity)
+        cell?.createdPriceText.text = currentItem.totalprice
+        let lastPrice = String(saveByName[indexPath.row].lastPrice)
+        let result = lastPrice.components(separatedBy: "0000")
+        cell?.currentPriceText.text = result[0]
+        return cell!
+    }
+    
+}
+
 extension TabBarController: TabBarViewModelOutput {
+    
+    func currentlyCoinPrice(valuePostList: [CoinModel]) {
+        saveByName += valuePostList
+        
+        if saveByName.count == postListArray.count {
+            DispatchQueue.main.async {
+                self.portfolioCollectionView?.reloadData()
+            }
+        }
+        
+    }
     
     
     func postUpdate(valuePostList: [PostModel]) {
@@ -297,6 +337,7 @@ extension TabBarController: TabBarViewModelOutput {
         postListArray.removeAll(keepingCapacity: false)
         postListArray = valuePostList
         fetchTotalPrice()
+
     }
     
     func currentlyTotalPrice(valueLastPrice: [Double]) {
@@ -306,7 +347,6 @@ extension TabBarController: TabBarViewModelOutput {
             for index in 0..<postListArray.count {
                 let temp = coinListArray[index]
                 lastValue.append(temp)
-                
             }
             let totalSum = lastValue.reduce(0, +)
             let result = String(format: "%.2f", ceil(totalSum * 100) / 100)
@@ -322,10 +362,14 @@ extension TabBarController: TabBarViewModelOutput {
                     let thirdOutput = secondOutput.components(separatedBy: "-")[1]
                     changeText.text = thirdOutput
                     changeText.textColor = .blue
+                    
+                           
                 } else if value1 > value2{
                     let firstOutput = ((value2 - value1) / value1) * 100
                     changeText.text = String(format: "%.2f", ceil(firstOutput * 100) / 100)
                     changeText.textColor = .red
+                    
+                            
                 }
             }
         }

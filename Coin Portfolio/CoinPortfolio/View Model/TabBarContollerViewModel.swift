@@ -15,10 +15,12 @@ protocol TabBarViewModelProtocol: AnyObject {
     var postListService : FetchDataFirestore { get }
     func fetchPostItems()
     func fetchSelectedItems(index: Int, selectedItem : String , selectedItemQuantity : Double)
+    func fetchSelectedByName(selectedItem :  String)
 }
 
 protocol TabBarViewModelOutput: AnyObject {
     func currentlyTotalPrice(valueLastPrice : [Double])
+    func currentlyCoinPrice(valuePostList : [CoinModel])
     func postUpdate(valuePostList : [PostModel])
 }
 
@@ -46,6 +48,12 @@ class TabBarControllerViewModel: TabBarViewModelProtocol {
         }
     }
    
+    func fetchSelectedByName(selectedItem :  String) {
+        coinListService.loadSelectedCoinByName(selectedCoin: selectedItem) {[weak self] response in
+            self?.output?.currentlyCoinPrice(valuePostList: response ?? [])
+        }
+    }
+    
     func signOut() {
         do {
             try Auth.auth().signOut()
