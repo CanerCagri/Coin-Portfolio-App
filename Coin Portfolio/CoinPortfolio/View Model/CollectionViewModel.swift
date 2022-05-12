@@ -41,5 +41,11 @@ class CollectionViewModel: CollectionViewModelProtocol {
             self?.output?.updateView(valuePostList: response ?? [])
         }
     }
+    
+    func numberOfInRowsInSection(section : Int) -> Int {
+        return postList.count
+    }
+    
+   
 }
 

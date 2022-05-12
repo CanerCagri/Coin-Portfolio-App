@@ -31,14 +31,36 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var lastValue = [Double] ()
     var coinName = [String] ()
     var coinQuantity = [Double] ()
-    
+    var calculatedPrice = 0.0
+    var totalPriceHolder = [Double] ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.delegate = self
+        
         createInterface()
         
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        coinListArray.removeAll(keepingCapacity: false)
+        postListArray.removeAll(keepingCapacity: false)
+        lastValue.removeAll(keepingCapacity: false)
+        coinName.removeAll(keepingCapacity: false)
+        coinQuantity.removeAll(keepingCapacity: false)
+        totalPriceHolder.removeAll(keepingCapacity: false)
+        calculateButton.isHidden = true
+        portfolioValueLabel.isHidden = true
+        portfolioValue.isHidden = true
+        changeLabel.isHidden = true
+        changeText.isHidden = true
+        currentPriceLabel.isHidden = true
+        currentTotalPriceLabel.isHidden = true
+        
+        tabBarControllerViewModel.output = self
+        tabBarControllerViewModel.fetchPostItems()
     }
     
     func createInterface() {
@@ -64,7 +86,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         self.view.addSubview(priceLabel)
         
         totalPriceLabel = UILabel()
-        totalPriceLabel.text = ""
+        totalPriceLabel.text = "$ 0.0"
         totalPriceLabel.font = UIFont.boldSystemFont(ofSize: 20)
         totalPriceLabel.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
         self.view.addSubview(totalPriceLabel)
@@ -181,7 +203,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         totalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         totalPriceLabel.topAnchor.constraint(equalTo: currentUserLabel.bottomAnchor, constant: 125).isActive = true
-        totalPriceLabel.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor, constant: 30).isActive = true
+        totalPriceLabel.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor, constant: 20).isActive = true
         
         calculateButton.translatesAutoresizingMaskIntoConstraints = false
         calculateButton.topAnchor.constraint(equalTo: priceLabel.topAnchor, constant: 50).isActive = true
@@ -194,7 +216,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         portfolioValue.translatesAutoresizingMaskIntoConstraints = false
         portfolioValue.topAnchor.constraint(equalTo: portfolioValueLabel.bottomAnchor, constant: 10).isActive = true
-        portfolioValue.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        portfolioValue.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
         
         changeLabel.translatesAutoresizingMaskIntoConstraints = false
         changeLabel.topAnchor.constraint(equalTo: calculateButton.bottomAnchor, constant: 150).isActive = true
@@ -202,7 +224,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         changeText.translatesAutoresizingMaskIntoConstraints = false
         changeText.topAnchor.constraint(equalTo: changeLabel.bottomAnchor, constant: 10).isActive = true
-        changeText.leadingAnchor.constraint(equalTo: portfolioValue.trailingAnchor, constant: 55).isActive = true
+        changeText.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 160).isActive = true
         
         currentPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         currentPriceLabel.topAnchor.constraint(equalTo: calculateButton.bottomAnchor, constant: 150).isActive = true
@@ -210,14 +232,27 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         currentTotalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         currentTotalPriceLabel.topAnchor.constraint(equalTo: currentPriceLabel.bottomAnchor, constant: 10).isActive = true
-        currentTotalPriceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40).isActive = true
+        currentTotalPriceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50).isActive = true
         
         logoutButton.frame = CGRect.init(x: self.tabBar.center.x - 32, y: self.view.bounds.height - 160, width: 64, height: 64)
         logoutButton.layer.cornerRadius = 32
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if selectedIndex == 1 {
+        
+        if selectedIndex == 0 {
+            totalPriceLabel.text = String(CollectionViewController.shared.calculatedBalance)
+            
+            tabBarControllerViewModel.output = self
+            tabBarControllerViewModel.fetchPostItems()
+            
+            logoutButton.isHidden = false
+            welcomeLabel.isHidden = false
+            currentUserLabel.isHidden = false
+            priceLabel.isHidden = false
+            totalPriceLabel.isHidden = false
+            
+        } else if selectedIndex == 1 {
             logoutButton.isHidden = true
             welcomeLabel.isHidden = true
             currentUserLabel.isHidden = true
@@ -231,21 +266,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             currentPriceLabel.isHidden = true
             currentTotalPriceLabel.isHidden = true
             
-        } else if selectedIndex == 0 {
-            logoutButton.isHidden = false
-            welcomeLabel.isHidden = false
-            currentUserLabel.isHidden = false
-            priceLabel.isHidden = false
-            totalPriceLabel.isHidden = false
-            calculateButton.isHidden = false
-            portfolioValueLabel.isHidden = false
-            portfolioValue.isHidden = false
-            changeLabel.isHidden = false
-            changeText.isHidden = false
-            currentPriceLabel.isHidden = false
-            currentTotalPriceLabel.isHidden = false
-            
-        } else if selectedIndex == 2 {
+        }  else if selectedIndex == 2 {
             logoutButton.isHidden = true
             welcomeLabel.isHidden = true
             currentUserLabel.isHidden = true
@@ -261,21 +282,17 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        tabBarControllerViewModel.output = self
-        tabBarControllerViewModel.fetchPostItems()
-    }
     
     func fetchTotalPrice() {
-        var calculatedPrice = 0.0
-        var totalPriceHolder = [Double] ()
+        
         for index in 0..<postListArray.count {
             coinName.append(postListArray[index].coinname)
             coinQuantity.append(postListArray[index].coinquantity)
             totalPriceHolder.append( Double(postListArray[index].totalprice)!)
             calculatedPrice += totalPriceHolder[index]
         }
-        totalPriceLabel.text = String(calculatedPrice)
+        let result = String(format: "%.2f", ceil(calculatedPrice * 100) / 100)
+        totalPriceLabel.text = "$ \(result)"
         calculateButton.isHidden = false
     }
 }
@@ -290,7 +307,6 @@ extension TabBarController: TabBarViewModelOutput {
     }
     
     func updateView(valueCoinList: [CoinModel]) {
-        
         coinListArray += valueCoinList
         
         if coinListArray.count == postListArray.count {
@@ -300,12 +316,12 @@ extension TabBarController: TabBarViewModelOutput {
                 
             }
             let totalSum = lastValue.reduce(0, +)
-            currentTotalPriceLabel.text = String(format: "%.2f", ceil(totalSum * 100) / 100)
+            let result = String(format: "%.2f", ceil(totalSum * 100) / 100)
+            currentTotalPriceLabel.text = "$ \(result)"
             portfolioValue.text = totalPriceLabel.text
-            
-            guard let value1 = Double(portfolioValue.text!) else {return}
-            guard let value2 = Double(currentTotalPriceLabel.text!) else { return}
-            
+            let value1Input = String(format: "%.2f", ceil(calculatedPrice * 100) / 100)
+            guard let value1 = Double(value1Input) else {return}
+            guard let value2 = Double(result) else { return}
             if value1 != 0 {
                 if value1 < value2 {
                     let firstOutput = ((value1 - value2) / value2) * 100

@@ -18,7 +18,7 @@ class CollectionViewController: UIViewController {
     let collectionViewM = CollectionViewModel()
     let collectionVc = CollectionVC()
     
-   
+    static let shared = CollectionViewController()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +29,8 @@ class CollectionViewController: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        totalBalance.text = "$ 0.0"
+        calculatedBalance = 0
         collectionViewM.output = self
         collectionViewM.fetchAllItems()
     }
@@ -47,20 +49,23 @@ class CollectionViewController: UIViewController {
 extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(collectionViewM.postList.count)
-        return collectionViewM.postList.count
+        return collectionViewM.numberOfInRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = collectionTableView.dequeueReusableCell(withIdentifier: collectionVc.cellIdentifier, for: indexPath) as! CollectionTableViewCell
         cell.configure(with: collectionViewM.postList, indexPath: indexPath)
         calculatedBalance += Double(collectionViewM.postList[indexPath.row].totalprice)!
-        totalBalance.text = "$ \(String(calculatedBalance))"
+        let result = String(format: "%.2f", ceil(calculatedBalance * 100) / 100)
+        totalBalance.text = "$ \(String(result))"
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let coinPrice = Double(collectionViewM.postList[indexPath.row].totalprice)
+            let result = calculatedBalance - coinPrice!
+            totalBalance.text = String(format: "%.2f", ceil(result * 100) / 100)
             collectionViewM.postDeleteDocument(selectedCoin: collectionViewM.postList[indexPath.row].id)
             collectionViewM.postList.remove(at: indexPath.row)
             collectionTableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)

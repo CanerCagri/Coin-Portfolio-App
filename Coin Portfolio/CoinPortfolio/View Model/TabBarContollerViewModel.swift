@@ -35,18 +35,19 @@ class TabBarControllerViewModel: TabBarViewModelProtocol {
         postListService = FetchDataFirestore()
     }
     
-    func fetchSelectedItems(selectedItem : String) {
-        coinListService.loadSelectedCoin(selectedCoin: selectedItem) { [weak self] response in
-            self?.output?.updateView(valueCoinList: [response!])
-        }
-    }
-   
     func fetchPostItems() {
         postListService.fetchData {[weak self] response in
             self?.output?.postUpdate(valuePostList: response ?? [])
         }
     }
     
+    
+    func fetchSelectedItems(selectedItem : String) {
+        coinListService.loadSelectedCoin(selectedCoin: selectedItem) { [weak self] response in
+            self?.output?.updateView(valueCoinList: [response!])
+        }
+    }
+   
     func signOut() {
         do {
             try Auth.auth().signOut()

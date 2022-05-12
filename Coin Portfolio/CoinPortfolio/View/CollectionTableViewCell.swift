@@ -19,10 +19,10 @@ class CollectionTableViewCell: UITableViewCell {
         let apiPrice = postModel[indexPath.row].totalprice
         let result = apiPrice.components(separatedBy: priceSeperator.lastPriceSeperator)
         if result[0].last != "." {  // Price checking , if price end with . after result add 0
-            priceLabel.text = result[0]
+            priceLabel.text = "$ \(result[0])"
            
         } else {
-            let last = "\(result[0])0"
+            let last = "$ \(result[0])0"
             priceLabel.text = last
             
         }
