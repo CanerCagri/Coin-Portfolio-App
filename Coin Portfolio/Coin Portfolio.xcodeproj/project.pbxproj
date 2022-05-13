@@ -23,6 +23,8 @@
 		010EBC2128094CA7003436C6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 010EBC2028094CA7003436C6 /* Alamofire */; };
 		010EBC2528095480003436C6 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBC2428095480003436C6 /* CoinModel.swift */; };
 		010EBC49280C43C0003436C6 /* CoinListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */; };
+		010EDB62282E59AC007D2920 /* CollectionViewPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EDB61282E59AC007D2920 /* CollectionViewPopup.swift */; };
+		010EDB64282E839F007D2920 /* CollectionPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EDB63282E839E007D2920 /* CollectionPopupViewModel.swift */; };
 		011C958F2823071B00F160C2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C958E2823071B00F160C2 /* Constants.swift */; };
 		01CF4F3C2816815200C86268 /* MainViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3B2816815200C86268 /* MainViewControllerViewModel.swift */; };
 		01CF4F3E2816816400C86268 /* SigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF4F3D2816816400C86268 /* SigninViewModel.swift */; };
@@ -55,6 +57,8 @@
 		010EBBF928083E71003436C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		010EBC2428095480003436C6 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		010EBC48280C43C0003436C6 /* CoinListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListTableViewCell.swift; sourceTree = "<group>"; };
+		010EDB61282E59AC007D2920 /* CollectionViewPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewPopup.swift; sourceTree = "<group>"; };
+		010EDB63282E839E007D2920 /* CollectionPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPopupViewModel.swift; sourceTree = "<group>"; };
 		011C958E2823071B00F160C2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		01CF4F3B2816815200C86268 /* MainViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerViewModel.swift; sourceTree = "<group>"; };
 		01CF4F3D2816816400C86268 /* SigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewModel.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 				010EBBE82808171D003436C6 /* SigninViewController.swift */,
 				010EBBEA28081DBC003436C6 /* TabBarController.swift */,
 				010EBBEC28081DDC003436C6 /* CollectionViewController.swift */,
+				010EDB61282E59AC007D2920 /* CollectionViewPopup.swift */,
 				010EBBF028081DFB003436C6 /* AddDeleteCoinViewController.swift */,
 				01E290B6280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift */,
 			);
@@ -176,6 +181,7 @@
 				01CF4F3D2816816400C86268 /* SigninViewModel.swift */,
 				01CF4F3F2816817700C86268 /* TabBarContollerViewModel.swift */,
 				01CF4F412816819400C86268 /* CollectionViewModel.swift */,
+				010EDB63282E839E007D2920 /* CollectionPopupViewModel.swift */,
 				01CF4F45281681B500C86268 /* AddDeleteViewModel.swift */,
 				01CF4F472816A68E00C86268 /* AddPopupViewModel.swift */,
 			);
@@ -284,7 +290,9 @@
 				010EBBED28081DDC003436C6 /* CollectionViewController.swift in Sources */,
 				01E290B7280E98CE004C3143 /* AddDeleteTableViewPopUpViewController.swift in Sources */,
 				01CF4F3C2816815200C86268 /* MainViewControllerViewModel.swift in Sources */,
+				010EDB62282E59AC007D2920 /* CollectionViewPopup.swift in Sources */,
 				01CF4F4D28173FFD00C86268 /* Service.swift in Sources */,
+				010EDB64282E839F007D2920 /* CollectionPopupViewModel.swift in Sources */,
 				010EBBE92808171D003436C6 /* SigninViewController.swift in Sources */,
 				010EBBD62808145A003436C6 /* MainViewController.swift in Sources */,
 				010EBBD22808145A003436C6 /* AppDelegate.swift in Sources */,

@@ -17,11 +17,28 @@ protocol FetchDataFirestoreProtocol {
 }
 
 protocol AddDataFirestoreProtocol {
-    func addData(selectedCoin : String , selectedCoinPrice: Double, totalPrice: String)
+    func addData(selectedCoin : String , selectedCoinQuantity: Double, totalPrice: String)
+}
+
+protocol UpdateDataFirestoreProtocol {
+    func updateData (selectedCoinId : String, coinname: String, coinquantity: Double, totalprice: String)
 }
 
 let db = Firestore.firestore()
 let firestoreConstants = FirestoreConstants()
+
+class UpdateDataFirestore: UpdateDataFirestoreProtocol {
+    func updateData (selectedCoinId : String, coinname: String, coinquantity: Double, totalprice: String) {
+        
+        db.collection("Post").whereField("id", isEqualTo: selectedCoinId).getDocuments { result, error in
+            if error == nil {
+                for document in result!.documents {
+                    db.collection("Post").document(document.documentID).setData(["coinname" : coinname, "coinquantity" : coinquantity, "totalprice" : totalprice], merge: true)
+                }
+            }
+        }
+    }
+}
 
 class DeleteDataFirestore: DeleteDataFirestoreProtocol {
     func deleteData(selectedCoin : String) {
@@ -41,8 +58,8 @@ class DeleteDataFirestore: DeleteDataFirestoreProtocol {
 }
 
 class AddDataFirestore: AddDataFirestoreProtocol {
-    func addData(selectedCoin: String, selectedCoinPrice: Double, totalPrice: String) {
-        db.collection(firestoreConstants.collectionName).addDocument(data: [firestoreConstants.id: UUID().uuidString , firestoreConstants.email: Auth.auth().currentUser!.email! , firestoreConstants.coinname: selectedCoin , firestoreConstants.coinquantity : selectedCoinPrice , firestoreConstants.totalprice : totalPrice , firestoreConstants.date: FieldValue.serverTimestamp()]) { error in
+    func addData(selectedCoin : String , selectedCoinQuantity: Double, totalPrice: String) {
+        db.collection(firestoreConstants.collectionName).addDocument(data: [firestoreConstants.id: UUID().uuidString , firestoreConstants.email: Auth.auth().currentUser!.email! , firestoreConstants.coinname: selectedCoin , firestoreConstants.coinquantity : selectedCoinQuantity , firestoreConstants.totalprice : totalPrice , firestoreConstants.date: FieldValue.serverTimestamp()]) { error in
             if error == nil {
                 return
             } else {
@@ -74,7 +91,6 @@ class FetchDataFirestore : FetchDataFirestoreProtocol {
                                         if let id = document.get(firestoreConstants.id) as? String {
                                             if let totalprice = document.get(firestoreConstants.totalprice) as? String {
                                                 self.posts.append(PostModel(id: id, email: email, coinname: coinName, coinquantity: coinquantity, totalprice: totalprice))
-                                                
                                             }
                                         }
                                     }

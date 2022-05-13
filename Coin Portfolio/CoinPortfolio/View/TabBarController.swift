@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
+    
     var logoutButton = UIButton()
     var welcomeLabel = UILabel()
     var currentUserLabel = UILabel()
@@ -88,6 +89,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         currentTotalPriceLabel.isHidden = true
         totalPriceLabel.text = "0.0"
         calculatedPrice = 0
+        portfolioValue.text = ""
+        currentTotalPriceLabel.text = ""
+        changeText.text = ""
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
@@ -96,6 +100,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             
             tabBarControllerViewModel.output = self
             tabBarControllerViewModel.fetchPostItems()
+            
+            DispatchQueue.main.async {
+                self.portfolioCollectionView?.reloadData()
+            }
             logoutButton.isHidden = false
             welcomeLabel.isHidden = false
             currentUserLabel.isHidden = false
@@ -180,7 +188,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         portfolioCollectionView!.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         portfolioCollectionView!.bottomAnchor.constraint(equalTo: logoutButton.topAnchor, constant: -10).isActive = true
         
-        
         logoutButton.frame = CGRect.init(x: self.tabBar.center.x - 32, y: self.view.bounds.height - 160, width: 64, height: 64)
         logoutButton.layer.cornerRadius = 32
     }
@@ -194,8 +201,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let currentUser = Auth.auth().currentUser!.email
         let user = currentUser!.components(separatedBy: "@")
+        let userCapatitalized = user[0].capitalized
         currentUserLabel = UILabel()
-        currentUserLabel.text = "\(user[0])!"
+        currentUserLabel.text = "\(userCapatitalized)!"
         currentUserLabel.font = UIFont.boldSystemFont(ofSize: 30)
         currentUserLabel.textColor = UIColor.red
         currentUserLabel.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
@@ -269,7 +277,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         layout.itemSize = CGSize(width: (view.frame.size.height/7)-4, height: (view.frame.size.height/5)-4)
         portfolioCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         guard let portfolioCollectionView = portfolioCollectionView else { return }
-        
         portfolioCollectionView.register(PortfolioCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         portfolioCollectionView.dataSource = self
         portfolioCollectionView.delegate = self
@@ -287,7 +294,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         logoutButton.tag = 100
         self.view.addSubview(logoutButton)
     }
-    
 }
 
 extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -308,7 +314,7 @@ extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate
             for j in 0..<postListArray.count {
                 let priceName = saveByName[j].symbol
                 let result = priceName.components(separatedBy: "USDT")
-
+                
                 if postName != result[0] {
                     //do nothing!
                 } else {
@@ -317,7 +323,7 @@ extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate
                     if priceresult[0].last != "." {
                         cell?.currentPriceText.text = priceresult[0]
                         return cell!
-                       
+                        
                     } else {
                         let last = "\(priceresult[0])0"
                         cell?.currentPriceText.text = last
@@ -328,27 +334,19 @@ extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate
         }
         return cell!
     }
-    
 }
 
 extension TabBarController: TabBarViewModelOutput {
     
     func currentlyCoinPrice(valuePostList: [CoinModel]) {
         saveByName += valuePostList
-        
         if saveByName.count == postListArray.count {
             
-            //            for i in 0..<saveByName.count {
-            //               print("\(saveByName[i].lastPrice) and \(saveByName[i].symbol)")
-            //               print("\(postListArray[i].totalprice) and \(postListArray[i].coinname)")
-            //            }
             DispatchQueue.main.async {
                 self.portfolioCollectionView?.reloadData()
             }
         }
-        
     }
-    
     
     func postUpdate(valuePostList: [PostModel]) {
         postListArray.removeAll(keepingCapacity: false)
@@ -358,7 +356,6 @@ extension TabBarController: TabBarViewModelOutput {
     }
     
     func currentlyTotalPrice(valueLastPrice: [Double]) {
-        
         coinListArray += valueLastPrice
         if coinListArray.count == postListArray.count {
             for index in 0..<postListArray.count {
@@ -380,13 +377,17 @@ extension TabBarController: TabBarViewModelOutput {
                     changeText.text = thirdOutput
                     changeText.textColor = .blue
                     
-                    
+                    DispatchQueue.main.async {
+                        self.portfolioCollectionView?.reloadData()
+                    }
                 } else if value1 > value2{
                     let firstOutput = ((value2 - value1) / value1) * 100
                     changeText.text = String(format: "%.2f", ceil(firstOutput * 100) / 100)
                     changeText.textColor = .red
                     
-                    
+                    DispatchQueue.main.async {
+                        self.portfolioCollectionView?.reloadData()
+                    }
                 }
             }
         }

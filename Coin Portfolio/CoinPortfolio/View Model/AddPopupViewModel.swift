@@ -9,9 +9,9 @@ import Foundation
 import Firebase
 
 protocol AddPopupViewModelProtocol {
-  
+    
     var postListService: AddDataFirestore { get }
-    func postAddDocument(selectedCoin: String, selectedCoinPrice: Double, totalPrice: String)
+    func postAddDocument(selectedCoin: String, selectedCoinQuantity: Double, totalPrice: String)
 }
 
 class AddPopupViewModel: AddPopupViewModelProtocol{
@@ -21,7 +21,7 @@ class AddPopupViewModel: AddPopupViewModelProtocol{
         postListService = AddDataFirestore()
     }
     
-    func postAddDocument(selectedCoin: String, selectedCoinPrice: Double, totalPrice: String) {
-        postListService.addData(selectedCoin: selectedCoin, selectedCoinPrice: selectedCoinPrice, totalPrice: totalPrice)
+    func postAddDocument(selectedCoin: String, selectedCoinQuantity: Double, totalPrice: String) {
+        postListService.addData(selectedCoin: selectedCoin, selectedCoinQuantity: selectedCoinQuantity, totalPrice: totalPrice)
     }
 }

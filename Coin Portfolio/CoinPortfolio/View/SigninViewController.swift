@@ -8,7 +8,7 @@
 import UIKit
 
 class SigninViewController: UIViewController {
-
+    
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
@@ -20,7 +20,6 @@ class SigninViewController: UIViewController {
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
         dismiss(animated: true)
-        performSegue(withIdentifier: "toVC", sender: self)
     }
     
     @IBAction func createAccTapped(_ sender: Any) {

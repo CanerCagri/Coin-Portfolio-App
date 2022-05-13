@@ -102,7 +102,7 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
         
         coinNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         coinNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -60).isActive = true
-      
+        
         coinQuantityLabel.topAnchor.constraint(equalTo: coinNameLabel.bottomAnchor, constant: 15).isActive = true
         coinQuantityLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
@@ -120,8 +120,5 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
         
         currentPriceText.topAnchor.constraint(equalTo: currentPriceLabel.bottomAnchor, constant: 5).isActive = true
         currentPriceText.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        
-        
-        
     }
 }

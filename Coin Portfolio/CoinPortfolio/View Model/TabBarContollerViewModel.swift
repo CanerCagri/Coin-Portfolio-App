@@ -27,10 +27,10 @@ protocol TabBarViewModelOutput: AnyObject {
 class TabBarControllerViewModel: TabBarViewModelProtocol {
     
     weak var output : TabBarViewModelOutput?
-
+    
     let coinListService: Service
     let postListService: FetchDataFirestore
-
+    
     init() {
         coinListService = Service()
         postListService = FetchDataFirestore()
@@ -47,7 +47,7 @@ class TabBarControllerViewModel: TabBarViewModelProtocol {
             self?.output?.currentlyTotalPrice(valueLastPrice: [response!])
         }
     }
-   
+    
     func fetchSelectedByName(selectedItem : String) {
         coinListService.loadSelectedCoinByName(selectedCoin: selectedItem) {[weak self] response in
             self?.output?.currentlyCoinPrice(valuePostList: response ?? [])

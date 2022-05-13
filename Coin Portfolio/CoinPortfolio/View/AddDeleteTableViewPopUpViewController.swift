@@ -28,8 +28,10 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
         super.viewDidLoad()
         
         addBtn.isEnabled = false
-        totalPrice.text = ""
+        totalPrice.text = "0.0"
         quantityTextField.delegate = self
+        
+        selectedCoin.isHidden = true
         
         if coinName != nil && coinPrice != nil {
             coinNameLabel.text = coinName!
@@ -40,7 +42,7 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
-        addPopupViewModel.postAddDocument(selectedCoin: selectedCoin.text!, selectedCoinPrice: selectedCoinPrice!, totalPrice: totalPrice.text!)
+        addPopupViewModel.postAddDocument(selectedCoin: selectedCoin.text!, selectedCoinQuantity: selectedCoinPrice!, totalPrice: totalPrice.text!)
         dismiss(animated: true)
     }
     
@@ -54,7 +56,7 @@ extension AddDeleteTableViewPopUpViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if textField == quantityTextField {
             
-            if quantityTextField.text == "" {
+            if quantityTextField.text == "" || quantityTextField.text == "0" || quantityTextField.text == "0.0" || quantityTextField.text?.last == "." {
                 addBtn.isEnabled = false
             } else {
                 addBtn.isEnabled = true

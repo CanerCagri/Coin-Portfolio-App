@@ -10,9 +10,9 @@ import Foundation
 protocol AddDeleteViewModelProtocol {
     var coinListArray: [CoinModel] { get set  }
     var coinListService: Service { get }
-
+    
     func fetchItems()
-
+    
 }
 
 protocol AddDeleteViewModelOutput: AnyObject {
@@ -24,11 +24,11 @@ final class AddDeleteViewModel: AddDeleteViewModelProtocol {
     
     let coinListService: Service
     var coinListArray: [CoinModel] = []
-
+    
     init() {
         coinListService = Service()
     }
-
+    
     func fetchItems() {
         coinListService.loadCoins { [weak self] response in
             self?.output?.updateView(valuePostList: response ?? [])

@@ -8,13 +8,18 @@
 import UIKit
 import Firebase
 
+
 class CollectionViewController: UIViewController {
     
     @IBOutlet var totalBalance: UILabel!
     @IBOutlet var collectionTableView: UITableView!
     
+    var coinName = ""
+    var coinPrice = ""
+    var coinQuantity = ""
+    var coinId = ""
     var calculatedBalance : Double = 0
-
+    
     let collectionViewM = CollectionViewModel()
     let collectionVc = CollectionVC()
     
@@ -23,10 +28,10 @@ class CollectionViewController: UIViewController {
         
         collectionTableView.delegate = self
         collectionTableView.dataSource = self
-        collectionTableView.reloadData()
         tableViewHeader()
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         totalBalance.text = "$ 0.0"
         calculatedBalance = 0
@@ -57,7 +62,36 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
         calculatedBalance += Double(collectionViewM.postList[indexPath.row].totalprice)!
         let result = String(format: "%.2f", ceil(calculatedBalance * 100) / 100)
         totalBalance.text = "$ \(String(result))"
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        coinId = collectionViewM.postList[indexPath.row].id
+        coinName = collectionViewM.postList[indexPath.row].coinname
+        coinQuantity = String(collectionViewM.postList[indexPath.row].coinquantity)
+        let apiPrice = collectionViewM.postList[indexPath.row].totalprice
+        let apiPriceResult = apiPrice.components(separatedBy: "0000")
+        if apiPriceResult[0].last != "." {  // Price checking , if price end with . after result add 0
+            coinPrice = apiPriceResult[0]
+            
+        } else {
+            let last = "\(apiPriceResult[0])0"
+            coinPrice = last
+        }
+        performSegue(withIdentifier: "toCollectionPopup", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toCollectionPopup" {
+            let destination = segue.destination as! CollectionViewPopup
+            destination.delegate = self
+            destination.coinID = coinId
+            destination.coinName = coinName
+            destination.coinPrice = coinPrice
+            destination.coinQuantity = coinQuantity
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -77,5 +111,19 @@ extension CollectionViewController: CollectionViewModelOutput {
     func updateView(valuePostList: [PostModel]) {
         collectionViewM.postList = valuePostList
         collectionTableView.reloadData()
+    }
+}
+
+extension CollectionViewController : CollectionViewPopupProtocol {
+    func settingsUpdated() {
+        totalBalance.text = "$ 0.0"
+        calculatedBalance = 0
+        collectionViewM.output = self
+        collectionViewM.fetchAllItems()
+        
+        DispatchQueue.main.async {
+            
+            self.collectionTableView.reloadData()
+        }
     }
 }

@@ -13,7 +13,7 @@ protocol CollectionViewModelProtocol: AnyObject {
     var postListService: FetchDataFirestore { get }
     func fetchAllItems()
     func postDeleteDocument(selectedCoin : String)
-  
+    
 }
 protocol CollectionViewModelOutput: AnyObject {
     func updateView(valuePostList : [PostModel])
@@ -21,7 +21,7 @@ protocol CollectionViewModelOutput: AnyObject {
 
 class CollectionViewModel: CollectionViewModelProtocol {
     weak var output : CollectionViewModelOutput?
-
+    
     var postList: [PostModel] = []
     let postListService: FetchDataFirestore
     let postDeleteService : DeleteDataFirestore
@@ -34,9 +34,8 @@ class CollectionViewModel: CollectionViewModelProtocol {
     func postDeleteDocument(selectedCoin : String) {
         postDeleteService.deleteData(selectedCoin: selectedCoin)
     }
-
+    
     func fetchAllItems() {
-        postList.removeAll()
         postListService.fetchData {[weak self] response in
             self?.output?.updateView(valuePostList: response ?? [])
         }
@@ -45,7 +44,5 @@ class CollectionViewModel: CollectionViewModelProtocol {
     func numberOfInRowsInSection(section : Int) -> Int {
         return postList.count
     }
-    
-   
 }
 
