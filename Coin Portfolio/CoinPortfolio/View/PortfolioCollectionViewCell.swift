@@ -100,25 +100,26 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        coinNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        coinNameLabel.bottomAnchor.constraint(equalTo: coinQuantityLabel.topAnchor, constant: -30).isActive = true
         coinNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        coinNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -60).isActive = true
         
-        coinQuantityLabel.topAnchor.constraint(equalTo: coinNameLabel.bottomAnchor, constant: 15).isActive = true
+        coinQuantityLabel.bottomAnchor.constraint(equalTo: coinQuantityText.topAnchor, constant: -5).isActive = true
         coinQuantityLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
-        coinQuantityText.topAnchor.constraint(equalTo: coinQuantityLabel.bottomAnchor, constant: 5).isActive = true
+        coinQuantityText.bottomAnchor.constraint(equalTo: createdPriceLabel.topAnchor, constant: -12).isActive = true
         coinQuantityText.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
-        createdPriceLabel.topAnchor.constraint(equalTo: coinQuantityText.bottomAnchor, constant: 12).isActive = true
+        createdPriceLabel.bottomAnchor.constraint(equalTo: createdPriceText.topAnchor, constant: -5).isActive = true
         createdPriceLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
-        createdPriceText.topAnchor.constraint(equalTo: createdPriceLabel.bottomAnchor, constant: 5).isActive = true
+        createdPriceText.bottomAnchor.constraint(equalTo: currentPriceLabel.topAnchor, constant: -12).isActive = true
         createdPriceText.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
-        currentPriceLabel.topAnchor.constraint(equalTo: createdPriceText.bottomAnchor, constant: 12).isActive = true
+        currentPriceLabel.bottomAnchor.constraint(equalTo: currentPriceText.topAnchor, constant: -5).isActive = true
         currentPriceLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
-        currentPriceText.topAnchor.constraint(equalTo: currentPriceLabel.bottomAnchor, constant: 5).isActive = true
+        currentPriceText.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -25).isActive = true
         currentPriceText.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
     }
 }

@@ -17,7 +17,6 @@ protocol ServiceProtocol {
 }
 
 class Service: ServiceProtocol {
-    
     let coinApiConstant = CoinApiService()
     
     func loadCoins(completion: @escaping ([CoinModel]?) -> Void) {

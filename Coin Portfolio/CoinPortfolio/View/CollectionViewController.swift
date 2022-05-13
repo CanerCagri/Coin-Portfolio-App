@@ -116,14 +116,6 @@ extension CollectionViewController: CollectionViewModelOutput {
 
 extension CollectionViewController : CollectionViewPopupProtocol {
     func settingsUpdated() {
-        totalBalance.text = "$ 0.0"
-        calculatedBalance = 0
-        collectionViewM.output = self
-        collectionViewM.fetchAllItems()
-        
-        DispatchQueue.main.async {
-            
-            self.collectionTableView.reloadData()
-        }
+        tabBarController?.selectedIndex = 1
     }
 }

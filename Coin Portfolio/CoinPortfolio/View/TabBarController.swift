@@ -38,6 +38,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         
         createInterface()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,10 +101,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             
             tabBarControllerViewModel.output = self
             tabBarControllerViewModel.fetchPostItems()
-            
-            DispatchQueue.main.async {
-                self.portfolioCollectionView?.reloadData()
-            }
+
             logoutButton.isHidden = false
             welcomeLabel.isHidden = false
             currentUserLabel.isHidden = false
@@ -168,11 +166,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         changeLabel.translatesAutoresizingMaskIntoConstraints = false
         changeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
-        changeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 180).isActive = true
+        changeLabel.leadingAnchor.constraint(equalTo: changeText.leadingAnchor).isActive = true
         
         changeText.translatesAutoresizingMaskIntoConstraints = false
         changeText.topAnchor.constraint(equalTo: changeLabel.bottomAnchor, constant: 10).isActive = true
-        changeText.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 180).isActive = true
+        changeText.trailingAnchor.constraint(equalTo: currentTotalPriceLabel.leadingAnchor, constant: -85).isActive = true
         
         currentPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         currentPriceLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
@@ -274,7 +272,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 25
         layout.minimumInteritemSpacing = 1
-        layout.itemSize = CGSize(width: (view.frame.size.height/7)-4, height: (view.frame.size.height/5)-4)
+        layout.itemSize = CGSize(width: (view.frame.size.height/7)-4, height: (view.frame.size.height/3.5))
         portfolioCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         guard let portfolioCollectionView = portfolioCollectionView else { return }
         portfolioCollectionView.register(PortfolioCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -377,17 +375,11 @@ extension TabBarController: TabBarViewModelOutput {
                     changeText.text = thirdOutput
                     changeText.textColor = .blue
                     
-                    DispatchQueue.main.async {
-                        self.portfolioCollectionView?.reloadData()
-                    }
                 } else if value1 > value2{
                     let firstOutput = ((value2 - value1) / value1) * 100
                     changeText.text = String(format: "%.2f", ceil(firstOutput * 100) / 100)
                     changeText.textColor = .red
                     
-                    DispatchQueue.main.async {
-                        self.portfolioCollectionView?.reloadData()
-                    }
                 }
             }
         }

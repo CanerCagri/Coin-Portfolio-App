@@ -30,10 +30,10 @@ let firestoreConstants = FirestoreConstants()
 class UpdateDataFirestore: UpdateDataFirestoreProtocol {
     func updateData (selectedCoinId : String, coinname: String, coinquantity: Double, totalprice: String) {
         
-        db.collection("Post").whereField("id", isEqualTo: selectedCoinId).getDocuments { result, error in
+        db.collection(firestoreConstants.collectionName).whereField(firestoreConstants.id, isEqualTo: selectedCoinId).getDocuments { result, error in
             if error == nil {
                 for document in result!.documents {
-                    db.collection("Post").document(document.documentID).setData(["coinname" : coinname, "coinquantity" : coinquantity, "totalprice" : totalprice], merge: true)
+                    db.collection(firestoreConstants.collectionName).document(document.documentID).setData([firestoreConstants.coinname: coinname, firestoreConstants.coinquantity: coinquantity, firestoreConstants.totalprice: totalprice], merge: true)
                 }
             }
         }

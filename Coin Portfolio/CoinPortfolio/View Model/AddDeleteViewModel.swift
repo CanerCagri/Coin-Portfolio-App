@@ -12,7 +12,6 @@ protocol AddDeleteViewModelProtocol {
     var coinListService: Service { get }
     
     func fetchItems()
-    
 }
 
 protocol AddDeleteViewModelOutput: AnyObject {
