@@ -28,8 +28,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var postListArray = [PostModel] ()
     var saveByName = [CoinModel] ()
     var lastValue = [Double] ()
-    var coinName = [String] ()
-    var coinQuantity = [Double] ()
     var calculatedPrice = 0.0
     var totalPriceHolder = [Double] ()
     
@@ -50,15 +48,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBarControllerViewModel.signOut()
         performSegue(withIdentifier: tabBarC.segueIdentifier, sender: nil)
     }
- 
+    
     func loadChange() {
         if postListArray.count != 0 {
-            for index in 0..<coinName.count {
-                tabBarControllerViewModel.fetchSelectedItems(index: index, selectedItem: coinName[index] , selectedItemQuantity: coinQuantity[index])
-                tabBarControllerViewModel.fetchSelectedByName(selectedItem: coinName[index])
+            for index in 0..<postListArray.count {
+                tabBarControllerViewModel.fetchSelectedItems(index: index, selectedItem: postListArray[index].coinname , selectedItemQuantity: postListArray[index].coinquantity)
+                tabBarControllerViewModel.fetchSelectedByName(selectedItem: postListArray[index].coinname)
             }
-            coinName.removeAll(keepingCapacity: false)
-            coinQuantity.removeAll(keepingCapacity: false)
             lastValue.removeAll(keepingCapacity: false)
             portfolioValueLabel.isHidden = false
             portfolioValue.isHidden = false
@@ -71,8 +67,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func fetchTotalPrice() {
         for index in 0..<postListArray.count {
-            coinName.append(postListArray[index].coinname)
-            coinQuantity.append(postListArray[index].coinquantity)
             totalPriceHolder.append( Double(postListArray[index].totalprice)!)
             calculatedPrice += totalPriceHolder[index]
         }
@@ -85,8 +79,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         coinListArray.removeAll(keepingCapacity: false)
         postListArray.removeAll(keepingCapacity: false)
         lastValue.removeAll(keepingCapacity: false)
-        coinName.removeAll(keepingCapacity: false)
-        coinQuantity.removeAll(keepingCapacity: false)
         totalPriceHolder.removeAll(keepingCapacity: false)
         portfolioValueLabel.isHidden = true
         portfolioValue.isHidden = true
@@ -277,12 +269,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         layout.itemSize = CGSize(width: (view.frame.size.height/7)-4, height: (view.frame.size.height/5)-4)
         portfolioCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         guard let portfolioCollectionView = portfolioCollectionView else { return }
-
+        
         portfolioCollectionView.register(PortfolioCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         portfolioCollectionView.dataSource = self
         portfolioCollectionView.delegate = self
         self.view.addSubview(portfolioCollectionView)
-      
+        
         logoutButton = UIButton()
         logoutButton.setImage(UIImage(named: tabBarC.logoutImageName), for: .normal)
         logoutButton.setTitleColor(.black, for: .normal)
@@ -295,7 +287,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         logoutButton.tag = 100
         self.view.addSubview(logoutButton)
     }
-
+    
 }
 
 extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -309,9 +301,31 @@ extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate
         cell?.coinNameLabel.text = currentItem.coinname
         cell?.coinQuantityText.text = String(currentItem.coinquantity)
         cell?.createdPriceText.text = currentItem.totalprice
-        let lastPrice = String(saveByName[indexPath.row].lastPrice)
-        let result = lastPrice.components(separatedBy: "0000")
-        cell?.currentPriceText.text = result[0]
+        
+        //Bug fixed when current price texting. Below codes fixing that bug
+        for i in indexPath.row..<postListArray.count  {
+            let postName = postListArray[i].coinname
+            for j in 0..<postListArray.count {
+                let priceName = saveByName[j].symbol
+                let result = priceName.components(separatedBy: "USDT")
+
+                if postName != result[0] {
+                    //do nothing!
+                } else {
+                    let price = String(saveByName[j].lastPrice)
+                    let priceresult = price.components(separatedBy: "0000")
+                    if priceresult[0].last != "." {
+                        cell?.currentPriceText.text = priceresult[0]
+                        return cell!
+                       
+                    } else {
+                        let last = "\(priceresult[0])0"
+                        cell?.currentPriceText.text = last
+                        return cell!
+                    }
+                }
+            }
+        }
         return cell!
     }
     
@@ -323,6 +337,11 @@ extension TabBarController: TabBarViewModelOutput {
         saveByName += valuePostList
         
         if saveByName.count == postListArray.count {
+            
+            //            for i in 0..<saveByName.count {
+            //               print("\(saveByName[i].lastPrice) and \(saveByName[i].symbol)")
+            //               print("\(postListArray[i].totalprice) and \(postListArray[i].coinname)")
+            //            }
             DispatchQueue.main.async {
                 self.portfolioCollectionView?.reloadData()
             }
@@ -332,12 +351,10 @@ extension TabBarController: TabBarViewModelOutput {
     
     
     func postUpdate(valuePostList: [PostModel]) {
-        coinName.removeAll(keepingCapacity: false)
-        coinQuantity.removeAll(keepingCapacity: false)
         postListArray.removeAll(keepingCapacity: false)
         postListArray = valuePostList
         fetchTotalPrice()
-
+        
     }
     
     func currentlyTotalPrice(valueLastPrice: [Double]) {
@@ -363,13 +380,13 @@ extension TabBarController: TabBarViewModelOutput {
                     changeText.text = thirdOutput
                     changeText.textColor = .blue
                     
-                           
+                    
                 } else if value1 > value2{
                     let firstOutput = ((value2 - value1) / value1) * 100
                     changeText.text = String(format: "%.2f", ceil(firstOutput * 100) / 100)
                     changeText.textColor = .red
                     
-                            
+                    
                 }
             }
         }

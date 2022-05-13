@@ -48,7 +48,7 @@ class TabBarControllerViewModel: TabBarViewModelProtocol {
         }
     }
    
-    func fetchSelectedByName(selectedItem :  String) {
+    func fetchSelectedByName(selectedItem : String) {
         coinListService.loadSelectedCoinByName(selectedCoin: selectedItem) {[weak self] response in
             self?.output?.currentlyCoinPrice(valuePostList: response ?? [])
         }
