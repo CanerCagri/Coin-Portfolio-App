@@ -21,7 +21,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var changeText = UILabel()
     var currentPriceLabel = UILabel()
     var currentTotalPriceLabel = UILabel()
-    var portfolioCollectionView : UICollectionView?
+    var portfolioCollectionView : UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+        return collection
+       
+    }()
     
     let tabBarControllerViewModel = TabBarControllerViewModel()
     let tabBarC = TabBarC()
@@ -35,13 +41,15 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
-        
-        createInterface()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.delegate = self
+        portfolioCollectionView.dataSource = self
+        portfolioCollectionView.delegate = self
+        
+        createInterface()
         tabBarControllerViewModel.output = self
         tabBarControllerViewModel.fetchPostItems()
     }
@@ -57,13 +65,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 tabBarControllerViewModel.fetchSelectedItems(index: index, selectedItem: postListArray[index].coinname , selectedItemQuantity: postListArray[index].coinquantity)
                 tabBarControllerViewModel.fetchSelectedByName(selectedItem: postListArray[index].coinname)
             }
-            lastValue.removeAll(keepingCapacity: false)
-            portfolioValueLabel.isHidden = false
-            portfolioValue.isHidden = false
-            changeLabel.isHidden = false
-            changeText.isHidden = false
-            currentPriceLabel.isHidden = false
-            currentTotalPriceLabel.isHidden = false
         }
     }
     
@@ -88,6 +89,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         changeText.isHidden = true
         currentPriceLabel.isHidden = true
         currentTotalPriceLabel.isHidden = true
+        portfolioCollectionView.isHidden = true
         totalPriceLabel.text = "0.0"
         calculatedPrice = 0
         portfolioValue.text = ""
@@ -107,7 +109,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             currentUserLabel.isHidden = false
             priceLabel.isHidden = false
             totalPriceLabel.isHidden = false
-            portfolioCollectionView?.isHidden = false
+
         } else if selectedIndex == 1 {
             logoutButton.isHidden = true
             welcomeLabel.isHidden = true
@@ -120,7 +122,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             changeText.isHidden = true
             currentPriceLabel.isHidden = true
             currentTotalPriceLabel.isHidden = true
-            portfolioCollectionView?.isHidden = true
+            portfolioCollectionView.isHidden = true
         }  else if selectedIndex == 2 {
             logoutButton.isHidden = true
             welcomeLabel.isHidden = true
@@ -133,7 +135,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             changeText.isHidden = true
             currentPriceLabel.isHidden = true
             currentTotalPriceLabel.isHidden = true
-            portfolioCollectionView?.isHidden = true
+            portfolioCollectionView.isHidden = true
         }
     }
     
@@ -180,11 +182,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         currentTotalPriceLabel.topAnchor.constraint(equalTo: currentPriceLabel.bottomAnchor, constant: 10).isActive = true
         currentTotalPriceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         
-        portfolioCollectionView!.translatesAutoresizingMaskIntoConstraints = false
-        portfolioCollectionView!.topAnchor.constraint(equalTo: portfolioValue.bottomAnchor, constant: 25).isActive = true
-        portfolioCollectionView!.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        portfolioCollectionView!.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-        portfolioCollectionView!.bottomAnchor.constraint(equalTo: logoutButton.topAnchor, constant: -10).isActive = true
+        portfolioCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        portfolioCollectionView.topAnchor.constraint(equalTo: portfolioValue.bottomAnchor, constant: 25).isActive = true
+        portfolioCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        portfolioCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        portfolioCollectionView.bottomAnchor.constraint(equalTo: logoutButton.topAnchor, constant: -10).isActive = true
         
         logoutButton.frame = CGRect.init(x: self.tabBar.center.x - 32, y: self.view.bounds.height - 160, width: 64, height: 64)
         logoutButton.layer.cornerRadius = 32
@@ -268,16 +270,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         currentTotalPriceLabel.isHidden = true
         self.view.addSubview(currentTotalPriceLabel)
         
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 25
-        layout.minimumInteritemSpacing = 1
-        layout.itemSize = CGSize(width: (view.frame.size.height/7)-4, height: (view.frame.size.height/3.5))
-        portfolioCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        guard let portfolioCollectionView = portfolioCollectionView else { return }
         portfolioCollectionView.register(PortfolioCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        portfolioCollectionView.dataSource = self
-        portfolioCollectionView.delegate = self
         self.view.addSubview(portfolioCollectionView)
         
         logoutButton = UIButton()
@@ -294,17 +287,24 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
 }
 
-extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (view.frame.size.height/7)-4, height: (view.frame.size.height/3.5))
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return postListArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = portfolioCollectionView?.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? PortfolioCollectionViewCell
+        let cell = portfolioCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? PortfolioCollectionViewCell
         let currentItem = postListArray[indexPath.row]
         cell?.coinNameLabel.text = currentItem.coinname
         cell?.coinQuantityText.text = String(currentItem.coinquantity)
-        cell?.createdPriceText.text = currentItem.totalprice
+        let createdPrice = currentItem.totalprice
+        let createdResult = createdPrice.components(separatedBy: "9999")
+        cell?.createdPriceText.text = createdResult[0]
         
         //Bug fixed when current price texting. Below codes fixing that bug
         for i in indexPath.row..<postListArray.count  {
@@ -339,10 +339,6 @@ extension TabBarController: TabBarViewModelOutput {
     func currentlyCoinPrice(valuePostList: [CoinModel]) {
         saveByName += valuePostList
         if saveByName.count == postListArray.count {
-            
-            DispatchQueue.main.async {
-                self.portfolioCollectionView?.reloadData()
-            }
         }
     }
     
@@ -350,11 +346,11 @@ extension TabBarController: TabBarViewModelOutput {
         postListArray.removeAll(keepingCapacity: false)
         postListArray = valuePostList
         fetchTotalPrice()
-        
     }
     
     func currentlyTotalPrice(valueLastPrice: [Double]) {
         coinListArray += valueLastPrice
+        
         if coinListArray.count == postListArray.count {
             for index in 0..<postListArray.count {
                 let temp = coinListArray[index]
@@ -364,6 +360,14 @@ extension TabBarController: TabBarViewModelOutput {
             let result = String(format: "%.2f", ceil(totalSum * 100) / 100)
             currentTotalPriceLabel.text = "$ \(result)"
             portfolioValue.text = totalPriceLabel.text
+            lastValue.removeAll(keepingCapacity: false)
+            portfolioValueLabel.isHidden = false
+            portfolioValue.isHidden = false
+            changeLabel.isHidden = false
+            changeText.isHidden = false
+            currentPriceLabel.isHidden = false
+            currentTotalPriceLabel.isHidden = false
+         
             let value1Input = String(format: "%.2f", ceil(calculatedPrice * 100) / 100)
             guard let value1 = Double(value1Input) else {return}
             guard let value2 = Double(result) else { return}
@@ -374,12 +378,19 @@ extension TabBarController: TabBarViewModelOutput {
                     let thirdOutput = secondOutput.components(separatedBy: "-")[1]
                     changeText.text = thirdOutput
                     changeText.textColor = .blue
+                    DispatchQueue.main.async {
+                        self.portfolioCollectionView.reloadData()
+                    }
+                    portfolioCollectionView.isHidden = false
                     
                 } else if value1 > value2{
                     let firstOutput = ((value2 - value1) / value1) * 100
                     changeText.text = String(format: "%.2f", ceil(firstOutput * 100) / 100)
                     changeText.textColor = .red
-                    
+                    DispatchQueue.main.async {
+                        self.portfolioCollectionView.reloadData()
+                    }
+                    portfolioCollectionView.isHidden = false
                 }
             }
         }
