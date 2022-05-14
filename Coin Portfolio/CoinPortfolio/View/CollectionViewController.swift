@@ -90,7 +90,6 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
             destination.coinName = coinName
             destination.coinPrice = coinPrice
             destination.coinQuantity = coinQuantity
-            
         }
     }
     

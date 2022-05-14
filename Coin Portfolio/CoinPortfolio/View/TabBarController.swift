@@ -302,43 +302,38 @@ extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate
         let currentItem = postListArray[indexPath.row]
         cell?.coinNameLabel.text = currentItem.coinname
         cell?.coinQuantityText.text = String(currentItem.coinquantity)
-        let createdPrice = currentItem.totalprice
-        let createdResult = createdPrice.components(separatedBy: "9999 0000")
+        let createdPrice = "$ \(currentItem.totalprice)"
+        let createdResult = createdPrice.components(separatedBy: "9999")
         cell?.createdPriceText.text = createdResult[0]
         
         //Bug fixed when current price texting. Below codes fixing that bug
-        if indexPath.row < saveByName.count {
             for i in indexPath.row..<postListArray.count  {
                 let postName = postListArray[i].coinname
                 for j in 0..<postListArray.count {
+                    if j >= saveByName.count {
+                        cell?.currentPriceText.text = "ERROR"
+                        return cell!
+                    }
                     let priceName = saveByName[j].symbol
                     let result = priceName.components(separatedBy: "USDT")
-                    
                     if postName != result[0] {
                         //do nothing!
                     } else {
                         let price = String(saveByName[j].lastPrice)
                         let priceresult = price.components(separatedBy: "0000")
                         if priceresult[0].last != "." {
-                            cell?.currentPriceText.text = priceresult[0]
+                            cell?.currentPriceText.text = "$ \(priceresult[0])"
                             return cell!
                             
                         } else {
-                            let last = "\(priceresult[0])0"
+                            let last = "$ \(priceresult[0])0"
                             cell?.currentPriceText.text = last
                             return cell!
                         }
                     }
                 }
             }
-        } else {
-            cell?.currentPriceText.text = "ERROR"
-            return cell!
-        }
-        
         return cell!
-       
-       
     }
 }
 

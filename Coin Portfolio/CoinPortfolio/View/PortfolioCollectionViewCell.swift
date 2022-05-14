@@ -32,7 +32,7 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
         var coinName = UILabel()
         coinName.text = "CoinQuantityText"
         coinName.font = UIFont.systemFont(ofSize: 12)
-        coinName.textColor = .brown
+        coinName.textColor = .purple
         coinName.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
         coinName.translatesAutoresizingMaskIntoConstraints = false
         return coinName
@@ -122,7 +122,6 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
         currentPriceLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
         currentPriceText.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15).isActive = true
-
         currentPriceText.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
     }
 }

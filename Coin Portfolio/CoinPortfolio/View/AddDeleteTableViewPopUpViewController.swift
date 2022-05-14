@@ -35,9 +35,12 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
         totalPrice.text = "0.0"
         quantityTextField.delegate = self
         
+        hideKeyboardSettings()
+        
         if coinName != nil && coinPrice != nil {
             coinNameLabel.text = coinName!
-            coinPriceLabel.text = "$ String(coinPrice!)"
+            let coinPriceLabelText = String(coinPrice!)
+            coinPriceLabel.text = "$ \(coinPriceLabelText)"
             let selectedCoinName = coinNameLabel.text?.components(separatedBy: addDeletePopup.selectedCoinNameSeperator)[0]
             selectedCoin.text = selectedCoinName
         }
@@ -50,6 +53,31 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
         dismiss(animated: true)
+    }
+    
+    func hideKeyboardSettings() {
+        quantityTextField.keyboardType = UIKeyboardType.numbersAndPunctuation
+        quantityTextField.resignFirstResponder()
+        quantityTextField.becomeFirstResponder()
+        
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
+        let toolbar = UIToolbar()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                        target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done,
+                                         target: self, action: #selector(doneButtonTapped))
+        
+        toolbar.setItems([flexSpace, doneButton], animated: true)
+        toolbar.sizeToFit()
+        
+        quantityTextField.inputAccessoryView = toolbar
+    }
+    
+    @objc func doneButtonTapped() {
+        view.endEditing(true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -85,15 +113,10 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
         cancelBtn.topAnchor.constraint(equalTo: addBtn.bottomAnchor, constant: 50).isActive = true
         cancelBtn.leadingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.leadingAnchor, constant: 110).isActive = true
         cancelBtn.trailingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.trailingAnchor, constant: -120).isActive = true
-        
-        
-        
-        
     }
 }
 
 extension AddDeleteTableViewPopUpViewController: UITextFieldDelegate {
-    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if textField == quantityTextField {
             

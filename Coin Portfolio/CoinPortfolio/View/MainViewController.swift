@@ -9,18 +9,13 @@ import UIKit
 
 class ViewController: UIViewController {
     
-
     @IBOutlet var loginLabel: UILabel!
     @IBOutlet var createBtn: UIButton!
     @IBOutlet var logitnBtn: UIButton!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
-    
-
     @IBOutlet var passwordLabel: UILabel!
     @IBOutlet var createLabel: UILabel!
-
-
     @IBOutlet var emailLabel: UILabel!
     
     let viewControllerViewModel = MainViewControllerViewModel()
@@ -29,6 +24,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadButtonsOptions()
+        
+        hideKeyboardSettings()
+       
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,7 +48,6 @@ class ViewController: UIViewController {
         passwordLabel.translatesAutoresizingMaskIntoConstraints = false
         passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor , constant: 30).isActive = true
         passwordLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50).isActive = true
-      
         
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor , constant: 5).isActive = true
@@ -69,9 +66,6 @@ class ViewController: UIViewController {
         createBtn.translatesAutoresizingMaskIntoConstraints = false
         createBtn.topAnchor.constraint(equalTo: logitnBtn.bottomAnchor).isActive = true
         createBtn.leadingAnchor.constraint(equalTo: createLabel.trailingAnchor, constant: 5).isActive = true
-        
-        
-        
     }
     
     @IBAction func loginTapped(_ sender: Any) {
@@ -101,5 +95,28 @@ class ViewController: UIViewController {
         logitnBtn.layer.borderColor = UIColor.yellow.cgColor
         logitnBtn.layer.cornerRadius = 32
     }
+    
+    func hideKeyboardSettings() {
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
+        let toolbar = UIToolbar()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                        target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done,
+                                         target: self, action: #selector(doneButtonTapped))
+        
+        toolbar.setItems([flexSpace, doneButton], animated: true)
+        toolbar.sizeToFit()
+        
+        emailTextField.inputAccessoryView = toolbar
+        passwordTextField.inputAccessoryView = toolbar
+    }
+    
+    @objc func doneButtonTapped() {
+        view.endEditing(true)
+    }
+    
 }
 

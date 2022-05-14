@@ -33,16 +33,19 @@ class CollectionViewPopup: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         quantityTextField.delegate = self
         priceTextField.delegate = self
         
-        coinNameLabel.text = coinName
+        coinNameLabel.text = "\(coinName!)/USDT"
         quantityTextField.text = coinQuantity
         priceTextField.text = coinPrice
+        
+        hideKeyboardSettings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        coinNameLabel.text = coinName
+        coinNameLabel.text = "\(coinName!)/USDT"
         quantityTextField.text = coinQuantity
         priceTextField.text = coinPrice
         priceLabel.textAlignment = .center
@@ -59,14 +62,41 @@ class CollectionViewPopup: UIViewController {
         dismiss(animated: true)
     }
     
+    func hideKeyboardSettings() {
+        priceTextField.keyboardType = UIKeyboardType.numbersAndPunctuation
+        
+        quantityTextField.keyboardType = UIKeyboardType.numbersAndPunctuation
+        quantityTextField.resignFirstResponder()
+        quantityTextField.becomeFirstResponder()
+        
+        
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
+        let toolbar = UIToolbar()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                        target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done,
+                                         target: self, action: #selector(doneButtonTapped))
+        
+        toolbar.setItems([flexSpace, doneButton], animated: true)
+        toolbar.sizeToFit()
+        
+        quantityTextField.inputAccessoryView = toolbar
+        priceTextField.inputAccessoryView = toolbar
+    }
+    
+    @objc func doneButtonTapped() {
+        view.endEditing(true)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         coinNameLabel.translatesAutoresizingMaskIntoConstraints = false
         coinNameLabel.topAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         coinNameLabel.centerXAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        
-      
         
         quantityLabel.translatesAutoresizingMaskIntoConstraints = false
         quantityLabel.topAnchor.constraint(equalTo: coinNameLabel.bottomAnchor, constant: 60).isActive = true
@@ -79,13 +109,12 @@ class CollectionViewPopup: UIViewController {
         
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.topAnchor.constraint(equalTo: coinNameLabel.bottomAnchor, constant: 60).isActive = true
-        priceLabel.leadingAnchor.constraint(equalTo: quantityLabel.safeAreaLayoutGuide.trailingAnchor, constant: 50).isActive = true
+        priceLabel.leadingAnchor.constraint(equalTo: quantityLabel.safeAreaLayoutGuide.trailingAnchor, constant: 70).isActive = true
         
         priceTextField.translatesAutoresizingMaskIntoConstraints = false
         priceTextField.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 10).isActive = true
-        priceTextField.leadingAnchor.constraint(equalTo: priceLabel.leadingAnchor).isActive = true
+        priceTextField.leadingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: -30).isActive = true
         priceTextField.trailingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.trailingAnchor, constant: -60).isActive = true
-        
         
         updateBtn.translatesAutoresizingMaskIntoConstraints = false
         updateBtn.topAnchor.constraint(equalTo: priceTextField.bottomAnchor, constant: 40).isActive = true
@@ -116,3 +145,5 @@ extension CollectionViewPopup: UITextFieldDelegate {
         }
     }
 }
+
+

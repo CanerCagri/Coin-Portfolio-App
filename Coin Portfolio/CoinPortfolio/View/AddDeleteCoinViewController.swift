@@ -21,7 +21,6 @@ class AddDeleteCoinViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loadConfig()
         
         Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(refreshData), userInfo: nil, repeats: true)
@@ -134,7 +133,6 @@ extension AddDeleteCoinViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension AddDeleteCoinViewController : UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        
         let searchBar = searchController.searchBar
         let searchText = searchBar.text!
         filterForSearch(searchText: searchText)

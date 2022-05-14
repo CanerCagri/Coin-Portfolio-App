@@ -9,35 +9,26 @@ import UIKit
 
 class SigninViewController: UIViewController {
     
-    
-   
     @IBOutlet var signupLabel: UILabel!
-    
- 
     @IBOutlet var popupView: UIView!
-   
     @IBOutlet var emailLabel: UILabel!
-    
     @IBOutlet var passwordLabel: UILabel!
-    
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
-  
-
     @IBOutlet var createBtn: UIButton!
     @IBOutlet var cancelButton: UIButton!
-
+    
     let signinViewModel = SignViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hideKeyboardSettings()
     }
     
-
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true)
     }
-    
     
     @IBAction func createAccTapped(_ sender: Any) {
         if passwordTextField.text != "" && emailTextField.text != ""  {
@@ -53,6 +44,29 @@ class SigninViewController: UIViewController {
         }
     }
     
+    func hideKeyboardSettings() {
+        
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
+        let toolbar = UIToolbar()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                        target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done,
+                                         target: self, action: #selector(doneButtonTapped))
+        
+        toolbar.setItems([flexSpace, doneButton], animated: true)
+        toolbar.sizeToFit()
+        
+        emailTextField.inputAccessoryView = toolbar
+        passwordTextField.inputAccessoryView = toolbar
+    }
+    
+    @objc func doneButtonTapped() {
+        view.endEditing(true)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -63,7 +77,7 @@ class SigninViewController: UIViewController {
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         emailLabel.topAnchor.constraint(equalTo: signupLabel.bottomAnchor, constant: 30).isActive = true
         emailLabel.leadingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-       
+        
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 5).isActive = true
         emailTextField.leadingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
