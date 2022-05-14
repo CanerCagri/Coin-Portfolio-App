@@ -168,11 +168,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         changeLabel.translatesAutoresizingMaskIntoConstraints = false
         changeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
-        changeLabel.leadingAnchor.constraint(equalTo: changeText.leadingAnchor).isActive = true
+        changeLabel.leadingAnchor.constraint(equalTo: portfolioValueLabel.trailingAnchor, constant:  35).isActive = true
         
         changeText.translatesAutoresizingMaskIntoConstraints = false
         changeText.topAnchor.constraint(equalTo: changeLabel.bottomAnchor, constant: 10).isActive = true
-        changeText.trailingAnchor.constraint(equalTo: currentTotalPriceLabel.leadingAnchor, constant: -85).isActive = true
+        changeText.leadingAnchor.constraint(equalTo: changeLabel.leadingAnchor).isActive = true
         
         currentPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         currentPriceLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
@@ -303,34 +303,42 @@ extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate
         cell?.coinNameLabel.text = currentItem.coinname
         cell?.coinQuantityText.text = String(currentItem.coinquantity)
         let createdPrice = currentItem.totalprice
-        let createdResult = createdPrice.components(separatedBy: "9999")
+        let createdResult = createdPrice.components(separatedBy: "9999 0000")
         cell?.createdPriceText.text = createdResult[0]
         
         //Bug fixed when current price texting. Below codes fixing that bug
-        for i in indexPath.row..<postListArray.count  {
-            let postName = postListArray[i].coinname
-            for j in 0..<postListArray.count {
-                let priceName = saveByName[j].symbol
-                let result = priceName.components(separatedBy: "USDT")
-                
-                if postName != result[0] {
-                    //do nothing!
-                } else {
-                    let price = String(saveByName[j].lastPrice)
-                    let priceresult = price.components(separatedBy: "0000")
-                    if priceresult[0].last != "." {
-                        cell?.currentPriceText.text = priceresult[0]
-                        return cell!
-                        
+        if indexPath.row < saveByName.count {
+            for i in indexPath.row..<postListArray.count  {
+                let postName = postListArray[i].coinname
+                for j in 0..<postListArray.count {
+                    let priceName = saveByName[j].symbol
+                    let result = priceName.components(separatedBy: "USDT")
+                    
+                    if postName != result[0] {
+                        //do nothing!
                     } else {
-                        let last = "\(priceresult[0])0"
-                        cell?.currentPriceText.text = last
-                        return cell!
+                        let price = String(saveByName[j].lastPrice)
+                        let priceresult = price.components(separatedBy: "0000")
+                        if priceresult[0].last != "." {
+                            cell?.currentPriceText.text = priceresult[0]
+                            return cell!
+                            
+                        } else {
+                            let last = "\(priceresult[0])0"
+                            cell?.currentPriceText.text = last
+                            return cell!
+                        }
                     }
                 }
             }
+        } else {
+            cell?.currentPriceText.text = "ERROR"
+            return cell!
         }
+        
         return cell!
+       
+       
     }
 }
 

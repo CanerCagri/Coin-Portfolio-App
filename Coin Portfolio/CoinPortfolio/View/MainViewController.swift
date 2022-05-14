@@ -9,15 +9,20 @@ import UIKit
 
 class ViewController: UIViewController {
     
+
     @IBOutlet var loginLabel: UILabel!
     @IBOutlet var createBtn: UIButton!
     @IBOutlet var logitnBtn: UIButton!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     
-    @IBOutlet var createLabel: UILabel!
-    @IBOutlet var emailLabel: UILabel!
+
     @IBOutlet var passwordLabel: UILabel!
+    @IBOutlet var createLabel: UILabel!
+
+
+    @IBOutlet var emailLabel: UILabel!
+    
     let viewControllerViewModel = MainViewControllerViewModel()
     let mainVcConstants = MainVC()
     

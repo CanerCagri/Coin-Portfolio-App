@@ -69,7 +69,7 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
     
     var currentPriceText : UILabel = {
         var coinName = UILabel()
-        coinName.text = "CurrentPriceText"
+        coinName.text = "ERROR"
         coinName.font = UIFont.boldSystemFont(ofSize: 12)
         coinName.textColor = .red
         coinName.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
@@ -100,7 +100,9 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        coinNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        let low = coinNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10)
+        low.priority = .defaultLow
+        low.isActive = true
         coinNameLabel.bottomAnchor.constraint(equalTo: coinQuantityLabel.topAnchor, constant: -30).isActive = true
         coinNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
@@ -119,7 +121,8 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
         currentPriceLabel.bottomAnchor.constraint(equalTo: currentPriceText.topAnchor, constant: -5).isActive = true
         currentPriceLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
-        currentPriceText.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -25).isActive = true
+        currentPriceText.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15).isActive = true
+
         currentPriceText.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
     }
 }

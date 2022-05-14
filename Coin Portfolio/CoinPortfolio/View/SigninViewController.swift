@@ -10,15 +10,23 @@ import UIKit
 class SigninViewController: UIViewController {
     
     
+   
     @IBOutlet var signupLabel: UILabel!
     
+ 
+    @IBOutlet var popupView: UIView!
+   
     @IBOutlet var emailLabel: UILabel!
+    
     @IBOutlet var passwordLabel: UILabel!
+    
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
-    @IBOutlet var popupView: UIView!
-    @IBOutlet var cancelButton: UIButton!
+  
+
     @IBOutlet var createBtn: UIButton!
+    @IBOutlet var cancelButton: UIButton!
+
     let signinViewModel = SignViewModel()
     
     override func viewDidLoad() {
@@ -26,10 +34,10 @@ class SigninViewController: UIViewController {
     }
     
 
-    @IBAction func cancelBtnTappd(_ sender: Any) {
+    @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true)
-          
     }
+    
     
     @IBAction func createAccTapped(_ sender: Any) {
         if passwordTextField.text != "" && emailTextField.text != ""  {
@@ -47,11 +55,6 @@ class SigninViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-    //        popupView.translatesAutoresizingMaskIntoConstraints = false
-    //        popupView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
-    //        popupView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-    //        popupView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         
         signupLabel.translatesAutoresizingMaskIntoConstraints = false
         signupLabel.topAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
@@ -84,11 +87,6 @@ class SigninViewController: UIViewController {
         cancelButton.topAnchor.constraint(equalTo: createBtn.bottomAnchor, constant: 45).isActive = true
         cancelButton.leadingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.leadingAnchor, constant: 60).isActive = true
         cancelButton.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -60).isActive = true
-        
-
-        
-        
-        
     }
     
     func showError() {
