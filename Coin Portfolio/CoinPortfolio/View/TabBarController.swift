@@ -26,7 +26,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         layout.scrollDirection = .vertical
         let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
         return collection
-       
+        
     }()
     
     let tabBarControllerViewModel = TabBarControllerViewModel()
@@ -103,13 +103,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             
             tabBarControllerViewModel.output = self
             tabBarControllerViewModel.fetchPostItems()
-
+            
             logoutButton.isHidden = false
             welcomeLabel.isHidden = false
             currentUserLabel.isHidden = false
             priceLabel.isHidden = false
             totalPriceLabel.isHidden = false
-
+            
         } else if selectedIndex == 1 {
             logoutButton.isHidden = true
             welcomeLabel.isHidden = true
@@ -164,15 +164,15 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         portfolioValue.translatesAutoresizingMaskIntoConstraints = false
         portfolioValue.topAnchor.constraint(equalTo: portfolioValueLabel.bottomAnchor, constant: 10).isActive = true
-        portfolioValue.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25).isActive = true
+        portfolioValue.leadingAnchor.constraint(equalTo: portfolioValueLabel.leadingAnchor, constant: -10).isActive = true
         
         changeLabel.translatesAutoresizingMaskIntoConstraints = false
         changeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
-        changeLabel.leadingAnchor.constraint(equalTo: portfolioValueLabel.trailingAnchor, constant:  35).isActive = true
+        changeLabel.leadingAnchor.constraint(equalTo: portfolioValueLabel.trailingAnchor, constant:  40).isActive = true
         
         changeText.translatesAutoresizingMaskIntoConstraints = false
         changeText.topAnchor.constraint(equalTo: changeLabel.bottomAnchor, constant: 10).isActive = true
-        changeText.leadingAnchor.constraint(equalTo: changeLabel.leadingAnchor).isActive = true
+        changeText.leadingAnchor.constraint(equalTo: changeLabel.leadingAnchor, constant: 10).isActive = true
         
         currentPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         currentPriceLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
@@ -180,7 +180,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         currentTotalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         currentTotalPriceLabel.topAnchor.constraint(equalTo: currentPriceLabel.bottomAnchor, constant: 10).isActive = true
-        currentTotalPriceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        currentTotalPriceLabel.leadingAnchor.constraint(equalTo: currentPriceLabel.leadingAnchor, constant: 10).isActive = true
         
         portfolioCollectionView.translatesAutoresizingMaskIntoConstraints = false
         portfolioCollectionView.topAnchor.constraint(equalTo: portfolioValue.bottomAnchor, constant: 25).isActive = true
@@ -292,7 +292,7 @@ extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (view.frame.size.height/7)-4, height: (view.frame.size.height/3.5))
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return postListArray.count
     }
@@ -307,32 +307,28 @@ extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate
         cell?.createdPriceText.text = createdResult[0]
         
         //Bug fixed when current price texting. Below codes fixing that bug
-            for i in indexPath.row..<postListArray.count  {
-                let postName = postListArray[i].coinname
-                for j in 0..<postListArray.count {
-                    if j >= saveByName.count {
-                        cell?.currentPriceText.text = "ERROR"
-                        return cell!
-                    }
-                    let priceName = saveByName[j].symbol
-                    let result = priceName.components(separatedBy: "USDT")
-                    if postName != result[0] {
-                        //do nothing!
-                    } else {
-                        let price = String(saveByName[j].lastPrice)
-                        let priceresult = price.components(separatedBy: "0000")
-                        if priceresult[0].last != "." {
-                            cell?.currentPriceText.text = "$ \(priceresult[0])"
-                            return cell!
-                            
-                        } else {
-                            let last = "$ \(priceresult[0])0"
-                            cell?.currentPriceText.text = last
-                            return cell!
-                        }
-                    }
+        for i in indexPath.row..<postListArray.count  {
+            let postName = postListArray[i].coinname
+            for j in 0..<postListArray.count {
+                if j >= saveByName.count {
+                    cell?.currentPriceText.text = "ERROR"
+                    return cell!
+                }
+                let priceName = saveByName[j].symbol
+                let result = priceName.components(separatedBy: "USDT")
+                if postName != result[0] {
+                    //do nothing!
+                } else {
+                    let price = String(saveByName[j].lastPrice)
+                    let quantityResult = currentItem.coinquantity
+                    let priceResult2 = Double(price)! * quantityResult
+                    let priceLastResult = (priceResult2 * 10000).rounded() / 10000
+                    
+                    cell?.currentPriceText.text = "$ \(priceLastResult)"
+                    return cell!
                 }
             }
+        }
         return cell!
     }
 }
@@ -370,7 +366,7 @@ extension TabBarController: TabBarViewModelOutput {
             changeText.isHidden = false
             currentPriceLabel.isHidden = false
             currentTotalPriceLabel.isHidden = false
-         
+            
             let value1Input = String(format: "%.2f", ceil(calculatedPrice * 100) / 100)
             guard let value1 = Double(value1Input) else {return}
             guard let value2 = Double(result) else { return}
@@ -394,6 +390,9 @@ extension TabBarController: TabBarViewModelOutput {
                         self.portfolioCollectionView.reloadData()
                     }
                     portfolioCollectionView.isHidden = false
+                } else {
+                    changeText.textColor = .black
+                    changeText.text = "0.0"
                 }
             }
         }

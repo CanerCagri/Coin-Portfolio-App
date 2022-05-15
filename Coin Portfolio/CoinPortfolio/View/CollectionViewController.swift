@@ -98,10 +98,16 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
             let coinPrice = Double(collectionViewM.postList[indexPath.row].totalprice)
             let result = calculatedBalance - coinPrice!
             let calculate = String(format: "%.2f", ceil(result * 100) / 100)
-            totalBalance.text = "$ \(calculate)"
             collectionViewM.postDeleteDocument(selectedCoin: collectionViewM.postList[indexPath.row].id)
             collectionViewM.postList.remove(at: indexPath.row)
             collectionTableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+            
+            if collectionViewM.postList.count != 0 {
+                totalBalance.text = "$ \(calculate)"
+
+            } else {
+                totalBalance.text = "$ 0.0"
+            }
         }
     }
 }

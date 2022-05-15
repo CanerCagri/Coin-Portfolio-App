@@ -132,9 +132,8 @@ extension AddDeleteTableViewPopUpViewController: UITextFieldDelegate {
             }
             if selectedCoinPrice > 1.0 {
                 let total = selectedCoinPrice * Double(coinPrice!)!
-                let totalValue = String(total)
-                let totalResult = totalValue.components(separatedBy: "9999")
-                totalPrice.text = totalResult[0]
+                let totalValue = (total * 10000).rounded() / 10000
+                totalPrice.text = String(totalValue)
             } else if selectedCoinPrice < 1.0 {
                 let total = selectedCoinPrice / Double(coinPrice!)!
                 totalPrice.text = String(total)
