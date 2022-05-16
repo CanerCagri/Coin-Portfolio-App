@@ -108,6 +108,7 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
         addBtn.topAnchor.constraint(equalTo: totalPrice.bottomAnchor, constant: 40).isActive = true
         addBtn.leadingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.leadingAnchor, constant: 90).isActive = true
         addBtn.trailingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.trailingAnchor, constant: -100).isActive = true
+        addBtn.bottomAnchor.constraint(equalTo: popupView.centerYAnchor, constant: 30).isActive = true
         
         cancelBtn.translatesAutoresizingMaskIntoConstraints = false
         cancelBtn.topAnchor.constraint(equalTo: addBtn.bottomAnchor, constant: 50).isActive = true

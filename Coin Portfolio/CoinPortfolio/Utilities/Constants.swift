@@ -18,7 +18,7 @@ struct AddDeleteVC {
     let symbolSuffixUsdt = "USDT"
     let firstlastPriceFilter = "0.00000000"
     let secondlastPriceFilter = "0.0"
-    let lastPriceSeperator = "0000"
+    let lastPriceSeperator = "000"
     let popUpIdentifier = "toPopup"
 }
 

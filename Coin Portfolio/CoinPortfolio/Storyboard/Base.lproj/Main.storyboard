@@ -185,8 +185,7 @@
                                         <color key="backgroundColor" name="AccentColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="ADD">
-                                            <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="14"/>
-                                            <color key="baseForegroundColor" systemColor="systemBlueColor"/>
+                                            <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="addBtnTapped:" destination="JGt-Dy-MKp" eventType="touchUpInside" id="X2G-GB-5AG"/>

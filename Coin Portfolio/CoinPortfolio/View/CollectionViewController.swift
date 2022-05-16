@@ -37,12 +37,14 @@ class CollectionViewController: UIViewController {
         calculatedBalance = 0
         collectionViewM.output = self
         collectionViewM.fetchAllItems()
+        
+        
     }
     
     func tableViewHeader() {
         let headerView: UIView = UIView.init(frame: CGRect(x: 1, y: 50, width: 276, height: 30))
         headerView.backgroundColor = .orange
-        let labelView: UILabel = UILabel.init(frame: CGRect(x: 4, y: 5, width: 276, height: 24))
+        let labelView: UILabel = UILabel.init(frame: CGRect(x: 50, y: 5, width: 276, height: 24))
         labelView.text = collectionVc.title
         labelView.textAlignment = .center
         headerView.addSubview(labelView)
@@ -59,9 +61,16 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = collectionTableView.dequeueReusableCell(withIdentifier: collectionVc.cellIdentifier, for: indexPath) as! CollectionTableViewCell
         cell.configure(with: collectionViewM.postList, indexPath: indexPath)
-        calculatedBalance += Double(collectionViewM.postList[indexPath.row].totalprice)!
-        let result = String(format: "%.2f", ceil(calculatedBalance * 100) / 100)
-        totalBalance.text = "$ \(String(result))"
+       
+        
+        calculatedBalance = 0
+        if indexPath.row == collectionViewM.postList.count - 1 {
+            for index in 0..<collectionViewM.postList.count {
+                calculatedBalance += Double(collectionViewM.postList[index].totalprice)!
+                let result = String(format: "%.2f", ceil(calculatedBalance * 100) / 100)
+                totalBalance.text = "$ \(String(result))"
+            }
+        }
         
         return cell
     }
@@ -71,7 +80,7 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
         coinName = collectionViewM.postList[indexPath.row].coinname
         coinQuantity = String(collectionViewM.postList[indexPath.row].coinquantity)
         let apiPrice = collectionViewM.postList[indexPath.row].totalprice
-        let apiPriceResult = apiPrice.components(separatedBy: "0000")
+        let apiPriceResult = apiPrice.components(separatedBy: "000")
         if apiPriceResult[0].last != "." {  // Price checking , if price end with . after result add 0
             coinPrice = apiPriceResult[0]
             
@@ -85,7 +94,6 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toCollectionPopup" {
             let destination = segue.destination as! CollectionViewPopup
-            destination.delegate = self
             destination.coinID = coinId
             destination.coinName = coinName
             destination.coinPrice = coinPrice
@@ -103,9 +111,11 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
             collectionTableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
             
             if collectionViewM.postList.count != 0 {
+                calculatedBalance = Double(calculate)!
                 totalBalance.text = "$ \(calculate)"
 
             } else {
+                calculatedBalance = 0
                 totalBalance.text = "$ 0.0"
             }
         }
@@ -119,8 +129,4 @@ extension CollectionViewController: CollectionViewModelOutput {
     }
 }
 
-extension CollectionViewController : CollectionViewPopupProtocol {
-    func settingsUpdated() {
-        tabBarController?.selectedIndex = 1
-    }
-}
+

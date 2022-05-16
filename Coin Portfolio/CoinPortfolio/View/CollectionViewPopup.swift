@@ -120,6 +120,7 @@ class CollectionViewPopup: UIViewController {
         updateBtn.topAnchor.constraint(equalTo: priceTextField.bottomAnchor, constant: 40).isActive = true
         updateBtn.leadingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.leadingAnchor, constant: 90).isActive = true
         updateBtn.trailingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.trailingAnchor, constant: -100).isActive = true
+        updateBtn.bottomAnchor.constraint(equalTo: popupView.centerYAnchor, constant: 30).isActive = true
         
         cancelBtn.translatesAutoresizingMaskIntoConstraints = false
         cancelBtn.topAnchor.constraint(equalTo: updateBtn.bottomAnchor, constant: 50).isActive = true

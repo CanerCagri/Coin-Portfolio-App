@@ -12,7 +12,7 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
     var coinNameLabel : UILabel = {
         var coinName = UILabel()
         coinName.text = "CoinName"
-        coinName.font = UIFont.boldSystemFont(ofSize: 15)
+        coinName.font = UIFont.boldSystemFont(ofSize: 18)
         coinName.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
         coinName.translatesAutoresizingMaskIntoConstraints = false
         return coinName
@@ -100,10 +100,8 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let low = coinNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10)
-        low.priority = .defaultLow
-        low.isActive = true
-        coinNameLabel.bottomAnchor.constraint(equalTo: coinQuantityLabel.topAnchor, constant: -30).isActive = true
+        coinNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        coinNameLabel.bottomAnchor.constraint(equalTo: coinQuantityLabel.topAnchor, constant: -20).isActive = true
         coinNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
         coinQuantityLabel.bottomAnchor.constraint(equalTo: coinQuantityText.topAnchor, constant: -5).isActive = true
