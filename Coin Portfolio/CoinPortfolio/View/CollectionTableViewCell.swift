@@ -17,15 +17,9 @@ class CollectionTableViewCell: UITableViewCell {
     
     func configure(with postModel: [PostModel], indexPath: IndexPath) {
         if postModel.count != 0 {
-            let apiPrice = postModel[indexPath.row].totalprice
-            let result = apiPrice.components(separatedBy: priceSeperator.lastPriceSeperator)
-            if result[0].last != "." {  // Price checking , if price end with . after result add 0
-                priceLabel.text = "$ \(result[0])"
-                
-            } else {
-                let last = "$ \(result[0])0"
-                priceLabel.text = last
-            }
+            let apiPrice = String(postModel[indexPath.row].totalprice)
+            
+            priceLabel.text = apiPrice
             coinNameLabel.text = postModel[indexPath.row].coinname
             quantityLabel.text = String(postModel[indexPath.row].coinquantity)
         } else {

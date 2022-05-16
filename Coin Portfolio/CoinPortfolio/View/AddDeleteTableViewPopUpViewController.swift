@@ -9,6 +9,8 @@ import UIKit
 
 class AddDeleteTableViewPopUpViewController: UIViewController {
     
+  
+    @IBOutlet var mainView: UIView!
     @IBOutlet var cancelBtn: UIButton!
     @IBOutlet var addBtn: UIButton!
     @IBOutlet var coinNameLabel: UILabel!
@@ -82,6 +84,12 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        popupView.translatesAutoresizingMaskIntoConstraints = false
+        popupView.topAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
+        popupView.leadingAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        popupView.trailingAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        popupView.bottomAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
         
         coinNameLabel.translatesAutoresizingMaskIntoConstraints = false
         coinNameLabel.topAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true

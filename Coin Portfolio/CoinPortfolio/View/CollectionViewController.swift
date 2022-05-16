@@ -23,6 +23,8 @@ class CollectionViewController: UIViewController {
     let collectionViewM = CollectionViewModel()
     let collectionVc = CollectionVC()
     
+    let notificationListener = "notification"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +40,13 @@ class CollectionViewController: UIViewController {
         collectionViewM.output = self
         collectionViewM.fetchAllItems()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(change), name: NSNotification.Name(notificationListener), object: nil)
         
+        
+    }
+    
+    @objc func change() {
+        self.tabBarController?.selectedIndex = 1
     }
     
     func tableViewHeader() {
@@ -67,7 +75,8 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == collectionViewM.postList.count - 1 {
             for index in 0..<collectionViewM.postList.count {
                 calculatedBalance += Double(collectionViewM.postList[index].totalprice)!
-                let result = String(format: "%.2f", ceil(calculatedBalance * 100) / 100)
+//                let result = String(format: "%.2f", ceil(calculatedBalance * 100) / 100)
+                let result = String(calculatedBalance)
                 totalBalance.text = "$ \(String(result))"
             }
         }

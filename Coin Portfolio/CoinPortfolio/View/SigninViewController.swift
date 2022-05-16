@@ -9,6 +9,7 @@ import UIKit
 
 class SigninViewController: UIViewController {
     
+    @IBOutlet var mainView: UIView!
     @IBOutlet var signupLabel: UILabel!
     @IBOutlet var popupView: UIView!
     @IBOutlet var emailLabel: UILabel!
@@ -70,6 +71,12 @@ class SigninViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        popupView.translatesAutoresizingMaskIntoConstraints = false
+        popupView.topAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        popupView.leadingAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        popupView.trailingAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        popupView.bottomAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.bottomAnchor, constant: -60).isActive = true
+        
         signupLabel.translatesAutoresizingMaskIntoConstraints = false
         signupLabel.topAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         signupLabel.centerXAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -96,6 +103,7 @@ class SigninViewController: UIViewController {
         createBtn.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 35).isActive = true
         createBtn.leadingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.leadingAnchor, constant: 40).isActive = true
         createBtn.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -30).isActive = true
+        createBtn.bottomAnchor.constraint(equalTo: popupView.centerYAnchor, constant: 30).isActive = true
         
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.topAnchor.constraint(equalTo: createBtn.bottomAnchor, constant: 45).isActive = true

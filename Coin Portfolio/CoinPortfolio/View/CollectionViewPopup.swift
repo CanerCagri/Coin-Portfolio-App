@@ -7,12 +7,11 @@
 
 import UIKit
 
-protocol CollectionViewPopupProtocol: AnyObject {
-    func settingsUpdated()
-}
+
 
 class CollectionViewPopup: UIViewController {
     
+    @IBOutlet var mainView: UIView!
     @IBOutlet var coinNameLabel: UILabel!
     @IBOutlet var quantityLabel: UILabel!
     @IBOutlet var quantityTextField: UITextField!
@@ -28,7 +27,6 @@ class CollectionViewPopup: UIViewController {
     var coinID : String?
     
     let collectionPopupViewModel = CollectionPopupViewModel()
-    weak var delegate: CollectionViewPopupProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +50,13 @@ class CollectionViewPopup: UIViewController {
     }
     
     @IBAction func saveBtnTapped(_ sender: Any) {
+        
         let quantity = Double(quantityTextField.text!)!
         collectionPopupViewModel.postUpdateDocument(selectedCoinId: coinID!, selectedCoin: coinName!, selectedCoinQuantity: quantity, totalPrice: priceTextField.text!)
-        delegate?.settingsUpdated()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: CollectionViewController().notificationListener) ?? NSNotification.Name("notification"), object: nil)
         dismiss(animated: true)
+        
+        
     }
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
@@ -64,11 +65,11 @@ class CollectionViewPopup: UIViewController {
     
     func hideKeyboardSettings() {
         priceTextField.keyboardType = UIKeyboardType.numbersAndPunctuation
-        
+
         quantityTextField.keyboardType = UIKeyboardType.numbersAndPunctuation
         quantityTextField.resignFirstResponder()
         quantityTextField.becomeFirstResponder()
-        
+
         
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
@@ -93,6 +94,12 @@ class CollectionViewPopup: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        popupView.translatesAutoresizingMaskIntoConstraints = false
+        popupView.topAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        popupView.leadingAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        popupView.trailingAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        popupView.bottomAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
         
         coinNameLabel.translatesAutoresizingMaskIntoConstraints = false
         coinNameLabel.topAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true

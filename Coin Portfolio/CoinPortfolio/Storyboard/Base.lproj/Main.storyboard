@@ -250,6 +250,7 @@
                         <outlet property="cancelBtn" destination="syg-tf-7tK" id="keC-mS-esy"/>
                         <outlet property="coinNameLabel" destination="Ixc-so-Umo" id="qm2-Pd-UW2"/>
                         <outlet property="coinPriceLabel" destination="asc-ch-u7y" id="KjK-bA-Ujj"/>
+                        <outlet property="mainView" destination="2lI-hJ-j7m" id="yDK-k7-xez"/>
                         <outlet property="popupView" destination="5NX-eR-n3L" id="9sA-mb-VWz"/>
                         <outlet property="quantityLabel" destination="Slu-2e-TKT" id="d7s-Gq-VIm"/>
                         <outlet property="quantityTextField" destination="0Yt-g2-6l6" id="bqd-ci-tbS"/>
@@ -454,6 +455,7 @@
                     <connections>
                         <outlet property="cancelBtn" destination="HMV-FI-Kjv" id="sxZ-bY-YAJ"/>
                         <outlet property="coinNameLabel" destination="jmF-Id-b9w" id="whI-Pk-6lC"/>
+                        <outlet property="mainView" destination="xub-lE-kpa" id="VuU-q1-JQl"/>
                         <outlet property="popupView" destination="lPu-dx-fVe" id="i9r-vd-tEB"/>
                         <outlet property="priceLabel" destination="J3K-3N-281" id="j3d-x7-6VF"/>
                         <outlet property="priceTextField" destination="hid-du-76J" id="2CT-dY-61J"/>
@@ -547,7 +549,7 @@
                                             <action selector="cancelButton:" destination="VLX-Vj-haf" eventType="touchUpInside" id="duf-CP-7XC"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3I3-8D-5E2">
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Min. 6 Character" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3I3-8D-5E2">
                                         <rect key="frame" x="16" y="224" width="295" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -587,6 +589,7 @@
                         <outlet property="createBtn" destination="gnA-qP-ggs" id="7Gh-Uv-Vtx"/>
                         <outlet property="emailLabel" destination="g70-w2-l2R" id="gHH-A4-Q7m"/>
                         <outlet property="emailTextField" destination="5y9-Wy-e0x" id="GMI-rY-rgg"/>
+                        <outlet property="mainView" destination="6K4-bA-EAe" id="mDj-Jc-A93"/>
                         <outlet property="passwordLabel" destination="GDZ-vb-TUw" id="tPb-9T-Ku5"/>
                         <outlet property="passwordTextField" destination="3I3-8D-5E2" id="BJv-Iu-6iF"/>
                         <outlet property="popupView" destination="zg7-mo-37i" id="10N-nL-JeE"/>
