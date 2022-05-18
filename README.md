@@ -18,7 +18,7 @@ Powered by Swift - UIKit and MVVM Clean Architecture.
 * [Firebase Authentication](https://firebase.google.com/docs/auth) - For Authentication
 * [Firestore](https://firebase.google.com/docs/firestore) - Database
 * [Alamofire](https://github.com/Alamofire/Alamofire) - Networking
-* [SnapKit](https://github.com/SnapKit/SnapKit) - 
+* [SnapKit](https://github.com/SnapKit/SnapKit) 
 * [Binance API](https://api.binance.com/api/v3/ticker/24hr) 
 * [Collection View](https://developer.apple.com/documentation/uikit/uicollectionview) 
 * [Table View](https://developer.apple.com/documentation/uikit/uitableview) 
