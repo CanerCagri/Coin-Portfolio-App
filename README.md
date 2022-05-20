@@ -4,7 +4,7 @@ I created this app because for example , i bought in 2021 Ripple(XRP) coin. When
 
 Coin Portfolio is when we bought coins on bitcoin websites/apps it helps us to track our coins , Coin Portfolio is helping to know info about our all coins (like entry price or info about our coins) and current prices with changes.
 
-Powered by Swift - UIKit and MVVM Clean Architecture.
+Powered by Swift - UIKit , 60% Storyboard - 40% Programmatic and  MVVM Clean Architecture.
 
 # Previews
 
