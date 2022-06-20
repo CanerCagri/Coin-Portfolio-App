@@ -25,20 +25,12 @@ class CollectionViewPopup: UIViewController {
     var coinPrice : String?
     var coinQuantity : String?
     var coinID : String?
-    
     let collectionPopupViewModel = CollectionPopupViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        quantityTextField.delegate = self
-        priceTextField.delegate = self
-        
-        coinNameLabel.text = "\(coinName!)/USDT"
-        quantityTextField.text = coinQuantity
-        priceTextField.text = coinPrice
-        
+       
+        load()
         hideKeyboardSettings()
     }
     
@@ -56,7 +48,6 @@ class CollectionViewPopup: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: CollectionViewController().notificationListener) ?? NSNotification.Name("notification"), object: nil)
         dismiss(animated: true)
         
-        
     }
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
@@ -70,7 +61,6 @@ class CollectionViewPopup: UIViewController {
         quantityTextField.resignFirstResponder()
         quantityTextField.becomeFirstResponder()
 
-        
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
@@ -90,6 +80,14 @@ class CollectionViewPopup: UIViewController {
     
     @objc func doneButtonTapped() {
         view.endEditing(true)
+    }
+    
+    func load() {
+        quantityTextField.delegate = self
+        priceTextField.delegate = self
+        coinNameLabel.text = "\(coinName!)/USDT"
+        quantityTextField.text = coinQuantity
+        priceTextField.text = coinPrice
     }
     
     override func viewDidLayoutSubviews() {

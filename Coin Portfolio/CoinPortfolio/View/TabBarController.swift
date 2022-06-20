@@ -10,25 +10,6 @@ import Firebase
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
-    var logoutButton = UIButton()
-    var welcomeLabel = UILabel()
-    var currentUserLabel = UILabel()
-    var priceLabel = UILabel()
-    var totalPriceLabel = UILabel()
-    var portfolioValueLabel = UILabel()
-    var portfolioValue = UILabel()
-    var changeLabel = UILabel()
-    var changeText = UILabel()
-    var currentPriceLabel = UILabel()
-    var currentTotalPriceLabel = UILabel()
-    var portfolioCollectionView : UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
-        return collection
-        
-    }()
-    
     let tabBarControllerViewModel = TabBarControllerViewModel()
     let tabBarC = TabBarC()
     var coinListArray = [Double] ()
@@ -37,19 +18,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var lastValue = [Double] ()
     var calculatedPrice = 0.0
     var totalPriceHolder = [Double] ()
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         self.delegate = self
         portfolioCollectionView.dataSource = self
         portfolioCollectionView.delegate = self
      
-        
         createInterface()
         tabBarControllerViewModel.output = self
         tabBarControllerViewModel.fetchPostItems()
@@ -79,12 +54,36 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         loadChange()
     }
     
-    func clearAll() {
-        coinListArray.removeAll(keepingCapacity: false)
-        postListArray.removeAll(keepingCapacity: false)
-        lastValue.removeAll(keepingCapacity: false)
-        totalPriceHolder.removeAll(keepingCapacity: false)
-        saveByName.removeAll(keepingCapacity: false)
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if selectedIndex == 0 {
+            clearAll()
+            tabBarSelectedIndex0()
+            
+        } else if selectedIndex == 1 {
+            tabBarSelectedIndex1()
+            
+        }  else if selectedIndex == 2 {
+            tabBarSelectedIndex2()
+        }
+    }
+    
+    func tabBarSelectedIndex0() {
+        tabBarControllerViewModel.output = self
+        tabBarControllerViewModel.fetchPostItems()
+        
+        logoutButton.isHidden = false
+        welcomeLabel.isHidden = false
+        currentUserLabel.isHidden = false
+        priceLabel.isHidden = false
+        totalPriceLabel.isHidden = false
+    }
+    
+    func tabBarSelectedIndex1() {
+        logoutButton.isHidden = true
+        welcomeLabel.isHidden = true
+        currentUserLabel.isHidden = true
+        priceLabel.isHidden = true
+        totalPriceLabel.isHidden = true
         portfolioValueLabel.isHidden = true
         portfolioValue.isHidden = true
         changeLabel.isHidden = true
@@ -92,53 +91,21 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         currentPriceLabel.isHidden = true
         currentTotalPriceLabel.isHidden = true
         portfolioCollectionView.isHidden = true
-        totalPriceLabel.text = "0.0"
-        calculatedPrice = 0
-        portfolioValue.text = ""
-        currentTotalPriceLabel.text = ""
-        changeText.text = ""
     }
     
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if selectedIndex == 0 {
-            clearAll()
-            
-            tabBarControllerViewModel.output = self
-            tabBarControllerViewModel.fetchPostItems()
-            
-            logoutButton.isHidden = false
-            welcomeLabel.isHidden = false
-            currentUserLabel.isHidden = false
-            priceLabel.isHidden = false
-            totalPriceLabel.isHidden = false
-            
-        } else if selectedIndex == 1 {
-            logoutButton.isHidden = true
-            welcomeLabel.isHidden = true
-            currentUserLabel.isHidden = true
-            priceLabel.isHidden = true
-            totalPriceLabel.isHidden = true
-            portfolioValueLabel.isHidden = true
-            portfolioValue.isHidden = true
-            changeLabel.isHidden = true
-            changeText.isHidden = true
-            currentPriceLabel.isHidden = true
-            currentTotalPriceLabel.isHidden = true
-            portfolioCollectionView.isHidden = true
-        }  else if selectedIndex == 2 {
-            logoutButton.isHidden = true
-            welcomeLabel.isHidden = true
-            currentUserLabel.isHidden = true
-            priceLabel.isHidden = true
-            totalPriceLabel.isHidden = true
-            portfolioValueLabel.isHidden = true
-            portfolioValue.isHidden = true
-            changeLabel.isHidden = true
-            changeText.isHidden = true
-            currentPriceLabel.isHidden = true
-            currentTotalPriceLabel.isHidden = true
-            portfolioCollectionView.isHidden = true
-        }
+    func tabBarSelectedIndex2() {
+        logoutButton.isHidden = true
+        welcomeLabel.isHidden = true
+        currentUserLabel.isHidden = true
+        priceLabel.isHidden = true
+        totalPriceLabel.isHidden = true
+        portfolioValueLabel.isHidden = true
+        portfolioValue.isHidden = true
+        changeLabel.isHidden = true
+        changeText.isHidden = true
+        currentPriceLabel.isHidden = true
+        currentTotalPriceLabel.isHidden = true
+        portfolioCollectionView.isHidden = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -190,92 +157,23 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         portfolioCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         portfolioCollectionView.bottomAnchor.constraint(equalTo: logoutButton.topAnchor, constant: -10).isActive = true
         
-        
-       
         logoutButton.frame = CGRect.init(x: self.tabBar.center.x - 32, y: self.view.bounds.height - 150, width: 64, height: 64)
-         
-        
         logoutButton.layer.cornerRadius = 32
     }
     
     func createInterface() {
-        welcomeLabel = UILabel()
-        welcomeLabel.text = "Welcome"
-        welcomeLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        welcomeLabel.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
+        
         self.view.addSubview(welcomeLabel)
-        
-        let currentUser = Auth.auth().currentUser!.email
-        let user = currentUser!.components(separatedBy: "@")
-        let userCapatitalized = user[0].capitalized
-        currentUserLabel = UILabel()
-        currentUserLabel.text = "\(userCapatitalized)!"
-        currentUserLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        currentUserLabel.textColor = UIColor.red
-        currentUserLabel.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
         self.view.addSubview(currentUserLabel)
-        
-        priceLabel = UILabel()
-        priceLabel.text = "My Portfolio Price:"
-        priceLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        priceLabel.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
         self.view.addSubview(priceLabel)
-        
-        totalPriceLabel = UILabel()
-        totalPriceLabel.text = "$ 0.0"
-        totalPriceLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        totalPriceLabel.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
         self.view.addSubview(totalPriceLabel)
-        
-        portfolioValueLabel = UILabel()
-        portfolioValueLabel.text = "My Portfolio"
-        portfolioValueLabel.textColor = .darkGray
-        portfolioValueLabel.textAlignment = .left
-        portfolioValueLabel.font = UIFont.systemFont(ofSize: 15)
-        portfolioValueLabel.frame = CGRect(x: 0, y: 0, width: 80, height: 50)
-        portfolioValueLabel.isHidden = true
         self.view.addSubview(portfolioValueLabel)
-        
-        portfolioValue = UILabel()
-        portfolioValue.text = ""
-        portfolioValue.textAlignment = .left
-        portfolioValue.font = UIFont.boldSystemFont(ofSize: 20)
-        portfolioValue.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        portfolioValue.isHidden = true
         self.view.addSubview(portfolioValue)
-        
-        changeLabel = UILabel()
-        changeLabel.text = "Change"
-        changeLabel.textAlignment = .center
-        changeLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        changeLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        changeLabel.isHidden = true
         self.view.addSubview(changeLabel)
-        
-        changeText = UILabel()
-        changeText.text = ""
-        changeText.font = UIFont.boldSystemFont(ofSize: 20)
-        changeText.textAlignment = .center
-        changeText.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        changeText.isHidden = true
         self.view.addSubview(changeText)
-        
-        currentPriceLabel = UILabel()
-        currentPriceLabel.text = "Currently Total Price"
-        currentPriceLabel.textColor = .darkGray
-        currentPriceLabel.font = UIFont.systemFont(ofSize: 13)
-        currentPriceLabel.frame = CGRect(x: 0, y: 0, width: 80, height: 50)
-        currentPriceLabel.isHidden = true
         self.view.addSubview(currentPriceLabel)
-        
-        currentTotalPriceLabel = UILabel()
-        currentTotalPriceLabel.text = ""
-        currentTotalPriceLabel.textAlignment = .right
-        currentTotalPriceLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        currentTotalPriceLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        currentTotalPriceLabel.isHidden = true
         self.view.addSubview(currentTotalPriceLabel)
-        
+       
         portfolioCollectionView.register(PortfolioCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         self.view.addSubview(portfolioCollectionView)
         
@@ -291,8 +189,136 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         logoutButton.tag = 100
         self.view.addSubview(logoutButton)
     }
+    
+    func clearAll() {
+        coinListArray.removeAll(keepingCapacity: false)
+        postListArray.removeAll(keepingCapacity: false)
+        lastValue.removeAll(keepingCapacity: false)
+        totalPriceHolder.removeAll(keepingCapacity: false)
+        saveByName.removeAll(keepingCapacity: false)
+        portfolioValueLabel.isHidden = true
+        portfolioValue.isHidden = true
+        changeLabel.isHidden = true
+        changeText.isHidden = true
+        currentPriceLabel.isHidden = true
+        currentTotalPriceLabel.isHidden = true
+        portfolioCollectionView.isHidden = true
+        totalPriceLabel.text = "0.0"
+        calculatedPrice = 0
+        portfolioValue.text = ""
+        currentTotalPriceLabel.text = ""
+        changeText.text = ""
+    }
+    
+    // MARK: - Interface Objects
+    var logoutButton = UIButton()
+    var welcomeLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Welcome"
+        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
+        return label
+    }()
+    
+    var currentUserLabel : UILabel = {
+        
+        let currentUser = Auth.auth().currentUser!.email
+        let user = currentUser!.components(separatedBy: "@")
+        let userCapatitalized = user[0].capitalized
+        let label = UILabel()
+        label.text = "\(userCapatitalized)!"
+        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.textColor = UIColor.red
+        label.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
+        return label
+    }()
+    
+    var priceLabel : UILabel = {
+        let label = UILabel()
+        label.text = "My Portfolio Price:"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
+        return label
+    }()
+    
+    var totalPriceLabel : UILabel = {
+        var label = UILabel()
+        label.text = "$ 0.0"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
+        return label
+    }()
+    
+    var portfolioValueLabel : UILabel = {
+        var label = UILabel()
+        label.text = "My Portfolio"
+        label.textColor = .darkGray
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.frame = CGRect(x: 0, y: 0, width: 80, height: 50)
+        label.isHidden = true
+        return label
+    }()
+    
+    var portfolioValue : UILabel = {
+        var label = UILabel()
+        label.text = ""
+        label.textAlignment = .left
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+        label.isHidden = true
+        return label
+    }()
+    
+    var changeLabel : UILabel = {
+        var label = UILabel()
+        label.text = "Change"
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+        label.isHidden = true
+        return label
+    }()
+    
+    var changeText : UILabel = {
+        var label = UILabel()
+        label.text = ""
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
+        label.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+        label.isHidden = true
+        return label
+    }()
+    
+    var currentPriceLabel : UILabel = {
+        var label = UILabel()
+        label.text = "Currently Total Price"
+        label.textColor = .darkGray
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.frame = CGRect(x: 0, y: 0, width: 80, height: 50)
+        label.isHidden = true
+        return label
+        
+    }()
+    var currentTotalPriceLabel : UILabel = {
+        var label = UILabel()
+        label.text = ""
+        label.textAlignment = .right
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+        label.isHidden = true
+        return label
+    }()
+    var portfolioCollectionView : UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+        return collection
+        
+    }()
 }
 
+// MARK: - TableView
 extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -339,6 +365,7 @@ extension TabBarController: UICollectionViewDataSource, UICollectionViewDelegate
     }
 }
 
+// MARK: - Output
 extension TabBarController: TabBarViewModelOutput {
     
     func currentlyCoinPrice(valuePostList: [CoinModel]) {
@@ -355,7 +382,6 @@ extension TabBarController: TabBarViewModelOutput {
     
     func currentlyTotalPrice(valueLastPrice: [Double]) {
         coinListArray += valueLastPrice
-        
         
         if coinListArray.count == postListArray.count {
             for index in 0..<postListArray.count {

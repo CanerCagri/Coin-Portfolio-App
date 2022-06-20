@@ -15,17 +15,6 @@ class CoinListTableViewCell: UITableViewCell {
     var priceString = ""
     let priceSeperator = AddDeleteVC()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
     func configure(with postModel: [CoinModel], indexPath: IndexPath) {
         var symbolStr = postModel[indexPath.row].symbol
         symbolStr.insert("/", at: symbolStr.index(symbolStr.endIndex, offsetBy: -4))

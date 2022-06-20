@@ -15,7 +15,6 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     @IBOutlet var addBtn: UIButton!
     @IBOutlet var coinNameLabel: UILabel!
     @IBOutlet var coinPriceLabel: UILabel!
-    
     @IBOutlet var popupView: UIView!
     @IBOutlet var quantityLabel: UILabel!
     @IBOutlet var quantityTextField: UITextField!
@@ -25,27 +24,14 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     var coinName : String?
     var coinPrice : String?
     var selectedCoinPrice : Double?
-    
     let addPopupViewModel = AddPopupViewModel()
     let addDeletePopup = AddDeletePopupVC()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        selectedCoin.isHidden = true
-        addBtn.isEnabled = false
-        totalPrice.text = "0.0"
-        quantityTextField.delegate = self
-        
+        load()
         hideKeyboardSettings()
-        
-        if coinName != nil && coinPrice != nil {
-            coinNameLabel.text = coinName!
-            let coinPriceLabelText = String(coinPrice!)
-            coinPriceLabel.text = "$ \(coinPriceLabelText)"
-            let selectedCoinName = coinNameLabel.text?.components(separatedBy: addDeletePopup.selectedCoinNameSeperator)[0]
-            selectedCoin.text = selectedCoinName
-        }
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
@@ -80,6 +66,21 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     
     @objc func doneButtonTapped() {
         view.endEditing(true)
+    }
+    
+    func load() {
+        selectedCoin.isHidden = true
+        addBtn.isEnabled = false
+        totalPrice.text = "0.0"
+        quantityTextField.delegate = self
+        
+        if coinName != nil && coinPrice != nil {
+            coinNameLabel.text = coinName!
+            let coinPriceLabelText = String(coinPrice!)
+            coinPriceLabel.text = "$ \(coinPriceLabelText)"
+            let selectedCoinName = coinNameLabel.text?.components(separatedBy: addDeletePopup.selectedCoinNameSeperator)[0]
+            selectedCoin.text = selectedCoinName
+        }
     }
     
     override func viewDidLayoutSubviews() {

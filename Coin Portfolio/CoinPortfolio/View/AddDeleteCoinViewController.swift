@@ -22,8 +22,6 @@ class AddDeleteCoinViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadConfig()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
