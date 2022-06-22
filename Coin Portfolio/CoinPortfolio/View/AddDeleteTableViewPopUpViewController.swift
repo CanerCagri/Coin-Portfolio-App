@@ -42,7 +42,7 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
     @IBAction func cancelBtnTapped(_ sender: Any) {
         dismiss(animated: true)
     }
-    
+    // MARK: - Keyboard Hiding Settings And Done Button
     func hideKeyboardSettings() {
         quantityTextField.keyboardType = UIKeyboardType.numbersAndPunctuation
         quantityTextField.resignFirstResponder()
@@ -82,7 +82,39 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
             selectedCoin.text = selectedCoinName
         }
     }
-    
+}
+
+extension AddDeleteTableViewPopUpViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField == quantityTextField {
+            
+            if quantityTextField.text == "" || quantityTextField.text == "0" || quantityTextField.text == "0.0" || quantityTextField.text?.last == "." {
+                totalPrice.text = "..."
+                addBtn.isEnabled = false
+            } else {
+                addBtn.isEnabled = true
+            }
+            selectedCoinPrice = Double(quantityTextField.text ?? "0")
+            guard let selectedCoinPrice = selectedCoinPrice else {
+                return
+            }
+            if selectedCoinPrice > 1.0 {
+                let total = selectedCoinPrice * Double(coinPrice!)!
+                let totalValue = (total * 10000).rounded() / 10000
+                totalPrice.text = String(totalValue)
+            } else if selectedCoinPrice < 1.0 {
+                let total = selectedCoinPrice / Double(coinPrice!)!
+                totalPrice.text = String(total)
+            } else if selectedCoinPrice == 1.0  {
+                totalPrice.text = coinPrice!
+            } else if selectedCoinPrice == 0 {
+                totalPrice.text = "0"
+            }
+        }
+    }
+}
+// MARK: - Layout
+extension AddDeleteTableViewPopUpViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -123,35 +155,5 @@ class AddDeleteTableViewPopUpViewController: UIViewController {
         cancelBtn.topAnchor.constraint(equalTo: addBtn.bottomAnchor, constant: 50).isActive = true
         cancelBtn.leadingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.leadingAnchor, constant: 110).isActive = true
         cancelBtn.trailingAnchor.constraint(equalTo: popupView.safeAreaLayoutGuide.trailingAnchor, constant: -120).isActive = true
-    }
-}
-
-extension AddDeleteTableViewPopUpViewController: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField == quantityTextField {
-            
-            if quantityTextField.text == "" || quantityTextField.text == "0" || quantityTextField.text == "0.0" || quantityTextField.text?.last == "." {
-                totalPrice.text = "..."
-                addBtn.isEnabled = false
-            } else {
-                addBtn.isEnabled = true
-            }
-            selectedCoinPrice = Double(quantityTextField.text ?? "0")
-            guard let selectedCoinPrice = selectedCoinPrice else {
-                return
-            }
-            if selectedCoinPrice > 1.0 {
-                let total = selectedCoinPrice * Double(coinPrice!)!
-                let totalValue = (total * 10000).rounded() / 10000
-                totalPrice.text = String(totalValue)
-            } else if selectedCoinPrice < 1.0 {
-                let total = selectedCoinPrice / Double(coinPrice!)!
-                totalPrice.text = String(total)
-            } else if selectedCoinPrice == 1.0  {
-                totalPrice.text = coinPrice!
-            } else if selectedCoinPrice == 0 {
-                totalPrice.text = "0"
-            }
-        }
     }
 }

@@ -45,7 +45,7 @@ class DeleteDataFirestore: DeleteDataFirestoreProtocol {
         db.collection(firestoreConstants.collectionName).whereField(firestoreConstants.id, isEqualTo: "\(selectedCoin)").getDocuments { (snapshot, err) in
             
             if let err = err {
-                print("Error getting documents: \(err)")
+                fatalError(err.localizedDescription)
             } else {
                 for document in snapshot!.documents {
                     if document == document {
@@ -96,7 +96,6 @@ class FetchDataFirestore : FetchDataFirestoreProtocol {
                                     }
                                 }
                             } else {
-                                // If current email and firestore email is not matching , do nothing! go next loop
                             }
                         }
                     }

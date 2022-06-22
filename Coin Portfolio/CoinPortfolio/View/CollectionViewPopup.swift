@@ -26,6 +26,7 @@ class CollectionViewPopup: UIViewController {
     var coinQuantity : String?
     var coinID : String?
     let collectionPopupViewModel = CollectionPopupViewModel()
+    let collectionVc = CollectionVC()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,7 @@ class CollectionViewPopup: UIViewController {
         
         let quantity = Double(quantityTextField.text!)!
         collectionPopupViewModel.postUpdateDocument(selectedCoinId: coinID!, selectedCoin: coinName!, selectedCoinQuantity: quantity, totalPrice: priceTextField.text!)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: CollectionViewController().notificationListener) ?? NSNotification.Name("notification"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: CollectionViewController().notificationListener) ?? NSNotification.Name(collectionVc.notification), object: nil)
         dismiss(animated: true)
         
     }

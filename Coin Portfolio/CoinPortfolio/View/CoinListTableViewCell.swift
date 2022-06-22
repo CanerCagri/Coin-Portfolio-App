@@ -23,7 +23,7 @@ class CoinListTableViewCell: UITableViewCell {
         // Price settings
         let apiPrice = postModel[indexPath.row].lastPrice
         let result = apiPrice.components(separatedBy: priceSeperator.lastPriceSeperator)
-        if result[0].last != "." {  // Price checking , if price end with . after result add 0
+        if result[0].last != "." {  
             coinPrice.text = "$ \(result[0])"
         } else {
             let last = "$ \(result[0])0"

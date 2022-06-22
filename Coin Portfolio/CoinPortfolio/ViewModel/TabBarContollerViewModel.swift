@@ -58,7 +58,7 @@ class TabBarControllerViewModel: TabBarViewModelProtocol {
         do {
             try Auth.auth().signOut()
         }catch {
-            print("Error when logout")
+            fatalError("Error when logout")
         }
     }
 }

@@ -23,7 +23,7 @@ class CollectionViewController: UIViewController {
     let collectionViewM = CollectionViewModel()
     let collectionVc = CollectionVC()
     
-    let notificationListener = "notification"
+    let notificationListener = collectionVc.notification
     
     override func viewDidLoad() {
         super.viewDidLoad()

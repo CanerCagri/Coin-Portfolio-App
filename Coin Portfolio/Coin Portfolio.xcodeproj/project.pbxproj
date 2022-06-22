@@ -131,50 +131,19 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		011C9590282B8CA100F160C2 /* Storyboard */ = {
-			isa = PBXGroup;
-			children = (
-				010EBBDC2808145B003436C6 /* LaunchScreen.storyboard */,
-				010EBBD72808145A003436C6 /* Main.storyboard */,
-			);
-			path = Storyboard;
-			sourceTree = "<group>";
-		};
-		011C9591282B8CE700F160C2 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				010EBBF928083E71003436C6 /* GoogleService-Info.plist */,
-				010EBBDF2808145B003436C6 /* Info.plist */,
-				010EBBDA2808145B003436C6 /* Assets.xcassets */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		011C9592282B8E6400F160C2 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				011C958E2823071B00F160C2 /* Constants.swift */,
-				010EBBD32808145A003436C6 /* SceneDelegate.swift */,
-				010EBBD12808145A003436C6 /* AppDelegate.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
 		011C95C2282BEC3A00F160C2 /* CoinPortfolio */ = {
 			isa = PBXGroup;
 			children = (
-				011C9592282B8E6400F160C2 /* Utilities */,
-				011C9591282B8CE700F160C2 /* Resources */,
-				011C9590282B8CA100F160C2 /* Storyboard */,
 				01CF4F4B28173FF200C86268 /* Service */,
 				010EBBE728081632003436C6 /* Model */,
-				01CF4F3A281680FD00C86268 /* View Model */,
+				01CF4F3A281680FD00C86268 /* ViewModel */,
 				010EBBE528081611003436C6 /* View */,
+				01D3A6582860C49A005CC88F /* SupportingFiles */,
 			);
 			path = CoinPortfolio;
 			sourceTree = "<group>";
 		};
-		01CF4F3A281680FD00C86268 /* View Model */ = {
+		01CF4F3A281680FD00C86268 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				01CF4F3B2816815200C86268 /* MainViewControllerViewModel.swift */,
@@ -185,7 +154,7 @@
 				01CF4F45281681B500C86268 /* AddDeleteViewModel.swift */,
 				01CF4F472816A68E00C86268 /* AddPopupViewModel.swift */,
 			);
-			path = "View Model";
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		01CF4F4B28173FF200C86268 /* Service */ = {
@@ -195,6 +164,21 @@
 				01CF4F4E281892F300C86268 /* FirestoreService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		01D3A6582860C49A005CC88F /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				011C958E2823071B00F160C2 /* Constants.swift */,
+				010EBBD32808145A003436C6 /* SceneDelegate.swift */,
+				010EBBD12808145A003436C6 /* AppDelegate.swift */,
+				010EBBDC2808145B003436C6 /* LaunchScreen.storyboard */,
+				010EBBD72808145A003436C6 /* Main.storyboard */,
+				010EBBF928083E71003436C6 /* GoogleService-Info.plist */,
+				010EBBDF2808145B003436C6 /* Info.plist */,
+				010EBBDA2808145B003436C6 /* Assets.xcassets */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -451,7 +435,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XSY7H53P5K;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CoinPortfolio/Resources/Info.plist;
+				INFOPLIST_FILE = CoinPortfolio/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -479,7 +463,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XSY7H53P5K;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CoinPortfolio/Resources/Info.plist;
+				INFOPLIST_FILE = CoinPortfolio/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
