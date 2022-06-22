@@ -80,17 +80,7 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.layer.borderColor = UIColor.black.cgColor
-        contentView.layer.borderWidth = 2
-        contentView.layer.cornerRadius = 5
-        
-        contentView.addSubview(coinNameLabel)
-        contentView.addSubview(coinQuantityLabel)
-        contentView.addSubview(coinQuantityText)
-        contentView.addSubview(createdPriceLabel)
-        contentView.addSubview(createdPriceText)
-        contentView.addSubview(currentPriceLabel)
-        contentView.addSubview(currentPriceText)
+        loadInit()
     }
     
     required init?(coder: NSCoder) {
@@ -121,5 +111,19 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
         
         currentPriceText.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15).isActive = true
         currentPriceText.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+    }
+    
+    func loadInit() {
+        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.borderWidth = 2
+        contentView.layer.cornerRadius = 5
+        
+        contentView.addSubview(coinNameLabel)
+        contentView.addSubview(coinQuantityLabel)
+        contentView.addSubview(coinQuantityText)
+        contentView.addSubview(createdPriceLabel)
+        contentView.addSubview(createdPriceText)
+        contentView.addSubview(currentPriceLabel)
+        contentView.addSubview(currentPriceText)
     }
 }

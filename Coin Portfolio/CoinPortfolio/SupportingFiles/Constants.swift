@@ -29,6 +29,7 @@ struct AddDeletePopupVC {
 struct CollectionVC {
     let cellIdentifier = "Cell"
     let title = "YOUR COIN LIST"
+    let notification = "notification"
 }
 
 struct TabBarC {
@@ -47,5 +48,7 @@ struct FirestoreConstants {
 }
 
 struct CoinApiService {
+    let usdt = "USDT"
     let apiUrl = "https://api.binance.com/api/v3/ticker/24hr"
+    let selectedCoinApi = "https://api.binance.com/api/v3/ticker/24hr?symbol="
 }

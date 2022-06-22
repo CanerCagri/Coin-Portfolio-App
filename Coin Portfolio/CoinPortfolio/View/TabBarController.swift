@@ -18,197 +18,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var lastValue = [Double] ()
     var calculatedPrice = 0.0
     var totalPriceHolder = [Double] ()
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.delegate = self
-        portfolioCollectionView.dataSource = self
-        portfolioCollectionView.delegate = self
-     
-        createInterface()
-        tabBarControllerViewModel.output = self
-        tabBarControllerViewModel.fetchPostItems()
-    }
-    
-    @objc func logoutBtnTapped(_ sender: UIButton!) {
-        tabBarControllerViewModel.signOut()
-        performSegue(withIdentifier: tabBarC.segueIdentifier, sender: nil)
-    }
-    
-    func loadChange() {
-        if postListArray.count != 0 {
-            for index in 0..<postListArray.count {
-                tabBarControllerViewModel.fetchSelectedItems(index: index, selectedItem: postListArray[index].coinname , selectedItemQuantity: postListArray[index].coinquantity)
-                tabBarControllerViewModel.fetchSelectedByName(selectedItem: postListArray[index].coinname)
-            }
-        }
-    }
-    
-    func fetchTotalPrice() {
-        for index in 0..<postListArray.count {
-            totalPriceHolder.append( Double(postListArray[index].totalprice)!)
-            calculatedPrice += totalPriceHolder[index]
-        }
-        let result = String(format: "%.2f", ceil(calculatedPrice * 100) / 100)
-        totalPriceLabel.text = "$ \(result)"
-        loadChange()
-    }
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if selectedIndex == 0 {
-            clearAll()
-            tabBarSelectedIndex0()
-            
-        } else if selectedIndex == 1 {
-            tabBarSelectedIndex1()
-            
-        }  else if selectedIndex == 2 {
-            tabBarSelectedIndex2()
-        }
-    }
-    
-    func tabBarSelectedIndex0() {
-        tabBarControllerViewModel.output = self
-        tabBarControllerViewModel.fetchPostItems()
-        
-        logoutButton.isHidden = false
-        welcomeLabel.isHidden = false
-        currentUserLabel.isHidden = false
-        priceLabel.isHidden = false
-        totalPriceLabel.isHidden = false
-    }
-    
-    func tabBarSelectedIndex1() {
-        logoutButton.isHidden = true
-        welcomeLabel.isHidden = true
-        currentUserLabel.isHidden = true
-        priceLabel.isHidden = true
-        totalPriceLabel.isHidden = true
-        portfolioValueLabel.isHidden = true
-        portfolioValue.isHidden = true
-        changeLabel.isHidden = true
-        changeText.isHidden = true
-        currentPriceLabel.isHidden = true
-        currentTotalPriceLabel.isHidden = true
-        portfolioCollectionView.isHidden = true
-    }
-    
-    func tabBarSelectedIndex2() {
-        logoutButton.isHidden = true
-        welcomeLabel.isHidden = true
-        currentUserLabel.isHidden = true
-        priceLabel.isHidden = true
-        totalPriceLabel.isHidden = true
-        portfolioValueLabel.isHidden = true
-        portfolioValue.isHidden = true
-        changeLabel.isHidden = true
-        changeText.isHidden = true
-        currentPriceLabel.isHidden = true
-        currentTotalPriceLabel.isHidden = true
-        portfolioCollectionView.isHidden = true
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
-        welcomeLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-        welcomeLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40).isActive = true
-        
-        currentUserLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentUserLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-        currentUserLabel.leadingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor, constant: 30).isActive = true
-        
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 25).isActive = true
-        priceLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40 ).isActive = true
-        
-        totalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        totalPriceLabel.topAnchor.constraint(equalTo: currentUserLabel.bottomAnchor, constant: 25).isActive = true
-        totalPriceLabel.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor, constant: 20).isActive = true
-        
-        portfolioValueLabel.translatesAutoresizingMaskIntoConstraints = false
-        portfolioValueLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
-        portfolioValueLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor , constant: 30).isActive = true
-        
-        portfolioValue.translatesAutoresizingMaskIntoConstraints = false
-        portfolioValue.topAnchor.constraint(equalTo: portfolioValueLabel.bottomAnchor, constant: 10).isActive = true
-        portfolioValue.leadingAnchor.constraint(equalTo: portfolioValueLabel.leadingAnchor, constant: -10).isActive = true
-        
-        changeLabel.translatesAutoresizingMaskIntoConstraints = false
-        changeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
-        changeLabel.leadingAnchor.constraint(equalTo: portfolioValueLabel.trailingAnchor, constant:  40).isActive = true
-        
-        changeText.translatesAutoresizingMaskIntoConstraints = false
-        changeText.topAnchor.constraint(equalTo: changeLabel.bottomAnchor, constant: 10).isActive = true
-        changeText.leadingAnchor.constraint(equalTo: changeLabel.leadingAnchor, constant: 2).isActive = true
-        
-        currentPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentPriceLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
-        currentPriceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor , constant: -20).isActive = true
-        
-        currentTotalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentTotalPriceLabel.topAnchor.constraint(equalTo: currentPriceLabel.bottomAnchor, constant: 10).isActive = true
-        currentTotalPriceLabel.leadingAnchor.constraint(equalTo: currentPriceLabel.leadingAnchor, constant: 15).isActive = true
-        
-        portfolioCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        portfolioCollectionView.topAnchor.constraint(equalTo: portfolioValue.bottomAnchor, constant: 25).isActive = true
-        portfolioCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        portfolioCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-        portfolioCollectionView.bottomAnchor.constraint(equalTo: logoutButton.topAnchor, constant: -10).isActive = true
-        
-        logoutButton.frame = CGRect.init(x: self.tabBar.center.x - 32, y: self.view.bounds.height - 150, width: 64, height: 64)
-        logoutButton.layer.cornerRadius = 32
-    }
-    
-    func createInterface() {
-        
-        self.view.addSubview(welcomeLabel)
-        self.view.addSubview(currentUserLabel)
-        self.view.addSubview(priceLabel)
-        self.view.addSubview(totalPriceLabel)
-        self.view.addSubview(portfolioValueLabel)
-        self.view.addSubview(portfolioValue)
-        self.view.addSubview(changeLabel)
-        self.view.addSubview(changeText)
-        self.view.addSubview(currentPriceLabel)
-        self.view.addSubview(currentTotalPriceLabel)
-       
-        portfolioCollectionView.register(PortfolioCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        self.view.addSubview(portfolioCollectionView)
-        
-        logoutButton = UIButton()
-        logoutButton.setImage(UIImage(named: tabBarC.logoutImageName), for: .normal)
-        logoutButton.setTitleColor(.black, for: .normal)
-        logoutButton.setTitleColor(.yellow, for: .highlighted)
-        logoutButton.frame = CGRect(x: 100, y: 0, width: 44, height: 44)
-        logoutButton.backgroundColor = .orange
-        logoutButton.layer.borderWidth = 4
-        logoutButton.layer.borderColor = UIColor.yellow.cgColor
-        logoutButton.addTarget(self, action: #selector(logoutBtnTapped), for: .touchUpInside)
-        logoutButton.tag = 100
-        self.view.addSubview(logoutButton)
-    }
-    
-    func clearAll() {
-        coinListArray.removeAll(keepingCapacity: false)
-        postListArray.removeAll(keepingCapacity: false)
-        lastValue.removeAll(keepingCapacity: false)
-        totalPriceHolder.removeAll(keepingCapacity: false)
-        saveByName.removeAll(keepingCapacity: false)
-        portfolioValueLabel.isHidden = true
-        portfolioValue.isHidden = true
-        changeLabel.isHidden = true
-        changeText.isHidden = true
-        currentPriceLabel.isHidden = true
-        currentTotalPriceLabel.isHidden = true
-        portfolioCollectionView.isHidden = true
-        totalPriceLabel.text = "0.0"
-        calculatedPrice = 0
-        portfolioValue.text = ""
-        currentTotalPriceLabel.text = ""
-        changeText.text = ""
-    }
     
     // MARK: - Interface Objects
     var logoutButton = UIButton()
@@ -316,6 +125,55 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         return collection
         
     }()
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.delegate = self
+        portfolioCollectionView.dataSource = self
+        portfolioCollectionView.delegate = self
+        createInterface()
+        tabBarControllerViewModel.output = self
+        tabBarControllerViewModel.fetchPostItems()
+    }
+    
+    @objc func logoutBtnTapped(_ sender: UIButton!) {
+        tabBarControllerViewModel.signOut()
+        performSegue(withIdentifier: tabBarC.segueIdentifier, sender: nil)
+    }
+    
+    func loadChange() {
+        if postListArray.count != 0 {
+            for index in 0..<postListArray.count {
+                tabBarControllerViewModel.fetchSelectedItems(index: index, selectedItem: postListArray[index].coinname , selectedItemQuantity: postListArray[index].coinquantity)
+                tabBarControllerViewModel.fetchSelectedByName(selectedItem: postListArray[index].coinname)
+            }
+        }
+    }
+    
+    func fetchTotalPrice() {
+        for index in 0..<postListArray.count {
+            totalPriceHolder.append( Double(postListArray[index].totalprice)!)
+            calculatedPrice += totalPriceHolder[index]
+        }
+        let result = String(format: "%.2f", ceil(calculatedPrice * 100) / 100)
+        totalPriceLabel.text = "$ \(result)"
+        loadChange()
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if selectedIndex == 0 {
+            clearAll()
+            tabBarSelectedIndex0()
+            
+        } else if selectedIndex == 1 {
+            tabBarSelectedIndex1()
+            
+        }  else if selectedIndex == 2 {
+            tabBarSelectedIndex2()
+        }
+    }
+    
+   
 }
 
 // MARK: - TableView
@@ -431,4 +289,152 @@ extension TabBarController: TabBarViewModelOutput {
             }
         }
     }
+}
+// MARK: - Layout And Functions
+extension TabBarController {
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
+        welcomeLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        welcomeLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40).isActive = true
+        
+        currentUserLabel.translatesAutoresizingMaskIntoConstraints = false
+        currentUserLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        currentUserLabel.leadingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor, constant: 30).isActive = true
+        
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        priceLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 25).isActive = true
+        priceLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40 ).isActive = true
+        
+        totalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
+        totalPriceLabel.topAnchor.constraint(equalTo: currentUserLabel.bottomAnchor, constant: 25).isActive = true
+        totalPriceLabel.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor, constant: 20).isActive = true
+        
+        portfolioValueLabel.translatesAutoresizingMaskIntoConstraints = false
+        portfolioValueLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
+        portfolioValueLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor , constant: 30).isActive = true
+        
+        portfolioValue.translatesAutoresizingMaskIntoConstraints = false
+        portfolioValue.topAnchor.constraint(equalTo: portfolioValueLabel.bottomAnchor, constant: 10).isActive = true
+        portfolioValue.leadingAnchor.constraint(equalTo: portfolioValueLabel.leadingAnchor, constant: -10).isActive = true
+        
+        changeLabel.translatesAutoresizingMaskIntoConstraints = false
+        changeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
+        changeLabel.leadingAnchor.constraint(equalTo: portfolioValueLabel.trailingAnchor, constant:  40).isActive = true
+        
+        changeText.translatesAutoresizingMaskIntoConstraints = false
+        changeText.topAnchor.constraint(equalTo: changeLabel.bottomAnchor, constant: 10).isActive = true
+        changeText.leadingAnchor.constraint(equalTo: changeLabel.leadingAnchor, constant: 2).isActive = true
+        
+        currentPriceLabel.translatesAutoresizingMaskIntoConstraints = false
+        currentPriceLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 50).isActive = true
+        currentPriceLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor , constant: -20).isActive = true
+        
+        currentTotalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
+        currentTotalPriceLabel.topAnchor.constraint(equalTo: currentPriceLabel.bottomAnchor, constant: 10).isActive = true
+        currentTotalPriceLabel.leadingAnchor.constraint(equalTo: currentPriceLabel.leadingAnchor, constant: 15).isActive = true
+        
+        portfolioCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        portfolioCollectionView.topAnchor.constraint(equalTo: portfolioValue.bottomAnchor, constant: 25).isActive = true
+        portfolioCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        portfolioCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        portfolioCollectionView.bottomAnchor.constraint(equalTo: logoutButton.topAnchor, constant: -10).isActive = true
+        
+        logoutButton.frame = CGRect.init(x: self.tabBar.center.x - 32, y: self.view.bounds.height - 150, width: 64, height: 64)
+        logoutButton.layer.cornerRadius = 32
+    }
+    
+    func createInterface() {
+        
+        self.view.addSubview(welcomeLabel)
+        self.view.addSubview(currentUserLabel)
+        self.view.addSubview(priceLabel)
+        self.view.addSubview(totalPriceLabel)
+        self.view.addSubview(portfolioValueLabel)
+        self.view.addSubview(portfolioValue)
+        self.view.addSubview(changeLabel)
+        self.view.addSubview(changeText)
+        self.view.addSubview(currentPriceLabel)
+        self.view.addSubview(currentTotalPriceLabel)
+       
+        portfolioCollectionView.register(PortfolioCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        self.view.addSubview(portfolioCollectionView)
+        
+        logoutButton = UIButton()
+        logoutButton.setImage(UIImage(named: tabBarC.logoutImageName), for: .normal)
+        logoutButton.setTitleColor(.black, for: .normal)
+        logoutButton.setTitleColor(.yellow, for: .highlighted)
+        logoutButton.frame = CGRect(x: 100, y: 0, width: 44, height: 44)
+        logoutButton.backgroundColor = .orange
+        logoutButton.layer.borderWidth = 4
+        logoutButton.layer.borderColor = UIColor.yellow.cgColor
+        logoutButton.addTarget(self, action: #selector(logoutBtnTapped), for: .touchUpInside)
+        logoutButton.tag = 100
+        self.view.addSubview(logoutButton)
+    }
+    
+    func clearAll() {
+        coinListArray.removeAll(keepingCapacity: false)
+        postListArray.removeAll(keepingCapacity: false)
+        lastValue.removeAll(keepingCapacity: false)
+        totalPriceHolder.removeAll(keepingCapacity: false)
+        saveByName.removeAll(keepingCapacity: false)
+        portfolioValueLabel.isHidden = true
+        portfolioValue.isHidden = true
+        changeLabel.isHidden = true
+        changeText.isHidden = true
+        currentPriceLabel.isHidden = true
+        currentTotalPriceLabel.isHidden = true
+        portfolioCollectionView.isHidden = true
+        totalPriceLabel.text = "0.0"
+        calculatedPrice = 0
+        portfolioValue.text = ""
+        currentTotalPriceLabel.text = ""
+        changeText.text = ""
+    }
+    
+    func tabBarSelectedIndex0() {
+        tabBarControllerViewModel.output = self
+        tabBarControllerViewModel.fetchPostItems()
+        
+        logoutButton.isHidden = false
+        welcomeLabel.isHidden = false
+        currentUserLabel.isHidden = false
+        priceLabel.isHidden = false
+        totalPriceLabel.isHidden = false
+    }
+    
+    func tabBarSelectedIndex1() {
+        logoutButton.isHidden = true
+        welcomeLabel.isHidden = true
+        currentUserLabel.isHidden = true
+        priceLabel.isHidden = true
+        totalPriceLabel.isHidden = true
+        portfolioValueLabel.isHidden = true
+        portfolioValue.isHidden = true
+        changeLabel.isHidden = true
+        changeText.isHidden = true
+        currentPriceLabel.isHidden = true
+        currentTotalPriceLabel.isHidden = true
+        portfolioCollectionView.isHidden = true
+    }
+    
+    func tabBarSelectedIndex2() {
+        logoutButton.isHidden = true
+        welcomeLabel.isHidden = true
+        currentUserLabel.isHidden = true
+        priceLabel.isHidden = true
+        totalPriceLabel.isHidden = true
+        portfolioValueLabel.isHidden = true
+        portfolioValue.isHidden = true
+        changeLabel.isHidden = true
+        changeText.isHidden = true
+        currentPriceLabel.isHidden = true
+        currentTotalPriceLabel.isHidden = true
+        portfolioCollectionView.isHidden = true
+    }
+
+    
+   
 }
